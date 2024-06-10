@@ -41,8 +41,9 @@ body {
   }
   
   .svg-img{
-    max-width: 350px;
+    width:500px;
     height: auto;
+    margin-right: 30px;
   }
   
   .main-svg{
