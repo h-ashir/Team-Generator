@@ -150,3 +150,17 @@ function displayTeams(teams) {
         output.appendChild(teamDiv);
     });
 }
+
+const stars = document.querySelectorAll('.star');
+    stars.forEach(star => {
+        star.addEventListener('click', (event) => {
+            selectedRating = event.target.dataset.value;
+            highlightStars(selectedRating);
+        });
+    });
+
+    function highlightStars(rating) {
+        stars.forEach(star => {
+            star.style.color = star.dataset.value <= rating ? 'gold' : 'grey';
+        });
+    }
