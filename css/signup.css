@@ -56,10 +56,9 @@ body {
   .login-redirect{
     color: black;
     font-weight: bold;
-    text-decoration: none;
   }
   .login-redirect:hover{
-    color: blue;
+    color: #AD50A7;
     font-weight: bold;
     text-decoration: none;
   }
