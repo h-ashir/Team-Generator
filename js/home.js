@@ -1,88 +1,152 @@
-//Calculate max number of people in each group
 document.addEventListener("DOMContentLoaded", function() {
-    const numberOfPeople = document.getElementById("numberOfPeople");
-    const numberOfGroups = document.getElementById("numberOfGroups");
-    const result = document.getElementById("result");
-
-    function calculate() {
-        const value1 = parseFloat(numberOfPeople.value) || 0;
-        const value2 = parseFloat(numberOfGroups.value) || 0;
-
-        
-        const calculationResult = value1 / value2;
-        result.value = Math.ceil(calculationResult) ;
+    const teamForm = document.getElementById("teamForm");
+    const manualInputFields = document.getElementById("manualInputFields");
+    const fileInputFields = document.getElementById("fileInputFields");
+ 
+ 
+    manualInputOption.addEventListener("change", function() {
+        if (manualInputOption.checked) {
+            manualInputFields.style.display = "block";
+            fileInputFields.style.display = "none";
+            generateMemberInputs(); // Generate fields for manual input
+        }
+    });
+ 
+    fileInputOption.addEventListener("change", function() {
+        if (fileInputOption.checked) {
+            fileInputFields.style.display = "block";
+            manualInputFields.style.display = "none";
+        }
+    });
+ 
+    teamForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        output.innerHTML = ""; // Clear previous output
+ 
+        const numTeams = parseInt(document.getElementById("numTeams").value);
+        const numMembers = parseInt(document.getElementById("numMembers").value);
+ 
+        if (manualInputOption.checked) {
+            const teams = generateTeamsFromManualInput(numTeams, numMembers);
+            displayTeams(teams);
+        } else if (fileInputOption.checked) {
+            const file = document.getElementById("file").files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+                    const fileContent = XLSX.utils.sheet_to_csv(sheet);
+                    const teams = generateTeamsFromFile(fileContent, numTeams);
+                    displayTeams(teams);
+                };
+                reader.readAsArrayBuffer(file);
+            }
+        }
+    });
+});
+ 
+function generateMemberInputs() {
+    const container = document.getElementById("manualInputFields");
+    container.innerHTML = "";
+ 
+    const numMembers = parseInt(document.getElementById("numMembers").value);
+ 
+    for (let i = 0; i < numMembers; i++) {
+        const div = document.createElement("div");
+ 
+        const nameLabel = document.createElement("label");
+        nameLabel.textContent = "Name " + (i + 1) + ":";
+        const nameInput = document.createElement("input");
+        nameInput.type = "text";
+        nameInput.required = true;
+ 
+        const techLabel = document.createElement("label");
+        techLabel.textContent = "Technical Score " + (i + 1) + ":";
+        const techInput = document.createElement("input");
+        techInput.type = "number";
+        techInput.min = "0";
+        techInput.required = true;
+ 
+        const softLabel = document.createElement("label");
+        softLabel.textContent = "Soft Skill Score " + (i + 1) + ":";
+        const softInput = document.createElement("input");
+        softInput.type = "number";
+        softInput.min = "0";
+        softInput.required = true;
+ 
+        div.appendChild(nameLabel);
+        div.appendChild(nameInput);
+        div.appendChild(document.createElement("br"));
+        div.appendChild(techLabel);
+        div.appendChild(techInput);
+        div.appendChild(document.createElement("br"));
+        div.appendChild(softLabel);
+        div.appendChild(softInput);
+        div.appendChild(document.createElement("br"));
+ 
+        container.appendChild(div);
     }
-
-    numberOfPeople.addEventListener("input", calculate);
-    numberOfGroups.addEventListener("input", calculate);
-});
-
-
-//Generate form
-document.getElementById('numberForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const numberOfPeople = parseInt(document.getElementById('numberOfPeople').value);
-    generateForm(numberOfPeople);
-});
-
-function generateForm(n) {
-    const formContainer = document.getElementById('formContainer');
-    formContainer.innerHTML = ''; // Clear previous content
-    const table = document.createElement('table');
-    const headerRow = table.insertRow();
-    
-    ['Serial Number', 'Name', 'Technical Skills Rating', 'Soft Skills Rating'].forEach(text => {
-        const th = document.createElement('th');
-        th.textContent = text;
-        headerRow.appendChild(th);
-    });
-    
-    for (let i = 1; i <= n; i++) {
-        const row = table.insertRow();
-        row.innerHTML = `
-            <td>${i}</td>
-            <td><input type="text" name="name${i}" required></td>
-            <td><input type="number" name="technicalSkills${i}" min="1" max="10" required></td>
-            <td><input type="number" name="softSkills${i}" min="1" max="10" required></td>
-        `;
+}
+ 
+function generateTeamsFromFile(fileContent, numTeams) {
+    const lines = fileContent.split('\n');
+    const members = [];
+    for (let i = 0; i < lines.length; i++) {
+        const parts = lines[i].split(',');
+        const name = parts[0];
+        const techScore = parseFloat(parts[1]);
+        const softScore = parseFloat(parts[2]);
+        members.push({ name, techScore, softScore });
     }
-    
-    formContainer.appendChild(table);
-    document.getElementById('submitAll').style.display = 'block';
+ 
+    return generateTeams(numTeams, members);
 }
-
-document.getElementById('submitAll').addEventListener('click', function() {
-    const tableRows = document.querySelectorAll('#formContainer table tr:not(:first-child)');
-    const result = [];
-    tableRows.forEach((row, index) => {
-        const name = row.querySelector(`input[name="name${index + 1}"]`).value;
-        const technicalSkills = row.querySelector(`input[name="technicalSkills${index + 1}"]`).value;
-        const softSkills = row.querySelector(`input[name="softSkills${index + 1}"]`).value;
-        result.push({
-            serialNumber: index + 1,
-            name,
-            technicalSkills,
-            softSkills
-        });
+ 
+function generateTeamsFromManualInput(numTeams, numMembers) {
+    const members = [];
+    const memberInputs = document.querySelectorAll("#manualInputFields > div");
+    memberInputs.forEach(input => {
+        const name = input.querySelector("input[type='text']").value;
+        const techScore = parseFloat(input.querySelector("input[type='number']").value);
+        const softScore = parseFloat(input.querySelectorAll("input[type='number']")[1].value);
+        members.push({ name, techScore, softScore });
     });
-
-    displayResult(result);
-});
-
-function displayResult(data) {
-    const resultDiv = document.getElementById('result');
-    resultDiv.innerHTML = `<h2>Submitted Data:</h2>`;
-    data.forEach(person => {
-        resultDiv.innerHTML += `
-            <p><strong>Serial Number:</strong> ${person.serialNumber}</p>
-            <p><strong>Name:</strong> ${person.name}</p>
-            <p><strong>Technical Skills Rating:</strong> ${person.technicalSkills}</p>
-            <p><strong>Soft Skills Rating:</strong> ${person.softSkills}</p>
-            <hr>
+ 
+    return generateTeams(numTeams, members);
+}
+ 
+function generateTeams(numTeams, members) {
+    members.sort((a, b) => b.techScore - a.techScore);
+    const teams = Array.from({ length: numTeams }, () => ({ leader: null, members: [] }));
+    let currentIndex = 0;
+ 
+    for (let i = 0; i < members.length; i++) {
+        if (teams[currentIndex].leader === null && members[i].softScore >= 6) {
+            teams[currentIndex].leader = members[i];
+        } else {
+            teams[currentIndex].members.push(members[i]);
+        }
+        currentIndex = (currentIndex + 1) % numTeams;
+    }
+ 
+    return teams;
+}
+ 
+function displayTeams(teams) {
+    const output = document.getElementById("output");
+    teams.forEach((team, index) => {
+        const teamDiv = document.createElement("div");
+        teamDiv.classList.add("team");
+        teamDiv.innerHTML = `
+<h3>Team ${index + 1}</h3>
+<p><strong>Leader:</strong> ${team.leader.name}</p>
+<p><strong>Members:</strong></p>
+<ul>
+                ${team.members.map(member => `<li>${member.name}</li>`).join("")}
+</ul>
         `;
+        output.appendChild(teamDiv);
     });
 }
-
-//
-
-
