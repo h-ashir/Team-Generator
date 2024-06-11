@@ -46,6 +46,27 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
+// document.addEventListener("click",function(){
+//     const output = document.getElementById('output');
+//     const submitbutton = document.getElementById('submitbutton');
+
+
+// });
+
+function displayResult(data) {
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = `<h2>Submitted Data:</h2>`;
+    data.forEach(person => {
+        resultDiv.innerHTML += `
+            <p><strong>Serial Number:</strong> ${person.serialNumber}</p>
+            <p><strong>Name:</strong> ${person.name}</p>
+            <p><strong>Technical Skills Rating:</strong> ${person.technicalSkills}</p>
+            <p><strong>Soft Skills Rating:</strong> ${person.softSkills}</p>
+            <hr>
+        `;
+    });
+}
  
 function generateMemberInputs() {
     const container = document.getElementById("manualInputFields");
@@ -150,3 +171,10 @@ function displayTeams(teams) {
         output.appendChild(teamDiv);
     });
 }
+
+
+
+
+
+
+
