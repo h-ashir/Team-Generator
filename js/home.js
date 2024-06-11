@@ -180,3 +180,13 @@ const stars = document.querySelectorAll('.star');
             star.style.color = star.dataset.value <= rating ? 'gold' : 'grey';
         });
     }
+    document.addEventListener('DOMContentLoaded', function() {
+        const submitButton = document.getElementById('submitButton');
+        const output = document.getElementById('output');
+       
+        submitButton.addEventListener('click',function(){
+            output.style.visibility = 'visible';
+        })
+ 
+       
+    })

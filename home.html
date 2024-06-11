@@ -26,17 +26,12 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">History</a>
+                        <a class="nav-link" href="history.html">History</a>
                       </li>
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Afthab
+                      <li class="nav-item">
+                        <a class="nav-link" href="login.html">
+                          Logout
                         </a>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Settings  <i class="fa-solid fa-gear"></i></a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#">Log Out  <i class="fa-solid fa-right-from-bracket"></i></a></li>
-                        </ul>
                       </li>
                     </ul>
                   </div>
@@ -78,14 +73,14 @@
                 <input type="file" id="file" accept=".xlsx,.xls,.csv">
             </div>
  
-            <button type="submit" id="submit-button">Generate Teams</button>
+            <button type="submit" id="submitButton">Generate Teams</button>
           </form>
         </div>
       </div>
      
       <!-- <div id="formContainer"></div> -->
       <!-- <button id="submitAll" style="display:none;">Submit All Data</button> -->
-      <div id="output">
+      <div style="visibility: hidden;" id="output">
         <!-- Team members and leaders will be displayed here -->
       </div>
    
@@ -99,7 +94,7 @@
           <span class="star" data-value="5">&#9733;</span>
       </div>
       <textarea name="" id="feedbackMessage" placeholder="Enter your feedback here..."></textarea>
-      <button id="submitFeedbackBtn">Submit Feedback</button>
+      <button class="submitbtn" id="submitFeedbackBtn">Submit Feedback</button>
       </div>
    
  
