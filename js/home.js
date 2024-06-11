@@ -46,14 +46,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
-
-// document.addEventListener("click",function(){
-//     const output = document.getElementById('output');
-//     const submitbutton = document.getElementById('submitbutton');
-
-
-// });
-
+ 
+ 
+ 
 function displayResult(data) {
     const resultDiv = document.getElementById('result');
     resultDiv.innerHTML = `<h2>Submitted Data:</h2>`;
@@ -172,9 +167,16 @@ function displayTeams(teams) {
     });
 }
 
-
-
-
-
-
-
+const stars = document.querySelectorAll('.star');
+    stars.forEach(star => {
+        star.addEventListener('click', (event) => {
+            selectedRating = event.target.dataset.value;
+            highlightStars(selectedRating);
+        });
+    });
+ 
+    function highlightStars(rating) {
+        stars.forEach(star => {
+            star.style.color = star.dataset.value <= rating ? 'gold' : 'grey';
+        });
+    }
