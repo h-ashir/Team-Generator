@@ -64,30 +64,3 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/fireba
         }
     })
  });
-
- //**************************Signin*************************************** */
-
- const signIn=document.getElementById('submitSignIn');
- signIn.addEventListener('click', (event)=>{
-    event.preventDefault();
-    const email=document.getElementById('email').value;
-    const password=document.getElementById('password').value;
-    const auth=getAuth();
-
-    signInWithEmailAndPassword(auth, email,password)
-    .then((userCredential)=>{
-        showMessage('login is successful', 'signInMessage');
-        const user=userCredential.user;
-        localStorage.setItem('loggedInUserId', user.uid);
-        window.location.href='home.html';               //********************page that we want to go -Aftab*******************/
-    })
-    .catch((error)=>{
-        const errorCode=error.code;
-        if(errorCode==='auth/invalid-credential'){
-            showMessage('Incorrect Email or Password', 'signInMessage');
-        }
-        else{
-            showMessage('Account does not Exist', 'signInMessage');
-        }
-    })
- })
