@@ -53,20 +53,32 @@ body {
   .main_content{
     justify-content: start;
   }
-  
-  .btnreg{
-    background-color: #AD50A7;
-    border: none;
-    border-radius: 10px;
-    width: 100%;
-    padding: 5px 5px 5px 5px;
-    
-    
-    
+  .login-redirect{
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .login-redirect:hover{
+    color: blue;
+    font-weight: bold;
+    text-decoration: none;
   }
   
-  .btnreg:hover{
-    background-color: #884083;
+  .btnform{
+    background-color: #AD50A7;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    transition: .5s linear;
+    color: white;
+    letter-spacing: 1px;
+    font-size: 20px;
+    }
+  
+  .btnform:hover{
+    background-color: #3f59d8;
+    color: white;
+    transform: scale(1.05);
   }
   
   .social-login a {
