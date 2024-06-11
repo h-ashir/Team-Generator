@@ -53,6 +53,9 @@ body {
   .main_content{
     justify-content: start;
   }
+  .signup-redirect{
+    color: black;
+  }
   
   .btnform{
     background-color: #AD50A7;
