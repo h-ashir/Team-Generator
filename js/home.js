@@ -47,6 +47,22 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
  
+ 
+ 
+function displayResult(data) {
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = `<h2>Submitted Data:</h2>`;
+    data.forEach(person => {
+        resultDiv.innerHTML += `
+            <p><strong>Serial Number:</strong> ${person.serialNumber}</p>
+            <p><strong>Name:</strong> ${person.name}</p>
+            <p><strong>Technical Skills Rating:</strong> ${person.technicalSkills}</p>
+            <p><strong>Soft Skills Rating:</strong> ${person.softSkills}</p>
+            <hr>
+        `;
+    });
+}
+ 
 function generateMemberInputs() {
     const container = document.getElementById("manualInputFields");
     container.innerHTML = "";
@@ -158,7 +174,7 @@ const stars = document.querySelectorAll('.star');
             highlightStars(selectedRating);
         });
     });
-
+ 
     function highlightStars(rating) {
         stars.forEach(star => {
             star.style.color = star.dataset.value <= rating ? 'gold' : 'grey';
