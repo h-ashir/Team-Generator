@@ -11,7 +11,7 @@
  
     <header class="home-header">
         <div class="header-leftarea">
-           <img src="assets/images/holdinghands.jpg" alt="Logo">
+           <img src="assets/images/holdinghands.jpg" class="logo" alt="Logo">
            <span>TEAM GENERATOR</span>
         </div>
         <div class="header-rightarea">
@@ -23,11 +23,11 @@
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
                       </li>
-                      <li class="nav-item">
+                      <!-- <li class="nav-item">
                         <a class="nav-link" href="history.html">History</a>
-                      </li>
+                      </li> -->
                       <li class="nav-item">
                         <a class="nav-link" href="login.html">
                           Logout
@@ -48,18 +48,21 @@
         <div id="container-inputfields">
           <form id="teamForm">
             <label class="label-title" for="numTeams">Number of Teams:</label>
-            <input type="number" id="numTeams" name="numTeams" required>
+            <input type="number" class="mb-5" id="numTeams" name="numTeams" required>
  
             <label class="label-title" for="numMembers">Number of Members:</label>
-            <input type="number" id="numMembers" name="numMembers" required>
-            <div class="upload-manual">
-              <input type="radio" id="fileInputOption" name="inputOption" value="file" >
-              <label for="fileInputOption">Upload File</label>
-            </div>
-           
-            <div class="upload-manual">
-              <input type="radio" id="manualInputOption" name="inputOption" value="manual" style="align-items: left;" >
-              <label for="manualInputOption">Manual Input</label>
+            <input type="number" class="mb-5" id="numMembers" name="numMembers" required>
+            <div class="radio-field">
+
+              <div class="upload-manual">
+                <input type="radio" id="fileInputOption" name="inputOption" value="file" >
+                <label for="fileInputOption">Upload File</label>
+              </div>
+            
+              <div class="upload-manual">
+                <input type="radio" id="manualInputOption" name="inputOption" value="manual" style="align-items: left;" >
+                <label for="manualInputOption">Manual Input</label>
+              </div>
             </div>
            
  
@@ -86,21 +89,21 @@
    
       <div id="feedbackContainer" class="feedback-container">
         <h2>Give us your <span>Feedback</span></h2>
-        <div class="rating">
+        <!-- <div class="rating">
           <span class="star" data-value="1">&#9733;</span>
           <span class="star" data-value="2">&#9733;</span>
           <span class="star" data-value="3">&#9733;</span>
           <span class="star" data-value="4">&#9733;</span>
           <span class="star" data-value="5">&#9733;</span>
-      </div>
-      <textarea name="" id="feedbackMessage" placeholder="Enter your feedback here..."></textarea>
+      </div> -->
+      <textarea name="" id="feedbackMessage" placeholder="Enter your feedback here..." required></textarea>
       <button class="submitbtn" id="submitFeedbackBtn">Submit Feedback</button>
       </div>
    
- 
+      
     <script src="xlsx.full.min.js"></script>
     <script src="js/home.js"></script>
- 
+    <script type="module" src="js/feedback.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

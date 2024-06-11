@@ -7,32 +7,36 @@ body {
     background: #FC466B;
     background: -webkit-linear-gradient(to right, #3F5EFB, #FC466B);
     background: linear-gradient(to right, #3F5EFB, #FC466B);
+    /* padding: 100px;
+    border-radius: 10px; */
 }
  
 .home-header{
+    /* border-top-left-radius: 10px;
+    border-top-right-radius: 10px; */
     width: 100%;
-    height: 6rem;
+    height: 6.3rem;
     background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-left: 1rem;
     padding-right: 1rem;
-    border-bottom: 3px solid black;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.26);
 }
 .header-leftarea{
     height: 4rem;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
 }
 .header-leftarea img{
-    height: 90px;
-    width: 90px;
+    height: 100px;
+    width: 100px;
 }
 .header-leftarea span{
     font-weight: 600;
-    font-size: 35px;
+    font-size: 30px;
 }
 .container-fluid{
     background-color: white;
@@ -42,28 +46,35 @@ body {
     display: flex;
     justify-content: space-between;
 }
+.navbar-nav{
+    display: flex;
+    gap: 20px;
+}
  
 #container {
-    width: 80%;
-    margin: 20px auto;
+    width: 100%;
+    margin: 0px auto;
     background-color: #fff;
-    padding: 20px;
+    /* background: #FC466B;
+    background: -webkit-linear-gradient(to right, #FC466B, #3F5EFB);
+    background: linear-gradient(to right, #FC466B, #3F5EFB); */
+    padding: 50px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-#container{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    gap: 3rem;
+    justify-content: center;
+    gap: 1rem;
+    padding: 70px;
 }
 #container img{
-    width: 400px;
-    height: 400px;
+    width: 550px;
+    height: 500px;
+    border-radius: 10px;
 }
 #output{
-    width: 80%;
-    margin: 20px auto;
+    width: 100%;
+    margin: 0px auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
@@ -73,22 +84,28 @@ body {
 }
  
 #teamForm input{
-    width: 89%;
+    width: 100%;
 }
 #container-inputfields{
     padding-left: 100px;
 }
 .label-title{
-    font-size: 25px;
+    font-size: 22px;
+    font-weight: bold;
 }
 .upload-manual{
-    margin-bottom: 15px;
-    width: 30%;
+    margin: 15px 0;
+    width: 40%;
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: center;
     align-items: center;
     }
+.upload-manual input{
+    height: 17px;
+    
+}
 .upload-manual label{
+    font-size: 20px;
     width: 100%;
 }
 h1 {
@@ -106,6 +123,11 @@ ul{
 label {
     display: block;
     margin-bottom: 5px;
+    width: 100%;
+}
+.radio-field{
+    display: flex;
+    width: 100%;
 }
  
 input[type="number"],
@@ -123,7 +145,8 @@ input[type="file"] {
 }
  
 button[type="submit"] {
-    padding: 5px 10px;
+    margin-top: 20px;
+    padding: 10px 20px;
     font-weight: bold;
     background-color: #AD50A7;
     border-radius: 5px;
@@ -132,8 +155,10 @@ button[type="submit"] {
     transition: .5s linear;
     color: white;
     letter-spacing: .3px;
+    width: 100%;
     font-size: 20px;
 }
+
  
 button[type="submit"]:hover {
     background-color: #3f59d8;
@@ -144,25 +169,39 @@ button[type="submit"]:hover {
     
     display: flex;
     flex-wrap: wrap;
+    padding: 70px;
+}
+.team p{
+    margin-top: 20px;
+    font-size: 22px;
+}
+ul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-size: 20px;
+    margin-right: 25px;
 }
  
 .team {
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 10px;
+    padding: 25px;
     margin: 10px;
     background-color: #f9f9f9;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: .34s linear;
+    }
+    .team:hover {
+    box-shadow: 2px 2px 5px blue;
+    transform: scale(1.05);
 }
- 
+    
 .team h3 {
     margin-top: 0;
 }
- 
- 
- 
- 
- 
 table {
     width: 100%;
     border-collapse: collapse;
@@ -186,6 +225,8 @@ th {
 }
 .team h3 {
     margin-top: 0;
+    font-size: 30px;
+    font-weight: bold;
 }
 .feedback-container {
     display: flex;
@@ -196,8 +237,9 @@ th {
     width: 80%;
     margin: 0 auto;
     border-radius: 10px;
-    margin-top: 50px;
-    padding: 20px;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    padding: 50px;
 }
 
 .rating {

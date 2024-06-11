@@ -162,7 +162,7 @@ function displayTeams(teams) {
 <ul>
                 ${team.members.map(member => `<li>${member.name}</li>`).join("")}
 </ul>
-        `;
+        `; 
         output.appendChild(teamDiv);
     });
 }
