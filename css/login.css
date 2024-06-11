@@ -53,13 +53,25 @@ body {
   .main_content{
     justify-content: start;
   }
-  
-  .btn{
-    background-color: #AD50A7;
+  .signup-redirect{
+    color: black;
   }
   
-  .btn:hover{
-    background-color: #884083;
+  .btnform{
+    background-color: #AD50A7;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    transition: .5s linear;
+    color: white;
+    letter-spacing: 1px;
+    font-size: 20px;
+    }
+  
+  .btnform:hover{
+    background-color: #3f59d8;
+    color: white;
+    transform: scale(1.05);
   }
   
   .social-login a {
