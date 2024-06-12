@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-    import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+    import { getDatabase, ref, set, get, child, push } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
  
     const firebaseConfig = {
     apiKey: "AIzaSyAIuCN5NMapt-HyvTWmEXPOhXTdBYlVhOk",
@@ -15,13 +15,17 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebas
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
  
-    document.getElementById("submitFeedbackBtn").addEventListener('click', function(e){
+   document.getElementById("submitFeedbackBtn").addEventListener('click', function(e) {
     e.preventDefault();
-    set(ref(db, 'user/' + document.getElementById("submitFeedbackBtn").value),
-    {
-        feedback: document.getElementById("feedbackMessage").value
-        // rating: document.getElementById("rating").value
- 
+   
+    const feedbackMessage = document.getElementById("feedbackMessage").value;
+   
+    const newFeedbackRef = push(ref(db, 'feedback/')); // Generate a new unique key under 'feedback/' path
+   
+    set(newFeedbackRef, {
+        feedback: feedbackMessage,
+    })
+    .then(() => {
+        alert("Feedback uploaded successfully!");
+    })
     });
-    alert("Feedback uploaded Sucessfully  !");
-})
