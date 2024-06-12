@@ -134,19 +134,35 @@ function generateTeamsFromManualInput(numTeams, numMembers) {
 }
  
 function generateTeams(numTeams, members) {
+    // Sort members by technical score in descending order
     members.sort((a, b) => b.techScore - a.techScore);
-    const teams = Array.from({ length: numTeams }, () => ({ leader: null, members: [] }));
-    let currentIndex = 0;
- 
-    for (let i = 0; i < members.length; i++) {
-        if (teams[currentIndex].leader === null && members[i].softScore >= 6) {
-            teams[currentIndex].leader = members[i];
-        } else {
-            teams[currentIndex].members.push(members[i]);
+
+    // Initialize teams array
+    const teams = Array.from({ length: numTeams }, () => ({ leader: null, members: [], totalTechScore: 0 }));
+
+    // Assign each member to the team with the lowest total technical score
+    members.forEach(member => {
+        let minScore = Infinity;
+        let minTeamIndex = 0;
+        teams.forEach((team, index) => {
+            if (team.totalTechScore < minScore) {
+                minScore = team.totalTechScore;
+                minTeamIndex = index;
+            }
+        });
+        teams[minTeamIndex].members.push(member);
+        teams[minTeamIndex].totalTechScore += member.techScore;
+    });
+
+    // Select leaders for each team
+    teams.forEach(team => {
+        const eligibleLeaders = team.members.filter(member => member.softScore >= 1);
+        if (eligibleLeaders.length > 0) {
+            team.leader = eligibleLeaders[0];
+            team.members = team.members.filter(member => member !== team.leader);
         }
-        currentIndex = (currentIndex + 1) % numTeams;
-    }
- 
+    });
+
     return teams;
 }
  
