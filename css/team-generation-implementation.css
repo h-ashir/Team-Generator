@@ -190,9 +190,13 @@ footer{
     height: 120px;
     background-color: #5A639C;
     display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+footer .footer-content{
+    display: flex;
     justify-content: space-around;
     align-items: center;
-    padding-top: 20px;
 }
 
 .footer-leftarea img{
