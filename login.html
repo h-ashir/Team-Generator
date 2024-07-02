@@ -4,54 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Team Generator</title>
-    <link rel="stylesheet" href="css/login.css" />
-    <script type="module" src="js/login.js"></script>
- 
-    <style>
-      .messageDiv {
-        background-color: hsl(327, 90%, 28%);
-        color: white;
-        padding: 10px 20px;
-        margin: 10px;
-        border-radius: 5px;
-        font-size: 1rem;
-        opacity: 0;
-        animation: fadeOut 7s forwards;
-      }
-    </style>
- 
-    <link
+    <link rel="stylesheet" href="./css/login.css" />
+    <!-- <script type="module" src="js/login.js"></script> -->
+  </head>
+  <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-  </head>
+
   <body>
-    <div class="page d-flex justify-content-center" id="signIn">
-      <div class="container bg-light">
-        <div class="row main-row">
-          <div class="col-md-6 d-flex main-svg">
-            <img
-              class="svg-img"
-              src="assets/images/Book-reading.svg"
-              alt="Image"
-              class="img-fluid"
-            />
-          </div>
-          <div class="col-md-6 d-flex main-content">
-            <div class="row">
+    
+    <div class="login-page">
+      <div class="image-area">
+        <img src="./assets/images/teamwork-people-with-book-icons-template 1 (1).png" alt="teamwork-people-with-book-icons-template">
+      </div>
+
+      <div class="login-details">
+        <div class="col-md-6 d-flex main-content">
+            <div class="row" style="width: 500px">
               <div class="col-md-11">
                 <div class="mb-4">
-                  <h2 class="display-3 text-center">
-                    Login <span style="color: #ad50a7">Here</span>
+                  <h2 class="text-center login-here" >
+                    <span style="font-size: 50px;">LOGIN HERE</span>
                   </h2>
-                  <p class="mb-4 d-flex gap-3">
-                    Don't have an account ? <br /><a
+                  <p class="mb-1 d-flex gap-2" style="width: 300px;">
+                    <br />
+                    <a style="color: #5A639C; font-weight: bolder;"
                       href="signup.html"
-                      style="font-weight: bold"
-                      >Sign Up</a
-                    >.
+                      >Sign Up
+                    </a>if you don't have an account
                   </p>
                   <div
                     id="signInMessage"
@@ -78,25 +61,15 @@
                       placeholder="Enter your password"
                     />
                   </div>
- 
-                  <input
-                    type="submit"
-                    id="submitSignIn"
-                    value="Login"
-                    class="btnform fw-bold p-2 ps-4 pe-4 btn-block"
-                  />
+                  <div class="submit-centre">
+                    <input class="btn btn-primary" type="submit" value="Login" style="background-color: #5A639C; width: 100px;">
+                  </div>
                 </form>
               </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
- 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
+
   </body>
 </html>
