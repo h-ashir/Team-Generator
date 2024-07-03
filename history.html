@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History</title>
+    <script type="module" src="scripts.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="css/history.css">
 </head>
@@ -11,17 +12,130 @@
     
     <!-- Navbar -->
     <nav>
-        
+        <header class="home-header">
+            <div class="header-leftarea">
+               <img src="./assets/images/TeamGenerator-icon 4 (1).png" class="logo" alt="Logo">
+               <span>Team <span style="color: #5A639C;">Generator</span></span>
+            </div>
+            <div class="header-rightarea">
+                <nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding-top: 0px; padding-bottom: 0px;">
+                    <div class="container-fluid">
+                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+                          <div>
+                            <li class="nav-item">
+                              <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                            </li>
+                          </div>
+                          <div>
+                            <li class="nav-item">
+                              <a class="nav-link active" aria-current="page" href="history.html">History</a>
+                            </li>
+                          </div>
+                          <div>
+                            <li class="nav-item">
+                                <a class="log-item" href="login.html">Logout</a>
+                            </li>
+                          </div>
+                        </ul>
+                      </div>
+                    </div>
+                </nav>
+            </div>
+          </header>
     </nav>
     <!-- Navbar End-->
 
     <section>
 
+        <div class="table-box">
+            <div class="table-row" style="background-color:#5A639C;">
+              <div class="table-cell">
+                <p style="color: white;">Serial Number</p>
+              </div>
+              <div class="table-cell">
+                <p style="color: white;">Project Name</p>
+              </div>
+              <div class="table-cell">
+                <p style="color: white;">Creation Date</p>
+              </div>
+            </div>
+          </div>
+          <div class="group">
+            <div class="table-row">
+              <div class="table-cell">
+                <p class="side1">1</p>
+              </div>
+              <div class="table-cell">
+                <p>Case Study</p>
+              </div>
+              <div class="table-cell">
+                <p class="side">03/05/2024</p>
+              </div>
+            </div>
+            <div class="table-row">
+              <div class="table-cell">
+                <p class="side1">2</p>
+              </div>
+              <div class="table-cell">
+                <p>Football</p>
+              </div>
+              <div class="table-cell">
+                <p class="side">26/06/2024</p>
+              </div>
+            </div>
+            <div class="table-row">
+              <div class="table-cell">
+                <p class="side1">3</p>
+              </div>
+              <div class="table-cell">
+                <p>Dumb charadas</p>
+              </div>
+              <div class="table-cell">
+                <p class="side">19/11/2024</p>
+              </div>
+            </div>
+          </div>
+
     </section>
     
     <!-- footer -->
      <footer>
-
+        <div class="footer-content">
+            <div class="three-spacing">
+              <div class="footer-leftarea">
+                <img src="./assets/images/Group 52 (1).png" class="logo" alt="Logo"> 
+              </div>
+            </div>
+            <div class="three-spacing">
+              <div class="social-icons-area">
+                <div style="text-align: center; font-size: large; font-weight: 400; color: white;">Get in Touch <br> with Us</div>
+                <div class="social-media">
+                  <a href="https://discord.com/"><i class="fa-brands fa-discord" style="color: #ffffff;"></i></a>
+                  <a href="https://twitter.com/?lang=en"><i class="fa-brands fa-x-twitter" style="color: #ffffff;"></i></a>
+                  <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i> </a>       
+                </div>
+              </div>
+            </div>
+            <div class="three-spacing" >
+              <div>
+                <h5 style="text-align: center; color: #ffffff; font-weight: 400; font-size: large; width: 175px;">Write to us!</h5>
+                <button class="btn btn-primary" type="submit" style="background-color: #5A639C; border: 0cm;" onclick="window.location.href = 'mailto:teamgen@gmail.com';">
+                  
+                  <i class="fa-regular fa-envelope fa-lg" id="envelope" style="color: #ffffff;"></i><br>
+                  <span>teamgen@gmail.com</span>
+                </button>
+              </div>
+            </div>
+          </div>
+    
+          <section class="sub-footer" style="text-align: center; color: #373270;">
+            <i class="fa-regular fa-copyright fa-2xs"></i>
+            <span>Team Generator - All Rights Reserved</span>
+          </section>
      </footer>
     <!-- footer end -->
     
