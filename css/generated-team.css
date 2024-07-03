@@ -88,12 +88,22 @@
 
 .result-tg-t-title{
      background-color: #5A639C;
+     border-radius: 5px 5px 0 0;
      height: 5rem;
      width: 35rem;
+     display: flex;
+     justify-content: center;
+     align-items: center;
      text-align: center;
-     padding-top: 2rem;
      color: white;
      
+}
+.result-tg-t-teamleader{
+    background-color: #C1C1C1;
+    padding: 10px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .result-tg-t-members{
@@ -101,6 +111,7 @@
     min-height: 5rem;
     text-align: center;
     width: 35rem;
+    border-radius: 0 0 5px 5px;
 }
 .result-tg-t-members ol{
     display: flex;
