@@ -41,9 +41,17 @@
     gap: 20px;
 }
 .navbar-nav .nav-item .log-item{
+    background-color: #5A639C;
     text-decoration: none;
-    color: black;
-    opacity: .5;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    width: 100%;
+}
+.navbar-nav .nav-item .log-item:hover{
+    background-color: #313c82;
+    text-decoration: none;
+    transition: .4s linear;
 }
 
 .header-leftarea img{
@@ -73,15 +81,6 @@
 .upload-area input{
     background-color: #5A639C;
 }
-
-.generate-area{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 25px; 
-    padding-bottom: 25px;
-}
-
 
 /* Input areas */
 .project-teams-area{
@@ -177,16 +176,29 @@
 }
 .prev-next-area input:hover{
     background-color: #313c82;
-    padding: 15px 30px ;
+    transition: .4s linear;
+}
+.generate-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 25px; 
+    padding-bottom: 25px;
+}
+.generate-area button{
+    background-color: #5A639C;    
+    padding: 20px 20px;
+    border-radius: 6px;
+    border: none;
     letter-spacing: 2px;
 }
-.generate-area input{
-    background-color: #5A639C;
-    padding: 15px 30px ;
-    letter-spacing: 2px;
+.generate-area button a{
+    text-decoration: none;
+    color: white;
 }
-.generate-area input:hover{
+.generate-area button:hover{
     background-color: #313c82;
+    transition: .4s linear;
 }
 
 /* footer area */
