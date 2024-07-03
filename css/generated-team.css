@@ -51,10 +51,10 @@
     background-color: #313c82;
     transition: .4s linear;
 }
-.navbar-nav .nav-item .logout-item{
+.navbar-nav .nav-item .log-item{
     text-decoration: none;
     color: black;
-    opacity: .6;
+    opacity: .5;
 }
 .header-leftarea img{
     height: 50px;

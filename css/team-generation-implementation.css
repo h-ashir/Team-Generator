@@ -40,6 +40,11 @@
     align-items: center;
     gap: 20px;
 }
+.navbar-nav .nav-item .log-item{
+    text-decoration: none;
+    color: black;
+    opacity: .5;
+}
 
 .header-leftarea img{
     height: 50px;

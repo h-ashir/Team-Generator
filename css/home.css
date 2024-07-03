@@ -42,12 +42,17 @@
 .navbar-nav .nav-item{
     font-size: 17px;
 }
-.navbar-nav .nav-item input{
+.navbar-nav .nav-item .log-item{
     background-color: #5A639C;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
     width: 100%;
 }
-.navbar-nav .nav-item input:hover{
+.navbar-nav .nav-item .log-item:hover{
     background-color: #313c82;
+    text-decoration: none;
     transition: .4s linear;
 }
 .header-leftarea img{
