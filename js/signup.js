@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
- import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+ import {getAuth, createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
  import{getFirestore, setDoc, doc} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
  
  const firebaseConfig = {
@@ -11,7 +11,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/fireba
     messagingSenderId: "1097943042656",
     appId: "1:1097943042656:web:174161d4af1d7017cad105",
     measurementId: "G-Q9C3E9L2P6"
-  };
+  };    
 
  // Initialize Firebase
  const app = initializeApp(firebaseConfig);
@@ -25,6 +25,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/fireba
         messageDiv.style.opacity=0;
     },5000);
  }
+
  const signUp=document.getElementById('submitSignUp');
  signUp.addEventListener('click', (event)=>{
     event.preventDefault();
@@ -61,7 +62,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/fireba
             showMessage('Email Address Already Exists !!!', 'signUpMessage');
         }
         else{
-            showMessage('unable to create User', 'signUpMessage');
+            showMessage('unable to create User (Password should be greater than 8 characters)', 'signUpMessage');
         }
     })
  });
