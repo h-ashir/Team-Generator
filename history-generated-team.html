@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generation History</title>
-    <script type="module" src="scripts.js"></script>
+    <title>Generated Team History</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/history.css">
+    <link rel="stylesheet" href="css/history-generated-team.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    
+
     <!-- Navbar -->
     <nav>
         <header class="home-header">
@@ -32,8 +32,8 @@
                           </div>
                           <div>
                             <li class="nav-item">
-                              <a class="nav-link active" aria-current="page" href="history.html">History</a>
-                            </li>
+                                <a class="nav-link active" aria-current="page" href="history.html">History</a>
+                              </li>
                           </div>
                           <div>
                             <li class="nav-item">
@@ -50,47 +50,61 @@
     <!-- Navbar End-->
 
     <section>
+        <div class="history-container">
+            <div class="history-container-item serial-no">
+                <h5>Serial Number</h5>
+                <p>1</p>
+            </div>
+            <div class="history-container-item project-name">
+                <h5>Project Name</h5>
+                <p>Case Study</p>
+            </div>
+            <div class="history-container-item creation-date">
+                <h5>Creation date</h5>
+                <p>03/05/2024</p>
+            </div>
+        </div>
 
-        <div class="table-box">
-            <div class="table-row" style="background-color:#5A639C;">
-              <div class="table-cell">
-                <p style="color: white;">Serial Number</p>
-              </div>
-              <div class="table-cell">
-                <p style="color: white;">Project Name</p>
-              </div>
-              <div class="table-cell">
-                <p style="color: white;">Creation Date</p>
-              </div>
-            </div>
-          </div>
-          <div class="group">
-            <div class="table-row">
-              <div class="table-cell">
-                <p class="side1">1</p>
-              </div>
-              <div class="table-cell">
-                <a href="history-generated-team.html">Case Study</a>
-              </div>
-              <div class="table-cell">
-                <p class="side">03/05/2024</p>
-              </div>
-            </div>
-            <div class="table-row">
-              <div class="table-cell">
-                <p class="side1">2</p>
-              </div>
-              <div class="table-cell">
-                <a href="history-generated-team.html">Specialization</a>
-              </div>
-              <div class="table-cell">
-                <p class="side">26/06/2024</p>
-              </div>
-            </div>
-            
-          </div>
+        <div class="teamname-area">
+            <div class="result-tg-container1">
+                <div class="result-tg-t">
+                    <div class="result-tg-t-title"><p>TEAM 1</p></div>
+                    <div class="result-tg-t-members">
+                        <div class="result-tg-t-teamleader"><p>Team Leader: Sarath</p></div>
+                        <ol>
+                            <li>Hashir</li>
+                            <li>Alby</li>
+                            <li>Athira</li>
 
-    </section>
+                        </ol>
+                    </div>
+                </div>
+                <div class="result-tg-t">
+                    <div class="result-tg-t-title"><p>TEAM 2</p></div>
+                    <div class="result-tg-t-members">
+                        <div class="result-tg-t-teamleader"><p>Team Leader: Sarath</p></div>
+                        <ol>
+                            <li>Hashir</li>
+                            <li>Alby</li>
+                            <li>Athira</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="result-tg-t">
+                    <div class="result-tg-t-title"><p>TEAM 3</p></div>
+                    <div class="result-tg-t-members">
+                        <div class="result-tg-t-teamleader"><p>Team Leader: Sarath</p></div>
+                        <ol>
+                            <li>Hashir</li>
+                            <li>Alby</li>
+                            <li>Athira</li>
+                        </ol>  
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
     
     <!-- footer -->
      <footer>
@@ -129,8 +143,10 @@
      </footer>
     <!-- footer end -->
     
-    <script src="js/history.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="xlsx.full.min.js"></script>
+    <!-- <script type="module" src="js/feedback.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="js/history-generated-team.js"></script>
 </body>
 </html>

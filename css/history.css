@@ -49,7 +49,10 @@
     color: black;
     opacity: .5;
 }
-
+.header-leftarea img{
+    height: 50px;
+    width: 50px;
+}
 .table-box{
     margin-top: 50px;
 }
