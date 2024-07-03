@@ -1,0 +1,214 @@
+:root{--lavendar: hsla(263, 25%, 55%, 0.502) ;}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+.home-header{
+    width: 100%;
+    height: 90px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-bottom: .5px solid rgba(0, 0, 0, 0.26);
+}
+.header-leftarea{
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.header-leftarea span{
+    font-weight: 600;
+    font-size: 30px;
+}
+.container-fluid{
+    background-color: white;
+    font-size: 20px;
+}
+.dropdown-flex{
+    display: flex;
+    justify-content: space-between;
+}
+.navbar-nav{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.navbar-nav .nav-item{
+    font-size: 17px;
+}
+.navbar-nav .nav-item input{
+    background-color: #5A639C;
+    width: 100%;
+}
+.navbar-nav .nav-item input:hover{
+    background-color: #313c82;
+    transition: .4s linear;
+}
+.navbar-nav .nav-item .logout-item{
+    text-decoration: none;
+    color: black;
+    opacity: .6;
+}
+.header-leftarea img{
+    height: 50px;
+    width: 50px;
+}
+.teamname-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.result-tg-container1{
+    background-color: var(--lavendar);
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    row-gap: 5rem;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    margin-top: 2rem;
+    border-radius: 10px;
+}
+
+.result-tg-t{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+
+.result-tg-t-title{
+     background-color: #5A639C;
+     height: 5rem;
+     width: 35rem;
+     text-align: center;
+     padding-top: 2rem;
+     color: white;
+     
+}
+
+.result-tg-t-members{
+    background-color: white;
+    min-height: 5rem;
+    text-align: center;
+    width: 35rem;
+}
+.result-tg-t-members ol{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+    flex-wrap: wrap;
+    
+}
+
+
+.result-tg-container2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.result-tg-container2-icon{
+    color: #5A639C;
+    font-size: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.feedback-area{
+    background-color: var(--lavendar);
+    width: 90%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 10rem;
+    border-radius: 10px;
+}
+
+.rating {
+    display: flex;
+    justify-content: center;
+}
+.star {
+    font-size: 40px;
+    color: #f9f8f8;
+    cursor: pointer;
+}
+.star:hover,
+.star.active {
+    color: #f90;
+}
+
+.feedback-form{
+    width: 50%;
+}
+
+.tg-feedback-btn{
+        background-color: #5A639C; 
+        color: white; 
+        border: none; 
+        border-radius: 4px;
+        transition: background-color 0.4s, color 0.4s; 
+        padding: 10px 44px;
+        font-size: 24px;
+}
+
+.tg-feedback-btn:hover {
+    background-color: #313c82 ; 
+    color: white; 
+}
+
+/* footer area */
+footer{
+    width: 100%;
+    height: 120px;
+    background-color: #5A639C;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+footer .footer-content{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.footer-leftarea img{
+    height: 50px;
+    width: 50px;
+}
+
+.social-icons-area{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.social-media{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.three-spacing{
+    width: 200px;
+}
+.sub-footer{
+    width: 100%;
+    height: 35px;
+    background-color: #5A639C; 
+}
