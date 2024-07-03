@@ -35,6 +35,11 @@ body{
   align-items: center;
   padding-left: 20px;
 }
+.login-details .login-item{
+  color: #5A639C;
+  font-weight: bolder;
+  text-decoration: none;
+}
 
 .submit-centre{
   display: flex;

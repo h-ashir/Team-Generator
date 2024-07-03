@@ -44,7 +44,14 @@ body{
 
 .login-here{
   font-size: 40px;
+  width: max-content;
 }
+.login-details .signup-item{
+  color: #5A639C; 
+  font-weight: bolder;
+  text-decoration: none;
+}
+
 
 @media screen and (max-width: 768px) {
 
