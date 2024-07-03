@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "target": "es6",  //js version to be targeted
+      "module": "es6",  //what module system should typescript follow
+      "strict": true,   //to ensure type checks
+      "esModuleInterop": true,  //module interoperability
+      "skipLibCheck": true, //
+      "forceConsistentCasingInFileNames": true,
+        // "emit": true,
+        "outDir": "./js",
+    },
+    "include": ["./src"],
+  }
