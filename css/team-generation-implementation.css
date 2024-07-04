@@ -40,6 +40,9 @@
     align-items: center;
     gap: 20px;
 }
+.navbar-nav .nav-item{
+    font-size: 17px;
+}
 .navbar-nav .nav-item .log-item{
     background-color: #5A639C;
     text-decoration: none;
@@ -48,6 +51,11 @@
     color: white;
     width: 100%;
 }
+.logout-item{
+    opacity: .5;
+    text-decoration: none;
+    color: black;
+  }
 .navbar-nav .nav-item .log-item:hover{
     background-color: #313c82;
     text-decoration: none;

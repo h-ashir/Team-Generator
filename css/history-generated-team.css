@@ -52,6 +52,12 @@
     color: white;
     width: 100%;
 }
+.navbar-nav .nav-item .logout-item{
+    color: black;
+    text-decoration: none;
+    opacity: .5;
+}
+
 .navbar-nav .nav-item .log-item:hover{
     background-color: #313c82;
     text-decoration: none;
