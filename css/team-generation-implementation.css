@@ -214,7 +214,7 @@
 /* footer area */
 footer{
     width: 100%;
-    height: 120px;
+    /* height: 120px; */
     background-color: #5A639C;
     display: flex;
     flex-direction: column;
@@ -227,8 +227,9 @@ footer .footer-content{
 }
 
 .footer-leftarea img{
-    height: 50px;
-    width: 50px;
+    margin-top: 30px;
+    height: 70px;
+    width: 70px;
 }
 
 .social-icons-area{
@@ -241,14 +242,31 @@ footer .footer-content{
     display: flex;
     justify-content: space-evenly;
 }
+.social-media i{
+    padding-top: 20px;
+    font-size: 30px;
+}
 
 .three-spacing{
     width: 200px;
 }
+.three-spacing button{
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+.three-spacing button i{
+    font-size: 30px;
+}
 .sub-footer{
     width: 100%;
     height: 35px;
+    margin-top: 40px;
     background-color: #5A639C; 
+}
+.sub-footer span{
+    color: white;
+    opacity: .6;
 }
 .form-label{
     font-weight: 500;
@@ -270,9 +288,8 @@ input[type=file]::file-selector-button {
     border-radius: 10px;
     color: #fff;
     cursor: pointer;
-    transition: background .2s ease-in-out;
+    transition: .2s ease-in-out;
   }
-  
   input[type=file]::file-selector-button:hover {
     background: #9B86BD;
   }
