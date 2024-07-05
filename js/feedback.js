@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-    import { getDatabase, ref, set, get, child, push } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+    import { getDatabase, ref, set,push } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
  
     const firebaseConfig = {
     apiKey: "AIzaSyAIuCN5NMapt-HyvTWmEXPOhXTdBYlVhOk",
@@ -18,7 +18,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebas
    document.getElementById("submitFeedbackBtn").addEventListener('click', function(e) {
     e.preventDefault();
    
-    const feedbackMessage = document.getElementById("feedbackMessage").value;
+    const feedbackMessage = document.getElementById("exampleFormControlTextarea1").value;
    
     const newFeedbackRef = push(ref(db, 'feedback/')); // Generate a new unique key under 'feedback/' path
    
