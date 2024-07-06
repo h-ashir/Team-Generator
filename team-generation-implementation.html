@@ -77,26 +77,21 @@
           <input class="form-control" id="exampleFormControlInput3" type="text" placeholder="2" aria-label="Disabled input example" disabled>
         </div>
       </div>
-      <div>
-        <div class="weightage-area">
-          <div class="mb-3 weightage-area-form">
-            <label for="customRange3" class="form-label">Set Weightage for Skill</label>
-            <br>
-            <input type="range" class="form-range" min="0" max="100" step="1" id="customRange3" style="height: 50px;">
-            <div id="sliderValue" class="text-center">50%</div>
-          </div>
-        </div>
-        <div class="prev-next-area">
-          <div class="prev-input">
-            <input class="btn btn-primary" type="submit" value="&larr; Previous" style="border: 0cm; width: 170px;">
-          </div>
-          <div class="next-input">
-            <input class="btn btn-primary" type="submit" value="Next &rarr;" style="border: 0cm; width: 170px;">
-          </div>
+
+      <div class="chart-area">
+        <h1>Dynamic Pie Chart</h1>
+        <label for="numParts">Enter the number of skills:</label>
+        <input type="number" id="numParts" min="1" step="1">
+        <button id="generate">Generate Inputs</button>
+        <canvas id="myPieChart"></canvas>
+        <div class="pie-container">
+          <div id="inputs"></div>
+          <p id="warning" class="warning-text"></p>
         </div>
       </div>
+    
       <div class="generate-area">
-        <button type="submit">
+        <button type="submit" id="generate-teams" disabled>
           <a href="generated-team.html">Generate Teams</a>
         </button>
       </div>
@@ -136,7 +131,7 @@
     </footer>
     <!-- footer end -->
     
-    <script type="module" src="./js/login.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="./js/team-generation-implementation.js"></script>
   </body>
 </html>
