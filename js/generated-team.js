@@ -1,4 +1,4 @@
-const stars = document.querySelectorAll('.star');
+  const stars = document.querySelectorAll('.star');
   const ratingValue = document.getElementById('ratingValue');
   const ratingStars = document.getElementById('ratingStars');
 

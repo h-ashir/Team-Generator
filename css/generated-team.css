@@ -56,6 +56,11 @@
     color: black;
     opacity: .5;
 }
+.logout-item{
+    opacity: .5;
+    text-decoration: none;
+    color: black;
+  }
 .header-leftarea img{
     height: 50px;
     width: 50px;
