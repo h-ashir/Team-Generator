@@ -1,6 +1,16 @@
-const stars = document.querySelectorAll('.star');
+  const stars = document.querySelectorAll('.star');
   const ratingValue = document.getElementById('ratingValue');
   const ratingStars = document.getElementById('ratingStars');
+
+  const editButton = document.querySelector('.edit-feedback');
+  const feedbackArea = document.querySelector('.feedback-area');
+
+  if (editButton && feedbackArea){
+    editButton.addEventListener('click', (event) =>{
+      event.preventDefault();
+      feedbackArea.style.display =  feedbackArea.style.display === 'none' ? 'block' :'none';
+    });
+  }
  
   stars.forEach(star => {
     star.addEventListener('mouseover', function() {
