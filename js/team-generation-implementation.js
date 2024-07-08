@@ -57,3 +57,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/fireba
       slider.addEventListener('input', function() {
         sliderValue.textContent = this.value + '%';
       });
+
+      document.getElementById('logoutButton').addEventListener('click', function() {
+        localStorage.setItem('showSwal', 'true');
+        window.location.href = 'home.html';
+        
+    });
