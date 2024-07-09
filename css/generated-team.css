@@ -61,6 +61,15 @@
     text-decoration: none;
     color: black;
   }
+
+#loginButton{
+    background-color: #5A639C;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    width: 100%;
+}
 .header-leftarea img{
     height: 50px;
     width: 50px;
