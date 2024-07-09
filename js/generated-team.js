@@ -4,6 +4,24 @@
 
   const editButton = document.querySelector('.edit-feedback');
   const feedbackArea = document.querySelector('.feedback-area');
+  const downloadButton = document.querySelector('.download');
+
+  window.addEventListener('load', function() {
+    if (localStorage.getItem('showSwal') === 'true') {
+        Swal.fire({
+            title: 'Save to history',
+            text: 'Saved to history',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+        localStorage.removeItem('showSwal');
+    }
+});
+
+  downloadButton.addEventListener('click', function() {
+    localStorage.setItem('showSwal', 'true');
+    window.location.href = 'generate-team.html';
+  });
 
   if (editButton && feedbackArea){
     editButton.addEventListener('click', (event) =>{
