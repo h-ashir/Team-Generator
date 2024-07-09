@@ -105,3 +105,10 @@ updateAuthButton(false);
     });
   }
 
+    //logout successful popup
+document.getElementById('logoutButton').addEventListener('click', function() {
+  localStorage.setItem('showSwal', 'true');
+  window.location.href = 'home.html';
+  
+});
+
