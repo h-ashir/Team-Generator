@@ -49,11 +49,41 @@ updateAuthButton(false);
   const feedbackArea = document.querySelector('.feedback-area');
   const downloadButton = document.querySelector('.download');
 
+  document.getElementById('downloadButton').addEventListener('click', function() {
+    // Extract team data from the webpage
+    const teams = [];
+    document.querySelectorAll('.result-tg-t').forEach(teamDiv => {
+        const teamName = teamDiv.querySelector('.result-tg-t-title p').textContent;
+        const teamLeader = teamDiv.querySelector('.result-tg-t-teamleader p').textContent.split(': ')[1];
+        const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent);
+        
+        teams.push({
+            teamName,
+            teamLeader,
+            members
+        });
+    });
+
+    // Convert team data to worksheet
+    const ws_data = [['Team Name', 'Team Leader', 'Members']];
+    teams.forEach(team => {
+        ws_data.push([team.teamName, team.teamLeader, team.members.join(', ')]);
+    });
+    const ws = XLSX.utils.aoa_to_sheet(ws_data);
+
+    // Create a new workbook and append the worksheet
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Teams');
+
+    // Write the workbook and trigger a download
+    XLSX.writeFile(wb, 'teams.xlsx');
+});
+
   window.addEventListener('load', function() {
     if (localStorage.getItem('showSwal') === 'true') {
         Swal.fire({
-            title: 'Save to history',
-            text: 'Saved to history',
+            title: 'Saved to history',
+            
             icon: 'success',
             confirmButtonText: 'OK'
         });
@@ -63,7 +93,7 @@ updateAuthButton(false);
 
   downloadButton.addEventListener('click', function() {
     localStorage.setItem('showSwal', 'true');
-    window.location.href = 'generate-team.html';
+    window.location.href = 'generated-team.html';
   });
 
 
