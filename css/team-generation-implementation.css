@@ -75,10 +75,18 @@
     width: 50%;
     height: 50%;
 }
-.implementation-content{
+/* .implementation-content{
     padding: 5px 70px;
+} */
+.implementation-content .uploadMsgTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px 0;
 }
-
+.implementation-content .uploadMsgTitle .uploadmsg{
+    font-size: 18px;
+}
 /* Upload and generate buttons */
 .upload-area{
     display: flex;
@@ -271,9 +279,4 @@ input[type=file]::file-selector-button {
   input[type=file]::file-selector-button:hover {
     background: #9B86BD;
   }
-.uploadmsg{
-    margin-left: 135px;
-    font-size: 18px;
-    padding: 20px;
-    
-}
+

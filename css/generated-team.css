@@ -281,3 +281,13 @@ footer .footer-content{
     font-size: 3.2rem;
     text-transform: uppercase;
 }
+#drag-drop{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#drag-drop .drag-alert{
+    font-weight: 600;
+    font-size: 1.4rem;
+}

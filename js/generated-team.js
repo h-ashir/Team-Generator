@@ -48,6 +48,8 @@ updateAuthButton(false);
   const feedbackArea = document.querySelector('.feedback-area');
   const downloadButton = document.querySelector('.download');
 
+  const dragAlert = document.querySelector('.drag-alert');
+
   document.getElementById('downloadButton').addEventListener('click', function() {
     // Extract team data from the webpage
     const teams = [];
@@ -96,14 +98,24 @@ updateAuthButton(false);
   });
 
 
-  
-
   if (editButton && feedbackArea){
     editButton.addEventListener('click', (event) =>{
       event.preventDefault();
       feedbackArea.style.display =  feedbackArea.style.display === 'none' ? 'block' :'none';
     });
   }
+
+  function dragAlertfunction(){
+    if (editButton){
+      editButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        setTimeout(() => {
+          dragAlert.textContent = 'You can drag and drop to swap members across team';
+        }, 200);
+      });
+    }
+  }
+  dragAlertfunction();
  
   stars.forEach(star => {
     star.addEventListener('mouseover', function() {
