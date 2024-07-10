@@ -16,6 +16,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 function updateAuthButton(isSignedIn) {
+  console.log("Hi")
   const loginButton = document.getElementById('loginButton');
   const logoutButton = document.getElementById('logoutButton');
   const historyButton = document.getElementById('historyButton');
@@ -48,43 +49,11 @@ updateAuthButton(false);
   const feedbackArea = document.querySelector('.feedback-area');
   const downloadButton = document.querySelector('.download');
 
-  const dragAlert = document.querySelector('.drag-alert');
-
-  document.getElementById('downloadButton').addEventListener('click', function() {
-    // Extract team data from the webpage
-    const teams = [];
-    document.querySelectorAll('.result-tg-t').forEach(teamDiv => {
-        const teamName = teamDiv.querySelector('.result-tg-t-title p').textContent;
-        const teamLeader = teamDiv.querySelector('.result-tg-t-teamleader p').textContent.split(': ')[1];
-        const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent);
-        
-        teams.push({
-            teamName,
-            teamLeader,
-            members
-        });
-    });
-
-    // Convert team data to worksheet
-    const ws_data = [['Team Name', 'Team Leader', 'Members']];
-    teams.forEach(team => {
-        ws_data.push([team.teamName, team.teamLeader, team.members.join(', ')]);
-    });
-    const ws = XLSX.utils.aoa_to_sheet(ws_data);
-
-    // Create a new workbook and append the worksheet
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Teams');
-
-    // Write the workbook and trigger a download
-    XLSX.writeFile(wb, 'teams.xlsx');
-});
-
   window.addEventListener('load', function() {
     if (localStorage.getItem('showSwal') === 'true') {
         Swal.fire({
-            title: 'Saved to history',
-            
+            title: 'Save to history',
+            text: 'Saved to history',
             icon: 'success',
             confirmButtonText: 'OK'
         });
@@ -94,9 +63,11 @@ updateAuthButton(false);
 
   downloadButton.addEventListener('click', function() {
     localStorage.setItem('showSwal', 'true');
-    window.location.href = 'generated-team.html';
+    window.location.href = 'generate-team.html';
   });
 
+
+  
 
   if (editButton && feedbackArea){
     editButton.addEventListener('click', (event) =>{
@@ -104,18 +75,6 @@ updateAuthButton(false);
       feedbackArea.style.display =  feedbackArea.style.display === 'none' ? 'block' :'none';
     });
   }
-
-  function dragAlertfunction(){
-    if (editButton){
-      editButton.addEventListener('click', (event) => {
-        event.preventDefault();
-        setTimeout(() => {
-          dragAlert.textContent = 'You can drag and drop to swap members across team';
-        }, 200);
-      });
-    }
-  }
-  dragAlertfunction();
  
   stars.forEach(star => {
     star.addEventListener('mouseover', function() {

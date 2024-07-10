@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-
+ 
     <!-- Navbar -->
     <nav>
         <header class="home-header">
@@ -24,19 +24,22 @@
                         <span class="navbar-toggler-icon"></span>
                       </button>
                       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                          <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="home.html" style="font-size: 17px;">Home</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="login-item" id="loginButton" href="login.html">Login</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link active" id="historyButton" aria-current="page" href="history.html">History</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="logout-item" id="logoutButton" href="home.html">Logout</a>
-                          </li>
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+                          <div>
+                            <li class="nav-item">
+                              <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                            </li>
+                          </div>
+                          <div>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="history.html">History</a>
+                              </li>
+                          </div>
+                          <div>
+                            <li class="nav-item">
+                                <a class="log-item" href="login.html">Logout</a>
+                            </li>
+                          </div>
                         </ul>
                       </div>
                     </div>
@@ -45,101 +48,55 @@
           </header>
     </nav>
     <!-- Navbar End-->
-
-    <div class="generated-project-name">
-      <h1 id="project-name-heading"></h1>
-    </div>
-
-    <div id="drag-drop">
-      <p class="drag-alert"></p>
-    </div>
-
+ 
     <section>
-        <div class="teamname-area">
-            <div class="result-tg-container1">
-                <div class="result-tg-t">
-                    <div class="result-tg-t-title"><p>TEAM 1</p></div>
-                    <div class="result-tg-t-members">
-                        <div class="result-tg-t-teamleader"><p>Team Leader: Sarath</p></div>
-                        <ol>
-                            <li>Hashir</li>
-                            <li>Alby</li>
-                            <li>Athira</li>
-                            
-                        </ol>
-                    </div>
-                </div>
-                <div class="result-tg-t">
-                    <div class="result-tg-t-title"><p>TEAM 2</p></div>
-                    <div class="result-tg-t-members">
-                        <div class="result-tg-t-teamleader"><p>Team Leader: Sarath</p></div>
-                        <ol>
-                            <li>Hashir</li>
-                            <li>Alby</li>
-                            <li>Athira</li>
-                        </ol>
-                    </div>
-                </div>
-                <div class="result-tg-t">
-                    <div class="result-tg-t-title"><p>TEAM 3</p></div>
-                    <div class="result-tg-t-members">
-                        <div class="result-tg-t-teamleader"><p>Team Leader: Sarath</p></div>
-                        <ol>
-                            <li>Hashir</li>
-                            <li>Alby</li>
-                            <li>Athira</li>
-                        </ol>  
-                    </div>
-                </div>
-
-                
-            </div>
+        <div class="teamname-area" id="teamsContainer">
+            <!-- Teams will be dynamically generated here -->
         </div>
-        
+       
         <div class="result-tg-container2">
             <div class="result-tg-container2-icon">
-              <a href="#" class="download" id="downloadButton" >
-                <i class="fa-solid fa-download fa-xs"></i>
-                <p style="margin-bottom: 0;">Download file</p>
-              </a>
+                <i class="fa-solid fa-floppy-disk fa-xs" style="color: #5a639c;"></i>
+                <p style="margin-bottom: 0;">Save</p>
             </div>
             <div class="result-tg-container2-icon">
-              <a href="" class="edit-feedback">
-                <i class="fa-solid fa-pencil fa-xs"></i>
+                <i class="fa-solid fa-download fa-xs" style="color: #5a639c;"></i>
+                <p style="margin-bottom: 0;">Download file</p>
+            </div>
+            <div class="result-tg-container2-icon">
+                <i class="fa-solid fa-pencil fa-xs" style="color: #5a639c;"></i>
                 <p style="margin-bottom: 0;">Edit</p>
-              </a>
-                
             </div>
         </div>
-
+ 
         <div class="teamname-area">
             <div class="feedback-area">
                 <h2 style="text-align: center;">We would love to hear from you :)</h2>
-                <!-- <div class="rating" id="ratingStars">
+                <div class="rating" id="ratingStars">
                     <span class="star" data-value="1">&#9733;</span>
                     <span class="star" data-value="2">&#9733;</span>
                     <span class="star" data-value="3">&#9733;</span>
                     <span class="star" data-value="4">&#9733;</span>
                     <span class="star" data-value="5">&#9733;</span>
                     <input type="hidden" name="rating" id="ratingValue" required>
-                  </div> -->
-                <div class="feedback-form">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" placeholder="Type your feedback here.."></textarea>
+                  </div>
+                <div class="mb-3 feedback-form">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type your feedback here.."></textarea>
                 </div>
                 <div class="feedback-submit-btn">
-                    <input class="tg-feedback-btn" type="submit" id="submitFeedbackBtn" value="Submit">
+                    <input class="tg-feedback-btn" type="submit" value="Submit">
                 </div>
             </div>
         </div>
-
+ 
     </section>
-    
+   
     <!-- footer -->
-     <footer>
+    <footer>
         <div class="footer-content">
             <div class="three-spacing">
               <div class="footer-leftarea">
-                <img src="./assets/images/Group 52 (1).png" class="logo" alt="Logo"> 
+                <img src="./assets/images/Group 52 (1).png" class="logo" alt="Logo">
               </div>
             </div>
             <div class="three-spacing">
@@ -148,7 +105,7 @@
                 <div class="social-media">
                   <a href="https://discord.com/"><i class="fa-brands fa-discord" style="color: #ffffff;"></i></a>
                   <a href="https://twitter.com/?lang=en"><i class="fa-brands fa-x-twitter" style="color: #ffffff;"></i></a>
-                  <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i> </a>       
+                  <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i> </a>      
                 </div>
               </div>
             </div>
@@ -161,18 +118,37 @@
               </div>
             </div>
           </div>
-    
+   
           <section class="sub-footer" style="text-align: center; color: #373270;">
+            <i class="fa-regular fa-copyright fa-2xs"></i>
             <span>&copy;Team Generator - All Rights Reserved</span>
           </section>
      </footer>
     <!-- footer end -->
-    
-    <script type="module" src="js/feedback.js"></script>
+   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script type="module" src="js/generated-team.js"></script>
-    <script type="module" src="js/login.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script> 
+        document.addEventListener('DOMContentLoaded', function() {
+        const teams = JSON.parse(sessionStorage.getItem('generatedTeams'));
+        const teamsContainer = document.getElementById('teamsContainer');
+
+        if (teams && teams.length > 0) {
+            teams.forEach((team, index) => {
+                const teamHtml = `
+                    <div class="result-tg-t">
+                        <div class="result-tg-t-title"><p>${team.name}</p></div>
+                        <div class="result-tg-t-members">
+                            <div class="result-tg-t-teamleader"><p>Team Leader: ${team.leader}</p></div>
+                            <ol>
+                                ${team.members.map(member => `<li>${member.name}</li>`).join('')}
+                            </ol>
+                        </div>
+                    </div>
+                `;
+                teamsContainer.innerHTML += teamHtml;
+            });
+        }
+    });
+  </script>
 </body>
 </html>

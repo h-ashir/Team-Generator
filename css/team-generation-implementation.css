@@ -135,35 +135,6 @@
     width: 10%;
 }
 
-/* Pie chart CSS */
-
-.chart-area {
-    text-align: center;
-    padding: 20px;
-}
-
-#inputs {
-    margin: 20px 0;
-}
-
-input[id="numParts"], .skill-input {
-    margin: 10px; 
-    width: 60px;
-}
-
-.pie-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-canvas {
-    height: 50vh;
-    width: 50vh;
-    margin: auto;
-    display: block;
-}
-
 .generate-area {
     display: flex;
     justify-content: center;
@@ -280,3 +251,64 @@ input[type=file]::file-selector-button {
     background: #9B86BD;
   }
 
+/* Pie Chart Area */
+.weightage-area canvas {
+    max-width: 100%;
+    max-height: 400px;
+}
+
+/* Hover Input for Pie Chart */
+input[type="number"] {
+    /* position: absolute;
+    z-index: 10;
+    border: 1px solid #ccc;
+    padding: 5px;
+    background: white;
+    border-radius: 4px;
+    width: auto;
+    text-align: center;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+    
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    /* -webkit-appearance: none; */
+    /* -moz-appearance: none; */
+    /* appearance: none; */
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+/* #randomGenerateButton
+{
+    background-color: #5A639C;
+    border-radius: 6px;
+    border: none;
+    letter-spacing: 2px;
+    padding: 5px 5px;
+color: azure;} */
+.form-control{
+    
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    /* -webkit-appearance: none; */
+    /* -moz-appearance: none; */
+    /* appearance: none; */
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
