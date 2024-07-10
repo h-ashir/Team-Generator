@@ -206,7 +206,7 @@
 }
 
 .tg-feedback-btn:hover {
-    background-color: #313c82 ; 
+    background-color: #313c82; 
     color: white; 
 }
 
@@ -266,4 +266,18 @@ footer .footer-content{
 .sub-footer span{
     color: white;
     opacity: .6;
+}
+
+.generated-project-name{
+    /* margin-left:400px; */
+    color: #313c82;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.generated-project-name #project-name-heading{
+    font-weight: 600;
+    font-size: 3.2rem;
+    text-transform: uppercase;
 }

@@ -16,7 +16,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 function updateAuthButton(isSignedIn) {
-  console.log("Hi")
   const loginButton = document.getElementById('loginButton');
   const logoutButton = document.getElementById('logoutButton');
   const historyButton = document.getElementById('historyButton');
@@ -112,3 +111,11 @@ document.getElementById('logoutButton').addEventListener('click', function() {
   
 });
 
+const projectName = localStorage.getItem('projectName');
+    const projectNameHeading = document.getElementById('project-name-heading');
+
+    if (projectName) {
+      projectNameHeading.textContent = ` ${projectName}`;
+    } else {
+      projectNameHeading.textContent = 'No project name provided';
+    }
