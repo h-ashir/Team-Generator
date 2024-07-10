@@ -66,7 +66,7 @@ document.getElementById('generate').addEventListener('click', () => {
   const inputsDiv = document.getElementById('inputs');
   inputsDiv.innerHTML = '';
   document.getElementById('warning').style.display = 'none';
-  document.getElementById('generate-teams').disabled = true;
+  // document.getElementById('generate-teams').disabled = true;
 
   if (isNaN(numParts) || numParts < 1) {
       alert('Please enter a valid number greater than 0.');
@@ -147,3 +147,19 @@ document.getElementById('logoutButton').addEventListener('click', function() {
   window.location.href = 'home.html';
   
 });
+
+const projectNameInput = document.getElementById('exampleFormControlInput1');
+  const generateButton = document.getElementById('generate-teams');
+  const generateLink = document.getElementById('generate-link');
+
+  // Enable button when input is not empty
+  projectNameInput.addEventListener('input', () => {
+    generateButton.disabled = !projectNameInput.value;
+  });
+
+  // Save project name to localStorage when button is clicked
+  generateButton.addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent the default form submission
+    localStorage.setItem('projectName', projectNameInput.value);
+    window.location.href = generateLink.href; // Redirect to generated-team page
+  });
