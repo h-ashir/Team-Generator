@@ -1,141 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Team Generator</title>
     <link rel="stylesheet" href="./css/team-generation-implementation.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-        crossorigin="anonymous"
-      />
-  </head>
-  
-  <body>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
     <!-- Navbar -->
     <nav>
-      <header class="home-header">
-        <div class="header-leftarea">
-          <img src="./assets/images/TeamGenerator-icon 4 (1).png" class="logo" alt="Logo">
-          <span>Team <span style="color: #5A639C;">Generator</span></span>
-        </div>
-        <div class="header-rightarea">
-          <nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding-top: 0px; padding-bottom: 0px;">
-            <div class="container-fluid">
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="home.html" style="font-size: 17px;">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="log-item" id="loginButton" href="login.html">Login</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" id="historyButton" aria-current="page" href="history.html">History</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="logout-item" id="logoutButton" href="home.html">Logout</a>
-                  </li>
-                </ul>
-              </div>
+        <header class="home-header">
+            <div class="header-leftarea">
+                <img src="./assets/images/TeamGenerator-icon 4 (1).png" class="logo" alt="Logo" />
+                <span>Team <span style="color: #5a639c">Generator</span></span>
             </div>
-          </nav>
-        </div>
-      </header>
+            <div class="header-rightarea">
+                <nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding-top: 0px; padding-bottom: 0px">
+                    <div class="container-fluid">
+                        <button
+                            class="navbar-toggler"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                        >
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="home.html" style="font-size: 17px">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="log-item" href="login.html">Login</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
     </nav>
     <!-- Navbar End-->
 
     <section class="banner-area">
-      <img src="./assets/images/2668382[1] 1.png" alt="" class="banner-image">
+        <img src="./assets/images/2668382[1] 1.png" alt="" class="banner-image" />
     </section>
-    
-    <div class="implementation-content">
-      <div class="uploadMsgTitle">
-        <h2 class="uploadmsg">Please upload an excel sheet containing the information of the team members and their parameters.</h2>
-      </div>
-      <div class="upload-area">
-        <input class="btn btn-primary" type="file" value="Upload file" style="background-color: white; border: 0cm;">
-      </div>
-      <div class="project-teams-area">
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Project Name</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter your project name here">
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput2" class="form-label">Number of Teams</label>
-          <input type="number" class="form-control" id="exampleFormControlInput2" placeholder="Enter number of teams you want to generate">
-        </div>
-      </div>
-      <div class="parameter-area">
-        <div class="mb-3 parameter-area-form">
-          <h1 class="mb-4">Number of Parameters Identified</h1>
-          <input class="form-control" id="exampleFormControlInput3" type="text" placeholder="2" aria-label="Disabled input example" disabled>
-        </div>
-      </div>
 
-      <div class="chart-area">
-        <h1>Dynamic Pie Chart</h1>
-        <label for="numParts">Enter the number of skills:</label>
-        <input type="number" id="numParts" min="1" step="1">
-        <button id="generate">Generate Inputs</button>
-        <canvas id="myPieChart"></canvas>
-        <div class="pie-container">
-          <div id="inputs"></div>
-          <p id="warning" class="warning-text"></p>
+    <div class="implementation-content">
+        <div class="upload-area">
+            <input
+                id="fileInput"
+                class="btn btn-primary"
+                type="file"
+                accept=".xls,.xlsx,.csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                style="background-color: white; border: 0cm"
+            />
         </div>
-      </div>
-    
-      <div class="generate-area">
-        <button type="submit" id="generate-teams" disabled>
-          <a href="generated-team.html" id="generate-link">Generate Teams</a>
-        </button>
-      </div>
+
+        <div class="project-teams-area">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Project Name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="exampleFormControlInput1"
+                    placeholder="Enter your project name here"
+                    required
+                />
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleFormControlInput2" class="form-label">Number of Teams</label>
+                <input
+                    type="number"
+                    class="form-control"
+                    id="exampleFormControlInput2"
+                    placeholder="Enter number of teams you want to generate"
+                    required
+            ></input>
+            </div>
+        </div>
+
+        <div class="parameter-area">
+            <div class="mb-3 parameter-area-form">
+                <h1 class="mb-4">Number of Parameters Identified</h1>
+                <input
+                    class="form-control"
+                    id="parameterCount"
+                    placeholder=" "
+                    aria-label="Disabled input example"
+                    disabled
+                ></input>
+            </div>
+        </div>
+
+        <h2>Set weightage for the parameters</h2>
+        <!-- <span>or</span>
+        <div class="randomGenerateButton">
+            <button type="button" id="randomGenerateButton">Randomly Generate</button>
+        </div> -->
+
+        <div class="weightage-area">
+            <canvas id="pieChart" width="400" height="400"></canvas>
+        </div>
+
+        <div class="generate-area">
+            <button type="button" id="generateButton">Generate Teams</button>
+        </div>
+
+        <!-- <div class="generated-teams-area" id="generatedTeamsArea"> -->
+            <!-- Generated teams will be displayed here -->
+        <!-- </div> -->
     </div>
 
     <!-- footer -->
     <footer>
-      <div class="footer-content">
-        <div class="three-spacing">
-          <div class="footer-leftarea">
-            <img src="./assets/images/Group 52 (1).png" class="logo" alt="Logo"> 
-          </div>
-        </div>
-        <div class="three-spacing">
-          <div class="social-icons-area">
-            <div style="text-align: center; font-size: large; font-weight: 400; color: white;">Get in Touch with Us</div>
-            <div class="social-media">
-              <a href="https://discord.com/"><i class="fa-brands fa-discord" style="color: #ffffff;"></i></a>
-              <a href="https://twitter.com/?lang=en"><i class="fa-brands fa-x-twitter" style="color: #ffffff;"></i></a>
-              <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i> </a>       
+        <div class="footer-content">
+            <div class="three-spacing">
+                <div class="footer-leftarea">
+                    <img src="./assets/images/Group 52 (1).png" class="logo" alt="Logo" />
+                </div>
             </div>
-          </div>
+            <div class="three-spacing">
+                <div class="social-icons-area">
+                    <div style="text-align: center; font-size: large; font-weight: 400; color: white">
+                        Get in Touch <br />
+                        with Us
+                    </div>
+                    <div class="social-media">
+                        <a href="https://discord.com/"><i class="fa-brands fa-discord" style="color: #ffffff"></i></a>
+                        <a href="https://twitter.com/?lang=en"><i class="fa-brands fa-x-twitter" style="color: #ffffff"></i></a>
+                        <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #ffffff"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="three-spacing">
+                <div>
+                    <h5 style="text-align: center; color: #ffffff; font-weight: 400; font-size: large; width: 175px">Write to us!</h5>
+                    <button
+                        class="btn btn-primary"
+                        type="submit"
+                        style="background-color: #5a639c; border: 0cm"
+                        onclick="window.location.href = 'mailto:teamgen@gmail.com'"
+                    >
+                        <i class="fa-regular fa-envelope fa-lg" id="envelope" style="color: #ffffff"></i><br />
+                        <span>teamgen@gmail.com</span>
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="three-spacing" >
-          <div>
-            <button class="btn btn-primary" type="submit" style="background-color: #5A639C; border: 0cm;" onclick="window.location.href = 'mailto:teamgen@gmail.com';">
-              <i class="fa-regular fa-envelope fa-lg" id="envelope" style="color: #ffffff;"></i><br>
-              <span>teamgen@gmail.com</span>
-            </button>
-          </div>
-        </div>
-      </div>
+<script>
+   
 
-      <section class="sub-footer" style="text-align: center; color: #373270;">
-        <span>&copy;Team Generator - All Rights Reserved</span>
-      </section>
-    </footer>
-    <!-- footer end -->
-    
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script type="module" src="./js/team-generation-implementation.js"></script>
-    <script type="module" src="./js/login.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  </body>
+    // document.getElementById('generateButton').addEventListener('click', handleGenerateButtonClick);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./js/team-generation-implementation.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-wl3SZZ4RoaCd3gWf4Qd9DPIlWdlV8UPGucoWVcWRipF1mCZ6VWLhp2ud0rM64Qe3" crossorigin="anonymous"></script>
+</body>
 </html>
