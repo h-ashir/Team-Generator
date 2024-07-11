@@ -124,6 +124,19 @@ const ratingStars = document.getElementById('ratingStars');
 const editButton = document.querySelector('.edit-feedback');
 const feedbackArea = document.querySelector('.feedback-area');
 const downloadButton = document.querySelector('.download');
+const dragAlert = document.querySelector('.drag-alert');
+
+function dragAlertfunction(){
+  if (editButton){
+    editButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      setTimeout(() => {
+        dragAlert.textContent = 'You can drag and drop to swap members across team';
+      }, 200);
+    });
+  }
+}
+dragAlertfunction();
 
 if (editButton && feedbackArea){
   editButton.addEventListener('click', (event) =>{
