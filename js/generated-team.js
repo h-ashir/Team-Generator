@@ -1,5 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAIuCN5NMapt-HyvTWmEXPOhXTdBYlVhOk",
@@ -14,6 +16,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
 
 function updateAuthButton(isSignedIn) {
   const loginButton = document.getElementById('loginButton');
@@ -39,18 +43,7 @@ onAuthStateChanged(auth, user => {
 
 updateAuthButton(false);
 
-
-  const stars = document.querySelectorAll('.star');
-  const ratingValue = document.getElementById('ratingValue');
-  const ratingStars = document.getElementById('ratingStars');
-
-  const editButton = document.querySelector('.edit-feedback');
-  const feedbackArea = document.querySelector('.feedback-area');
-  const downloadButton = document.querySelector('.download');
-
-  const dragAlert = document.querySelector('.drag-alert');
-
-  document.getElementById('downloadButton').addEventListener('click', function() {
+document.getElementById('downloadButton').addEventListener('click', async function() {
     // Extract team data from the webpage
     const teams = [];
     document.querySelectorAll('.result-tg-t').forEach(teamDiv => {
@@ -76,15 +69,47 @@ updateAuthButton(false);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Teams');
 
-    // Write the workbook and trigger a download
+    // Write the workbook to a Blob
+    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+    const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
+
+    // Upload the file to Firebase Storage
+    const projectName = localStorage.getItem('projectName') || 'NoProjectName';
+    const storageRef = ref(storage, `projects/${projectName}_${Date.now()}.xlsx`);
+    await uploadBytes(storageRef, blob);
+
+    // Get the download URL
+    const downloadURL = await getDownloadURL(storageRef);
+
+    // Save project metadata to Firestore
+    await addDoc(collection(db, 'projects'), {
+        projectName: projectName,
+        fileURL: downloadURL,
+        uploadDate: new Date().toISOString()
+    });
+
+    // Trigger download of the Excel file (optional)
     XLSX.writeFile(wb, 'teams.xlsx');
+
+    // Display success message
+    Swal.fire({
+        title: 'File uploaded and saved successfully',
+        icon: 'success',
+        confirmButtonText: 'OK'
+    });
 });
 
-  window.addEventListener('load', function() {
+function s2ab(s) {
+    const buf = new ArrayBuffer(s.length);
+    const view = new Uint8Array(buf);
+    for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+    return buf;
+}
+
+window.addEventListener('load', function() {
     if (localStorage.getItem('showSwal') === 'true') {
         Swal.fire({
             title: 'Saved to history',
-            
             icon: 'success',
             confirmButtonText: 'OK'
         });
@@ -92,72 +117,60 @@ updateAuthButton(false);
     }
 });
 
-  downloadButton.addEventListener('click', function() {
-    localStorage.setItem('showSwal', 'true');
-    window.location.href = 'generated-team.html';
+const stars = document.querySelectorAll('.star');
+const ratingValue = document.getElementById('ratingValue');
+const ratingStars = document.getElementById('ratingStars');
+
+const editButton = document.querySelector('.edit-feedback');
+const feedbackArea = document.querySelector('.feedback-area');
+const downloadButton = document.querySelector('.download');
+
+if (editButton && feedbackArea){
+  editButton.addEventListener('click', (event) =>{
+    event.preventDefault();
+    feedbackArea.style.display =  feedbackArea.style.display === 'none' ? 'block' :'none';
+  });
+}
+
+stars.forEach(star => {
+  star.addEventListener('mouseover', function() {
+    const value = parseInt(this.getAttribute('data-value'));
+    highlightStars(value);
   });
 
+  star.addEventListener('mouseleave', function() {
+    const value = parseInt(ratingValue.value);
+    highlightStars(value);
+  });
 
-  if (editButton && feedbackArea){
-    editButton.addEventListener('click', (event) =>{
-      event.preventDefault();
-      feedbackArea.style.display =  feedbackArea.style.display === 'none' ? 'block' :'none';
-    });
-  }
+  star.addEventListener('click', function() {
+    const value = parseInt(this.getAttribute('data-value'));
+    ratingValue.value = value;
+    highlightStars(value);
+  });
+});
 
-  function dragAlertfunction(){
-    if (editButton){
-      editButton.addEventListener('click', (event) => {
-        event.preventDefault();
-        setTimeout(() => {
-          dragAlert.textContent = 'You can drag and drop to swap members across team';
-        }, 200);
-      });
-    }
-  }
-  dragAlertfunction();
- 
+function highlightStars(value) {
   stars.forEach(star => {
-    star.addEventListener('mouseover', function() {
-      const value = parseInt(this.getAttribute('data-value'));
-      highlightStars(value);
-    });
- 
-    star.addEventListener('mouseleave', function() {
-      const value = parseInt(ratingValue.value);
-      highlightStars(value);
-    });
- 
-    star.addEventListener('click', function() {
-      const value = parseInt(this.getAttribute('data-value'));
-      ratingValue.value = value;
-      highlightStars(value);
-    });
+    const starValue = parseInt(star.getAttribute('data-value'));
+    if (starValue <= value) {
+      star.classList.add('active');
+    } else {
+      star.classList.remove('active');
+    }
   });
- 
-  function highlightStars(value) {
-    stars.forEach(star => {
-      const starValue = parseInt(star.getAttribute('data-value'));
-      if (starValue <= value) {
-        star.classList.add('active');
-      } else {
-        star.classList.remove('active');
-      }
-    });
-  }
+}
 
-    //logout successful popup
 document.getElementById('logoutButton').addEventListener('click', function() {
   localStorage.setItem('showSwal', 'true');
   window.location.href = 'home.html';
-  
 });
 
+const projectNameHeading = document.getElementById('project-name-heading');
 const projectName = localStorage.getItem('projectName');
-    const projectNameHeading = document.getElementById('project-name-heading');
 
-    if (projectName) {
-      projectNameHeading.textContent = ` ${projectName}`;
-    } else {
-      projectNameHeading.textContent = 'No project name provided';
-    }
+if (projectName) {
+  projectNameHeading.textContent = ` ${projectName}`;
+} else {
+  projectNameHeading.textContent = 'No project name provided';
+}
