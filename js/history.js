@@ -1,11 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+import { getFirestore, collection, getDocs, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 import { getStorage } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
 
 // Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAIuCN5NMapt-HyvTWmEXPOhXTdBYlVhOk",
+  apiKey: "AIzaSyAIuCN5NMapt-HyvTWmEXPOhXTdBYlVhOk",
   authDomain: "login-backend-59af8.firebaseapp.com",
   databaseURL: "https://login-backend-59af8-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "login-backend-59af8",
@@ -20,55 +20,90 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
+function updateAuthButton(isSignedIn) {
+  const loginButton = document.getElementById('loginButton');
+  const logoutButton = document.getElementById('logoutButton');
+  const historyButton = document.getElementById('historyButton');
+
+  if (loginButton && logoutButton && historyButton) {
+    if (isSignedIn) {
+      historyButton.style.display = "block";
+      logoutButton.style.display = "block";
+      loginButton.style.display = "none";
+    } else {
+      historyButton.style.display = "none";
+      logoutButton.style.display = "none";
+      loginButton.style.display = "block";
+    }
+  }
+}
+
+onAuthStateChanged(auth, user => {
+  updateAuthButton(!!user);
+  if (user) {
+    console.log("User is signed in:", user);
+    fetchAndDisplayProjects(user.uid);
+  } else {
+    console.log("No user is signed in.");
+    window.location.href = 'login.html';
+  }
+});
+
+updateAuthButton(false);
+
 // Function to fetch projects from Firestore and display them
-async function fetchAndDisplayProjects() {
-    const projectsCollection = collection(db, 'projects');
-    const projectsSnapshot = await getDocs(projectsCollection);
-    const projectsList = document.querySelector('.history-container-content');
-    
+async function fetchAndDisplayProjects(userId) {
+  console.log("Fetching projects for userId:", userId);
+  const projectsCollection = collection(db, 'projects');
+  const q = query(projectsCollection, where("userId", "==", userId), orderBy("uploadDate", "desc"));
+  const projectsSnapshot = await getDocs(q);
+  const projectsList = document.querySelector('.history-container-content');
 
+  projectsList.innerHTML = ''; // Clear the list before adding new items
+
+  if (projectsSnapshot.empty) {
+    console.log("No projects found for this user.");
+  } else {
+    console.log("Projects found:", projectsSnapshot.size);
     projectsSnapshot.forEach((doc, index) => {
-        const projectData = doc.data();
-        const projectName = projectData.projectName;
-        const creationDate = new Date(projectData.uploadDate).toLocaleDateString();
-        const fileURL = projectData.fileURL;
+      const projectData = doc.data();
+      const projectName = projectData.projectName;
+      const creationDate = new Date(projectData.uploadDate).toLocaleDateString();
+      const fileURL = projectData.fileURL;
 
-        const projectRow = document.createElement('div');
-        projectRow.className = 'history-content-row';
+      const projectRow = document.createElement('div');
+      projectRow.className = 'history-content-row';
 
-        projectRow.innerHTML = `
-            <div class="history-content-details">${projectName}</div>
-            <div class="history-content-details">${creationDate}</div>
-            <div class="history-content-details">
-                <a href="#" class="download-link" data-url="${fileURL}">Download</a>
-                </div>
-                `;
-                
-                // <a href="#" class="download-link" data-url="${fileURL}"><i class="fas fa-save"></i></a>
-        projectsList.appendChild(projectRow);
+      projectRow.innerHTML = `
+        <div class="history-content-details">${projectName}</div>
+        <div class="history-content-details">${creationDate}</div>
+        <div class="history-content-details">
+          <a href="#" class="download-link" data-url="${fileURL}">Download</a>
+        </div>
+      `;
+
+      projectsList.appendChild(projectRow);
     });
 
     // Add event listeners to download links
     const downloadLinks = document.querySelectorAll('.download-link');
     downloadLinks.forEach(link => {
-        link.addEventListener('click', async (event) => {
-            event.preventDefault();
-            const url = event.target.getAttribute('data-url');
-            const response = await fetch(url);
-            const blob = await response.blob();
-            const fileName = url.split('?')[0].split('/').pop();
-            const linkElement = document.createElement('a');
-            linkElement.href = URL.createObjectURL(blob);
-            linkElement.download = fileName;
-            document.body.appendChild(linkElement);
-            linkElement.click();
-            document.body.removeChild(linkElement);
-        });
+      link.addEventListener('click', async (event) => {
+        event.preventDefault();
+        const url = event.target.getAttribute('data-url');
+        const response = await fetch(url);
+        const blob = await response.blob();
+        const fileName = url.split('?')[0].split('/').pop();
+        const linkElement = document.createElement('a');
+        linkElement.href = URL.createObjectURL(blob);
+        linkElement.download = fileName;
+        document.body.appendChild(linkElement);
+        linkElement.click();
+        document.body.removeChild(linkElement);
+      });
     });
+  }
 }
-
-// Initialize the app and fetch projects on page load
-document.addEventListener('DOMContentLoaded', fetchAndDisplayProjects);
 
 // Add your existing authentication and logout logic here
 onAuthStateChanged(auth, (user) => {
