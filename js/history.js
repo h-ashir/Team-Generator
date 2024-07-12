@@ -41,10 +41,10 @@ async function fetchAndDisplayProjects() {
             <div class="history-content-details">${creationDate}</div>
             <div class="history-content-details">
                 <a href="#" class="download-link" data-url="${fileURL}">Download</a>
-            </div>
-            
-        `;
-
+                </div>
+                `;
+                
+                // <a href="#" class="download-link" data-url="${fileURL}"><i class="fas fa-save"></i></a>
         projectsList.appendChild(projectRow);
     });
 

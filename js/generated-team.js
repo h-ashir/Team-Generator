@@ -2,7 +2,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/fireba
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
-
 const firebaseConfig = {
   apiKey: "AIzaSyAIuCN5NMapt-HyvTWmEXPOhXTdBYlVhOk",
   authDomain: "login-backend-59af8.firebaseapp.com",
@@ -20,6 +19,7 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 function updateAuthButton(isSignedIn) {
+  console.log("Hi")
   const loginButton = document.getElementById('loginButton');
   const logoutButton = document.getElementById('logoutButton');
   const historyButton = document.getElementById('historyButton');
@@ -43,7 +43,7 @@ onAuthStateChanged(auth, user => {
 
 updateAuthButton(false);
 
-document.getElementById('downloadButton').addEventListener('click', async function() {
+  document.getElementById('downloadButton').addEventListener('click', async function() {
     // Extract team data from the webpage
     const teams = [];
     document.querySelectorAll('.result-tg-t').forEach(teamDiv => {
@@ -106,7 +106,7 @@ function s2ab(s) {
     return buf;
 }
 
-window.addEventListener('load', function() {
+  window.addEventListener('load', function() {
     if (localStorage.getItem('showSwal') === 'true') {
         Swal.fire({
             title: 'Saved to history',
@@ -117,73 +117,42 @@ window.addEventListener('load', function() {
     }
 });
 
-const stars = document.querySelectorAll('.star');
-const ratingValue = document.getElementById('ratingValue');
-const ratingStars = document.getElementById('ratingStars');
-
 const editButton = document.querySelector('.edit-feedback');
 const feedbackArea = document.querySelector('.feedback-area');
-const downloadButton = document.querySelector('.download');
 const dragAlert = document.querySelector('.drag-alert');
+const downloadButton = document.querySelector('.download');
 
-function dragAlertfunction(){
-  if (editButton){
-    editButton.addEventListener('click', (event) => {
+  function dragAlertfunction(){
+    if (editButton){
+      editButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        setTimeout(() => {
+          dragAlert.textContent = 'You can drag and drop to swap members across team';
+        }, 200);
+      });
+    }
+  }
+  dragAlertfunction();
+
+  if (editButton && feedbackArea){
+    editButton.addEventListener('click', (event) =>{
       event.preventDefault();
-      setTimeout(() => {
-        dragAlert.textContent = 'You can drag and drop to swap members across team';
-      }, 200);
+      feedbackArea.style.display =  feedbackArea.style.display === 'none' ? 'block' :'none';
     });
   }
-}
-dragAlertfunction();
-
-if (editButton && feedbackArea){
-  editButton.addEventListener('click', (event) =>{
-    event.preventDefault();
-    feedbackArea.style.display =  feedbackArea.style.display === 'none' ? 'block' :'none';
-  });
-}
-
-stars.forEach(star => {
-  star.addEventListener('mouseover', function() {
-    const value = parseInt(this.getAttribute('data-value'));
-    highlightStars(value);
-  });
-
-  star.addEventListener('mouseleave', function() {
-    const value = parseInt(ratingValue.value);
-    highlightStars(value);
-  });
-
-  star.addEventListener('click', function() {
-    const value = parseInt(this.getAttribute('data-value'));
-    ratingValue.value = value;
-    highlightStars(value);
-  });
-});
-
-function highlightStars(value) {
-  stars.forEach(star => {
-    const starValue = parseInt(star.getAttribute('data-value'));
-    if (starValue <= value) {
-      star.classList.add('active');
-    } else {
-      star.classList.remove('active');
-    }
-  });
-}
-
+ 
+    //logout successful popup
 document.getElementById('logoutButton').addEventListener('click', function() {
   localStorage.setItem('showSwal', 'true');
   window.location.href = 'home.html';
+  
 });
 
-const projectNameHeading = document.getElementById('project-name-heading');
 const projectName = localStorage.getItem('projectName');
+    const projectNameHeading = document.getElementById('project-name-heading');
 
-if (projectName) {
-  projectNameHeading.textContent = ` ${projectName}`;
-} else {
-  projectNameHeading.textContent = 'No project name provided';
-}
+    if (projectName) {
+      projectNameHeading.textContent = ` ${projectName}`;
+    } else {
+      projectNameHeading.textContent = 'No project name provided';
+    }
