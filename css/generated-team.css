@@ -99,40 +99,63 @@
     flex-direction: column;
     width: auto;
 } */
+.teamname-area{
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+ }
+.result-tg-t{
+    width: calc(50% - 20px); /* Adjust to fit three items per row, considering the gap */
+    background-color: var(--lavender); /* Example background color */
+    border-radius: 10px;
+    overflow: hidden;
 
+}
+.result-tg-t ol{
+    padding: 15px 0;
+    background-color: rgb(221, 221, 221);
+    border-radius: 0px 0px 8px 8px;
+}
 .result-tg-t-title{
-     background-color: #5A639C;
-     border-radius: 5px 5px 0 0;
-     height: 5rem;
-     width: 35rem;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     text-align: center;
-     color: white;
-     
+    background-color: #5A639C;
+    border-radius: 5px 5px 0 0;
+    /* height: 1rem; */
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+   
+}
+.result-tg-t-title p{
+    margin-bottom: 0;
+    padding: 10px 0 10px 0;
 }
 .result-tg-t-teamleader{
     background-color: #C1C1C1;
-    padding: 10px 0px;
+    padding: 10px 0px 10px 0px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
+.result-tg-t-teamleader p{
+    margin-bottom: 0;
+}
 .result-tg-t-members{
     background-color: white;
     min-height: 5rem;
     text-align: center;
-    width: 35rem;
     border-radius: 0 0 5px 5px;
 }
 .result-tg-t-members ol{
     display: flex;
     justify-content: space-around;
     padding-top: 10px;
-    flex-wrap: wrap;
-    
+    flex-wrap: nowrap;
 }
 
 
