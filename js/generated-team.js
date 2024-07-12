@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
-
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
 const firebaseConfig = {
   apiKey: "AIzaSyAIuCN5NMapt-HyvTWmEXPOhXTdBYlVhOk",
   authDomain: "login-backend-59af8.firebaseapp.com",
@@ -14,6 +15,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
 
 function updateAuthButton(isSignedIn) {
   console.log("Hi")
@@ -106,8 +109,7 @@ function s2ab(s) {
   window.addEventListener('load', function() {
     if (localStorage.getItem('showSwal') === 'true') {
         Swal.fire({
-            title: 'Save to history',
-            text: 'Saved to history',
+            title: 'Saved to history',
             icon: 'success',
             confirmButtonText: 'OK'
         });
