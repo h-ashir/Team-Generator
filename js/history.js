@@ -37,11 +37,12 @@ async function fetchAndDisplayProjects() {
         projectRow.className = 'history-content-row';
 
         projectRow.innerHTML = `
-            <div class="history-content-details">${index + 1}</div>
-            <div class="history-content-details">
-                <a href="#" class="download-link" data-url="${fileURL}">${projectName}</a>
-            </div>
+            <div class="history-content-details">${projectName}</div>
             <div class="history-content-details">${creationDate}</div>
+            <div class="history-content-details">
+                <a href="#" class="download-link" data-url="${fileURL}">Download</a>
+            </div>
+
         `;
 
         projectsList.appendChild(projectRow);

@@ -32,12 +32,12 @@
                           </div>
                           <div>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="history.html">History</a>
-                              </li>
+                              <a class="nav-link active" aria-current="page" href="history.html">History</a>
+                            </li>
                           </div>
                           <div>
                             <li class="nav-item">
-                                <a class="log-item" href="login.html">Logout</a>
+                                <a class="log-item" id="logoutButton" href="home.html">Logout</a>
                             </li>
                           </div>
                         </ul>
@@ -49,45 +49,45 @@
     </nav>
     <!-- Navbar End-->
  
+    <div class="generated-project-name">
+      <h1 id="project-name-heading"></h1>
+    </div>
+
+    <div id="drag-drop">
+      <p class="drag-alert"></p>
+    </div>
+
     <section>
         <div class="teamname-area" id="teamsContainer">
             <!-- Teams will be dynamically generated here -->
         </div>
        
         <div class="result-tg-container2">
-            <div class="result-tg-container2-icon">
-                <i class="fa-solid fa-floppy-disk fa-xs" style="color: #5a639c;"></i>
-                <p style="margin-bottom: 0;">Save</p>
-            </div>
-            <div class="result-tg-container2-icon">
-                <i class="fa-solid fa-download fa-xs" style="color: #5a639c;"></i>
-                <p style="margin-bottom: 0;">Download file</p>
-            </div>
-            <div class="result-tg-container2-icon">
-                <i class="fa-solid fa-pencil fa-xs" style="color: #5a639c;"></i>
-                <p style="margin-bottom: 0;">Edit</p>
-            </div>
+          <div class="result-tg-container2-icon">
+            <a href="#" class="download" id="downloadButton" >
+              <i class="fa-solid fa-download fa-xs"></i>
+              <p style="margin-bottom: 0;">Download file</p>
+            </a>
+          </div>
+          <div class="result-tg-container2-icon">
+            <a href="#" class="edit-feedback">
+              <i class="fa-solid fa-pencil fa-xs"></i>
+              <p style="margin-bottom: 0;">Edit</p>
+            </a>  
+          </div>
         </div>
  
         <div class="teamname-area">
             <div class="feedback-area">
-                <h2 style="text-align: center;">We would love to hear from you :)</h2>
-                <div class="rating" id="ratingStars">
-                    <span class="star" data-value="1">&#9733;</span>
-                    <span class="star" data-value="2">&#9733;</span>
-                    <span class="star" data-value="3">&#9733;</span>
-                    <span class="star" data-value="4">&#9733;</span>
-                    <span class="star" data-value="5">&#9733;</span>
-                    <input type="hidden" name="rating" id="ratingValue" required>
-                  </div>
-                <div class="mb-3 feedback-form">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type your feedback here.."></textarea>
-                </div>
-                <div class="feedback-submit-btn">
-                    <input class="tg-feedback-btn" type="submit" value="Submit">
-                </div>
+                <h2 style="text-align: center;">We would love to hear from you</h2>
+                <div class="feedback-form">
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" placeholder="Type your feedback here.."></textarea>
+              </div>
+              <div class="feedback-submit-btn">
+                  <input class="tg-feedback-btn" type="submit" id="submitFeedbackBtn" value="Submit">
+              </div>
             </div>
-        </div>
+        <!-- </div> -->
  
     </section>
    
@@ -148,6 +148,14 @@
             });
         }
     });
-</script>
+  </script>
+  <script type="module" src="js/feedback.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script type="module" src="js/generated-team.js"></script>
+  <script type="module" src="js/login.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js"></script>
 </body>
 </html>

@@ -1,3 +1,78 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAIuCN5NMapt-HyvTWmEXPOhXTdBYlVhOk",
+  authDomain: "login-backend-59af8.firebaseapp.com",
+  databaseURL: "https://login-backend-59af8-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "login-backend-59af8",
+  storageBucket: "login-backend-59af8.appspot.com",
+  messagingSenderId: "1097943042656",
+  appId: "1:1097943042656:web:174161d4af1d7017cad105",
+  measurementId: "G-Q9C3E9L2P6"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// const loginButton = document.getElementById('loginButton');
+// const logoutButton = document.getElementById('logoutButton');
+// const historyButton = document.getElementById('historyButton');
+// const slider = document.getElementById('customRange3');
+// const sliderValue = document.getElementById('sliderValue');
+// const generateTeamsButton = document.querySelector('.generate-area button');
+
+function updateAuthButton(isSignedIn) {
+  const loginButton = document.getElementById('loginButton');
+  const logoutButton = document.getElementById('logoutButton');
+  const historyButton = document.getElementById('historyButton');
+
+  if (loginButton && logoutButton && historyButton) {
+      if (isSignedIn) {
+          historyButton.style.display = "block";
+          logoutButton.style.display = "block";
+          loginButton.style.display = "none";
+      } else {
+          historyButton.style.display = "none";
+          logoutButton.style.display = "none";
+          loginButton.style.display = "block";
+      }
+  }
+}
+
+onAuthStateChanged(auth, user => {
+  updateAuthButton(!!user);
+});
+
+updateAuthButton(false);
+//logout successful popup
+document.getElementById('logoutButton').addEventListener('click', function() {
+  localStorage.setItem('showSwal', 'true');
+  window.location.href = 'home.html';
+  
+});
+
+const projectNameInput = document.getElementById('exampleFormControlInput1');
+  const generateButton = document.getElementById('generate-teams');
+  const generateProjectNameButton = document.getElementById('generateButton');
+
+  // Enable button when input is not empty
+  projectNameInput.addEventListener('input', () => {
+    generateButton.disabled = !projectNameInput.value;
+  });
+
+  // Save project name to localStorage when button is clicked
+  generateProjectNameButton.addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent the default form submission
+    localStorage.setItem('projectName', projectNameInput.value);
+    // window.location.href = generateLink.href; // Redirect to generated-team page
+  });
+
+// part 1 end
+
+// part 2 start 
+  // Logic implementation
+
 // // Add event listener for the Generate Teams button
 // document.querySelector('.generate-area button').addEventListener('click', handleGenerateButtonClick);
 let pieChartInstance; // Variable to hold the Chart.js instance
@@ -203,51 +278,6 @@ function handleGenerateButtonClick(event) {
     sessionStorage.setItem('generatedTeams', JSON.stringify(teams));
     window.location.href = 'generated-team.html';
 }
-
-// Function to generate teams based on weightage
-// function generateTeams(numberOfTeams) {
-//     const teams = [];
-//     const sortedMembers = [...memberScores]; // Clone the memberScores array
-//     sortedMembers.sort((a, b) => {
-//         // Sort by total score descending
-//         const sumA = a.scores.reduce((acc, score) => acc + score, 0);
-//         const sumB = b.scores.reduce((acc, score) => acc + score, 0);
-//         return sumB - sumA;
-//     });
-
-//     // Initialize teams with empty arrays
-//     for (let i = 0; i < numberOfTeams; i++) {
-//         teams.push({
-//             name: `TEAM ${i + 1}`,
-//             members: [],
-//             leader: null
-//         });
-//     }
-
-//     // Distribute members to teams
-//     for (let i = 0; i < sortedMembers.length; i++) {
-//         const member = sortedMembers[i];
-//         const teamIndex = i % numberOfTeams;
-//         teams[teamIndex].members.push(member); // Push the entire member object
-//     }
-
-//     // Select leader for each team (highest score member)
-//     for (let i = 0; i < numberOfTeams; i++) {
-//         const teamMembers = teams[i].members;
-//         let leader = null;
-//         let maxScore = -Infinity;
-//         teamMembers.forEach(member => {
-//             const totalScore = member.scores.reduce((acc, score) => acc + score, 0);
-//             if (totalScore > maxScore) {
-//                 maxScore = totalScore;
-//                 leader = member.name;
-//             }
-//         });
-//         teams[i].leader = leader;
-//     }
-
-//     return teams;
-// }
 function generateTeams(numberOfTeams) {
    
     const teams = [];
@@ -316,43 +346,43 @@ function calculateWeightedScores(members, weightages) {
 document.getElementById('generateButton').addEventListener('click', handleGenerateButtonClick);
 // let memberScores = []; // This will store the member scores from the Excel file
 
-function handleFileUpload(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
+// function handleFileUpload(event) {
+//     const file = event.target.files[0];
+//     const reader = new FileReader();
 
-    reader.onload = function (e) {
-        const data = new Uint8Array(e.target.result);
-        const workbook = XLSX.read(data, { type: 'array' });
-        const sheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[sheetName];
+//     reader.onload = function (e) {
+//         const data = new Uint8Array(e.target.result);
+//         const workbook = XLSX.read(data, { type: 'array' });
+//         const sheetName = workbook.SheetNames[0];
+//         const worksheet = workbook.Sheets[sheetName];
 
-        const jsonSheet = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+//         const jsonSheet = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
-        const headers = jsonSheet[0];
-        const parameters = headers.slice(1);
+//         const headers = jsonSheet[0];
+//         const parameters = headers.slice(1);
 
-        memberScores = jsonSheet.slice(1).map(row => {
-            return {
-                name: row[0],
-                scores: row.slice(1)
-            };
-        });
+//         memberScores = jsonSheet.slice(1).map(row => {
+//             return {
+//                 name: row[0],
+//                 scores: row.slice(1)
+//             };
+//         });
 
-        // Update parameter count and pie chart
-        document.getElementById('parameterCount').value = parameters.length;
-        updatePieChart(parameters);
-    };
+//         // Update parameter count and pie chart
+//         document.getElementById('parameterCount').value = parameters.length;
+//         updatePieChart(parameters);
+//     };
 
-    reader.readAsArrayBuffer(file);
-}
+//     reader.readAsArrayBuffer(file);
+// }
 
 document.getElementById('fileInput').addEventListener('change', handleFileUpload);
 
-function validateWeightage() {
-    const totalWeightages = pieChartInstance.data.datasets[0].data;
-    const total = totalWeightages.reduce((acc, curr) => acc + curr, 0);
-    return total === 100;
-}
+// function validateWeightage() {
+//     const totalWeightages = pieChartInstance.data.datasets[0].data;
+//     const total = totalWeightages.reduce((acc, curr) => acc + curr, 0);
+//     return total === 100;
+// }
 
 function updatePieChart(parameters) {
     const ctx = document.getElementById('pieChart').getContext('2d');
@@ -398,6 +428,9 @@ function handleFileUpload(event) {
         }));
         localStorage.setItem('membersData', JSON.stringify(membersData));
         alert('File uploaded successfully');
+                // Update parameter count and pie chart
+        document.getElementById('parameterCount').value = parameters.length;
+        updatePieChart(parameters);
     };
     reader.readAsArrayBuffer(file);
 }

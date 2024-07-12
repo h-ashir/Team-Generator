@@ -74,7 +74,7 @@
     height: 50px;
     width: 50px;
 }
-.teamname-area{
+/* .teamname-area{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,7 +98,7 @@
     display: flex;
     flex-direction: column;
     width: auto;
-}
+} */
 
 .result-tg-t-title{
      background-color: #5A639C;

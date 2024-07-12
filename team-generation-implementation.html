@@ -33,12 +33,18 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="home.html" style="font-size: 17px">Home</a>
+                                  <a class="nav-link active" aria-current="page" href="home.html" style="font-size: 17px;">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="log-item" href="login.html">Login</a>
+                                  <a class="log-item" id="loginButton" href="login.html">Login</a>
                                 </li>
-                            </ul>
+                                <li class="nav-item">
+                                  <a class="nav-link active" id="historyButton" aria-current="page" href="history.html">History</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="logout-item" id="logoutButton" href="home.html">Logout</a>
+                                </li>
+                              </ul>
                         </div>
                     </div>
                 </nav>
@@ -100,11 +106,6 @@
         </div>
 
         <h2>Set weightage for the parameters</h2>
-        <!-- <span>or</span>
-        <div class="randomGenerateButton">
-            <button type="button" id="randomGenerateButton">Randomly Generate</button>
-        </div> -->
-
         <div class="weightage-area">
             <canvas id="pieChart" width="400" height="400"></canvas>
         </div>
@@ -112,10 +113,6 @@
         <div class="generate-area">
             <button type="button" id="generateButton">Generate Teams</button>
         </div>
-
-        <!-- <div class="generated-teams-area" id="generatedTeamsArea"> -->
-            <!-- Generated teams will be displayed here -->
-        <!-- </div> -->
     </div>
 
     <!-- footer -->
@@ -154,14 +151,14 @@
                 </div>
             </div>
         </div>
-<script>
-   
+    </footer>
 
-    // document.getElementById('generateButton').addEventListener('click', handleGenerateButtonClick);
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="./js/team-generation-implementation.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-wl3SZZ4RoaCd3gWf4Qd9DPIlWdlV8UPGucoWVcWRipF1mCZ6VWLhp2ud0rM64Qe3" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="./js/team-generation-implementation.js"></script>
+    <script type="module" src="./js/login.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-wl3SZZ4RoaCd3gWf4Qd9DPIlWdlV8UPGucoWVcWRipF1mCZ6VWLhp2ud0rM64Qe3" crossorigin="anonymous"></script> -->
 </body>
 </html>
+ 
