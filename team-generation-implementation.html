@@ -38,12 +38,17 @@
                                 <li class="nav-item">
                                   <a class="log-item" id="loginButton" href="login.html">Login</a>
                                 </li>
-                                <li class="nav-item">
-                                  <a class="nav-link active" id="historyButton" aria-current="page" href="history.html">History</a>
+                                <!-- drop down name -->
+                                <li class="nav-item dropdown" id="dropdownButton" style="display: none;">
+                                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="userButton">
+              
+                                  </a>
+                                  <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" id="historyButton" aria-current="page"  href="history.html">History</a></li>
+                                    <li><a class="dropdown-item logout-item" id="logoutButton" href="home.html">Logout</a></li>
+                                  </ul>
                                 </li>
-                                <li class="nav-item">
-                                  <a class="logout-item" id="logoutButton" href="home.html">Logout</a>
-                                </li>
+                                  <!-- till here  -->
                               </ul>
                         </div>
                     </div>
@@ -158,6 +163,8 @@
     <script type="module" src="./js/team-generation-implementation.js"></script>
     <script type="module" src="./js/login.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="./js/userconfig.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-wl3SZZ4RoaCd3gWf4Qd9DPIlWdlV8UPGucoWVcWRipF1mCZ6VWLhp2ud0rM64Qe3" crossorigin="anonymous"></script> -->
 </body>
 </html>
