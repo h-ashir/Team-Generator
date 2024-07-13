@@ -67,6 +67,16 @@
     width: 50px;
 }
 
+/* dropdown css */
+.dropdown-menu {
+    width: auto; /* Adjust width as needed */
+}
+ 
+.dropdown-item {
+    padding: 0.5rem 1rem; /* Adjust padding as needed */
+    font-size: 14px; /* Adjust font size as needed */
+}
+
 /* banner area */
 .banner-image{
     display: block;
