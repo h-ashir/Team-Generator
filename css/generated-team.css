@@ -52,16 +52,23 @@
     transition: .4s linear;
 }
 .navbar-nav .nav-item .log-item{
+    background-color: #5A639C;
     text-decoration: none;
-    color: black;
-    opacity: .5;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    width: 100%;
 }
 .logout-item{
     opacity: .5;
     text-decoration: none;
     color: black;
-  }
-
+}
+.navbar-nav .nav-item .log-item:hover{
+    background-color: #313c82;
+    text-decoration: none;
+    transition: .4s linear;
+}
 #loginButton{
     background-color: #5A639C;
     text-decoration: none;
@@ -74,31 +81,6 @@
     height: 50px;
     width: 50px;
 }
-/* .teamname-area{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-.result-tg-container1{
-    background-color: var(--lavendar);
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    row-gap: 5rem;
-    padding-top: 100px;
-    padding-bottom: 100px;
-    margin-top: 2rem;
-    border-radius: 10px;
-}
-
-.result-tg-t{
-    display: flex;
-    flex-direction: column;
-    width: auto;
-} */
 .teamname-area{
     /* background-color: red; */
     display: flex;
@@ -122,7 +104,6 @@
 .result-tg-t-title{
     background-color: #5A639C;
     border-radius: 5px 5px 0 0;
-    /* height: 1rem; */
     font-size: 1.5rem;
     display: flex;
     justify-content: center;
@@ -149,16 +130,18 @@
     background-color: white;
     min-height: 5rem;
     text-align: center;
+    /* display: flex; */
     border-radius: 0 0 5px 5px;
 }
 .result-tg-t-members ol{
-    display: flex;
+    background-color: red;
     justify-content: space-around;
     padding-top: 10px;
-    flex-wrap: nowrap;
+    /* flex-wrap: wrap; */
+    height: 10rem;
+    margin: 0;
+    padding: 0;
 }
-
-
 .result-tg-container2{
     display: flex;
     flex-direction: row;
