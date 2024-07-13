@@ -99,27 +99,42 @@
             ></input>
             </div>
         </div>
-
-        <div class="parameter-area">
-            <div class="mb-3 parameter-area-form">
-                <h1 class="mb-4">Number of Parameters Identified</h1>
-                <input
-                    class="form-control"
-                    id="parameterCount"
-                    placeholder=" "
-                    aria-label="Disabled input example"
-                    disabled
-                ></input>
+        <div id="fileUploadSection" class="hidden">
+            <div class="parameter-area">
+                <div class="mb-3 parameter-area-form">
+                    <h1 class="mb-4">Number of Parameters Identified</h1>
+                    <input
+                        class="form-control"
+                        id="parameterCount"
+                        placeholder=" "
+                        aria-label="Disabled input example"
+                        disabled
+                    ></input>
+                </div>
             </div>
-        </div>
 
-        <h2>Set weightage for the parameters</h2>
-        <div class="weightage-area">
-            <canvas id="pieChart" width="400" height="400"></canvas>
-        </div>
 
-        <div class="generate-area">
-            <button type="button" id="generateButton">Generate Teams</button>
+            <div class="team-gen-weightage">
+                <h2 class="team-gen-header">Set weightage for the parameters</h2>
+            </div>
+
+            <div class="weightage-area">
+                <canvas id="pieChart" width="400" height="400"></canvas>
+                <label id="weightageLabel" for="weightageValue"></label>
+     
+                <div id="weightageInput">
+                    <button id="decreaseButton">-</button>
+                    <input type="text" id="weightageValue" >
+                    <button id="increaseButton">+</button>
+                    <!-- <div class="generate-area">
+                        <button type="button" id="generateButton">Generate Teams</button>
+                    </div> -->
+                </div>    
+            </div>
+
+            <div class="generate-area">
+                <button type="button" id="generateButton" style="color: white;">Generate Teams</button>
+            </div>
         </div>
     </div>
 
@@ -170,4 +185,3 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-wl3SZZ4RoaCd3gWf4Qd9DPIlWdlV8UPGucoWVcWRipF1mCZ6VWLhp2ud0rM64Qe3" crossorigin="anonymous"></script> -->
 </body>
 </html>
- 
