@@ -56,7 +56,7 @@ document.getElementById('downloadButton').addEventListener('click', async functi
   const teams = [];
   document.querySelectorAll('.result-tg-t').forEach(teamDiv => {
     const teamName = teamDiv.querySelector('.result-tg-t-title p').textContent;
-    const teamLeader = teamDiv.querySelector('.result-tg-t-teamleader p').textContent.split(': ')[1];
+    const teamLeader = teamDiv.querySelector('.result-tg-t-teamleader').textContent.split(': ')[1];
     const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent);
     
     teams.push({
