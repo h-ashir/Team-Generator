@@ -78,12 +78,15 @@ const projectNameInput = document.getElementById('exampleFormControlInput1');
 
 // // Add event listener for the Generate Teams button
 // document.querySelector('.generate-area button').addEventListener('click', handleGenerateButtonClick);
-let pieChartInstance; // Variable to hold the Chart.js instance
-let activeInput = null; // Variable to store the active input element
-let activeLabel = null; // Variable to store the active label element
-let parameters = []; // Array to store parameter names
-let memberScores = []; // Array to store member scores
-let parameterWeightages = []; // Array to store user-defined parameter weightages
+let pieChartInstance;
+let activeInput = null;
+let activeLabel = null;
+let parameters = [];
+let memberScores = [];
+let parameterWeightages = [];
+let currentWeightage = 0;
+const minWeightage = 0;
+const maxWeightage = 100;
 
 document.getElementById('fileInput').addEventListener('change', function() {
     const file = this.files[0];
@@ -112,6 +115,7 @@ document.getElementById('fileInput').addEventListener('change', function() {
 
         // Display parameter count in textarea
         document.getElementById('parameterCount').value = `${parameterCount}`;
+        document.getElementById('fileUploadSection').classList.remove('hidden');
 
         // Initialize Chart.js pie chart data with dynamic opacity and initial weightage
         const initialWeightage = Array(parameterCount).fill(100 / parameterCount); // Equal weightage initially
@@ -165,6 +169,7 @@ document.getElementById('fileInput').addEventListener('change', function() {
             data: pieData,
             options: pieOptions
         });
+        // document.getElementById('fileUploadSection').classList.remove('hidden');
 
         // Show the Generate Teams and Randomly Generate buttons
         document.getElementById('generateButton').style.display = 'block';
@@ -176,56 +181,26 @@ document.getElementById('fileInput').addEventListener('change', function() {
 
 // Function to show text input for editing weightage
 function showTextInput(label, currentWeightage, index) {
-    // If there's already an active input, remove it
-    hideAllTextInput();
-
-    // Create a new label element
-    const labelElement = document.createElement('label');
-    labelElement.textContent = `Enter weightage for ${label}`;
-    labelElement.style.position = 'absolute';
-    labelElement.style.left = `75%`;
-    labelElement.style.top = `200%`;
-    labelElement.style.zIndex = '100';
-    labelElement.style.fontFamily = 'Arial, sans-serif';
-    labelElement.style.fontSize = '14px';
-
-    // Create a new input element
-    const inputElement = document.createElement('input');
-    inputElement.type = 'text';
-    inputElement.value = currentWeightage.toFixed(2);
-    inputElement.style.position = 'absolute';
-    inputElement.style.left = `70%`;
-    inputElement.style.top = `210%`;
-    inputElement.style.border = '1px solid #ccc';
-    inputElement.style.padding = '5px';
-    inputElement.style.backgroundColor = '#ffffff'; // White background
-    inputElement.style.zIndex = '100';
-    inputElement.style.fontFamily = 'Arial, sans-serif';
-    inputElement.style.fontSize = '14px';
-    inputElement.style.width = '80px';
-    inputElement.dataset.index = index;
-
-    console.log(`Showing input at (${inputElement.style.left}, ${inputElement.style.top}) with initial value ${inputElement.value}`);
-
-    // Event listener for input change
-    inputElement.addEventListener('input', function() {
-        const newValue = parseFloat(this.value);
-        if (!isNaN(newValue) && newValue >= 0) {
-            pieChartInstance.data.datasets[0].data[index] = newValue;
-            pieChartInstance.update();
-        }
+    // hideAllTextInput();
+   
+   
+    document.getElementById('weightageInput').style.display = 'block';
+    const weightageLabel = document.getElementById('weightageLabel');
+    document.getElementById('weightageValue').value = currentWeightage.toFixed(2);
+    activeInput = document.getElementById('weightageValue');
+    weightageLabel.textContent = `Enter the weightage for '${label}'`;
+   
+    activeInput.dataset.index = index;
+   
+    activeInput.addEventListener('input', function() {
+      const newValue = parseFloat(this.value);
+      if (!isNaN(newValue) && newValue >= 0) {
+        pieChartInstance.data.datasets[0].data[index] = newValue;
+        pieChartInstance.update();
+      }
     });
 
-    // Append label and input element to document body
-    document.body.appendChild(labelElement);
-    document.body.appendChild(inputElement);
-
-    // Set the active input and label
-    activeInput = inputElement;
-    activeLabel = labelElement;
-
-    // Focus on the input field 
-    inputElement.focus();
+    activeInput.focus();
 }
 
 // Function to hide all text input fields
@@ -234,10 +209,7 @@ function hideAllTextInput() {
         activeInput.remove(); // Remove input element from DOM
         activeInput = null;
     }
-    if (activeLabel) {
-        activeLabel.remove(); // Remove label element from DOM
-        activeLabel = null;
-    }
+    document.getElementById('weightageInput').style.display = 'none';
 }
 
 // Function to generate random color palette
@@ -378,6 +350,30 @@ document.getElementById('generateButton').addEventListener('click', handleGenera
 //     reader.readAsArrayBuffer(file);
 // }
 
+
+document.getElementById('increaseButton').addEventListener('click', () => {
+    if (activeInput) {
+      const index = parseInt(activeInput.dataset.index);
+      let newValue = parseFloat(activeInput.value) + 1;
+      newValue = Math.min(newValue, maxWeightage);
+      activeInput.value = newValue.toFixed(2);
+      pieChartInstance.data.datasets[0].data[index] = newValue;
+      pieChartInstance.update();
+    }
+  });
+   
+  document.getElementById('decreaseButton').addEventListener('click', () => {
+    if (activeInput) {
+      const index = parseInt(activeInput.dataset.index);
+      let newValue = parseFloat(activeInput.value) - 1;
+      newValue = Math.max(newValue, minWeightage);
+      activeInput.value = newValue.toFixed(2);
+      pieChartInstance.data.datasets[0].data[index] = newValue;
+      pieChartInstance.update();
+    }
+  });
+  
+
 document.getElementById('fileInput').addEventListener('change', handleFileUpload);
 
 // function validateWeightage() {
@@ -418,9 +414,10 @@ function generateRandomColors(num) {
 document.getElementById('fileInput').addEventListener('change', handleFileUpload);
 
 function handleFileUpload(event) {
-    const file = event.target.files[0];
+      document.getElementById('weightageInput').style.display = 'block';
+     const file = event.target.files[0];
     const reader = new FileReader();
-    reader.onload = function(event) {
+     reader.onload = function(event) {
         const data = new Uint8Array(event.target.result);
         const workbook = XLSX.read(data, { type: 'array' });
         const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -433,6 +430,30 @@ function handleFileUpload(event) {
                 // Update parameter count and pie chart
         document.getElementById('parameterCount').value = parameters.length;
         updatePieChart(parameters);
+        updateWeightageInput(value);
+        document.getElementById('weightageInput').style.display = 'block';
+ 
     };
     reader.readAsArrayBuffer(file);
+}
+
+document.getElementById('increaseButton').addEventListener('click', function() {
+    if (currentWeightage < maxWeightage) {
+        currentWeightage++;
+        updateWeightageInput(currentWeightage);
+    }
+});
+ 
+document.getElementById('decreaseButton').addEventListener('click', function() {
+    if (currentWeightage > minWeightage) {
+        currentWeightage--;
+        updateWeightageInput(currentWeightage);
+    }
+});
+
+
+function updateWeightageInput(value) {
+    document.getElementById('weightageValue').value = value;
+    // Update the pie chart weightage here if needed
+    updatePieChartWeightage(value);
 }
