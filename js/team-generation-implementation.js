@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
-
+ 
 const firebaseConfig = {
   apiKey: "AIzaSyAIuCN5NMapt-HyvTWmEXPOhXTdBYlVhOk",
   authDomain: "login-backend-59af8.firebaseapp.com",
@@ -11,7 +11,7 @@ const firebaseConfig = {
   appId: "1:1097943042656:web:174161d4af1d7017cad105",
   measurementId: "G-Q9C3E9L2P6"
 };
-
+ 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
@@ -26,24 +26,27 @@ function updateAuthButton(isSignedIn) {
   const loginButton = document.getElementById('loginButton');
   const logoutButton = document.getElementById('logoutButton');
   const historyButton = document.getElementById('historyButton');
-
-  if (loginButton && logoutButton && historyButton) {
+  const dropdownButton = document.getElementById('dropdownButton');
+ 
+  if (loginButton && logoutButton && historyButton && dropdownButton) {
       if (isSignedIn) {
           historyButton.style.display = "block";
           logoutButton.style.display = "block";
           loginButton.style.display = "none";
+          dropdownButton.style.display = "block";
       } else {
           historyButton.style.display = "none";
           logoutButton.style.display = "none";
           loginButton.style.display = "block";
+          dropdownButton.style.display = "none";
       }
   }
 }
-
+ 
 onAuthStateChanged(auth, user => {
   updateAuthButton(!!user);
 });
-
+ 
 updateAuthButton(false);
 //logout successful popup
 document.getElementById('logoutButton').addEventListener('click', function() {
@@ -264,7 +267,6 @@ function validateWeightage() {
 }
 
 // Function to handle the Generate Teams button click
-// Function to handle the Generate Teams button click
 function handleGenerateButtonClick(event) {
     if (!validateWeightage()) {
         event.preventDefault();
@@ -321,7 +323,7 @@ function generateTeams(numberOfTeams) {
                     team.leader = team.members[0].name;
 
         });
-
+        team.members=team.members.filter(member=> member.name!==team.leader);
     });
 
     return teams;

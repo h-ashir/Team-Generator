@@ -56,7 +56,7 @@ document.getElementById('downloadButton').addEventListener('click', async functi
   const teams = [];
   document.querySelectorAll('.result-tg-t').forEach(teamDiv => {
     const teamName = teamDiv.querySelector('.result-tg-t-title p').textContent;
-    const teamLeader = teamDiv.querySelector('.result-tg-t-teamleader p').textContent.split(': ')[1];
+    const teamLeader = teamDiv.querySelector('.result-tg-t-teamleader').textContent.split(': ')[1];
     const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent);
     
     teams.push({
@@ -126,50 +126,93 @@ window.addEventListener('load', function() {
   }
 });
 
-const stars = document.querySelectorAll('.star');
-const ratingValue = document.getElementById('ratingValue');
-const ratingStars = document.getElementById('ratingStars');
-
 const editButton = document.querySelector('.edit-feedback');
 const feedbackArea = document.querySelector('.feedback-area');
+const dragAlert = document.querySelector('.drag-alert');
 const downloadButton = document.querySelector('.download');
 
-if (editButton && feedbackArea){
-  editButton.addEventListener('click', (event) =>{
-    event.preventDefault();
-    feedbackArea.style.display =  feedbackArea.style.display === 'none' ? 'block' :'none';
+function enableDragAndDrop() {
+  document.querySelectorAll('.result-tg-t ol li, .result-tg-t-teamleader p').forEach(item => {
+    item.setAttribute('draggable', true);
+
+    item.addEventListener('dragstart', function(event) {
+      event.dataTransfer.setData('text/plain', event.target.id);
+      event.target.classList.add('dragging');
+    });
+
+    item.addEventListener('dragend', function(event) {
+      event.target.classList.remove('dragging');
+    });
+  });
+
+  document.querySelectorAll('.result-tg-t ol, .result-tg-t-teamleader').forEach(list => {
+    list.addEventListener('dragover', function(event) {
+      event.preventDefault();
+      const draggingItem = document.querySelector('.dragging');
+      const afterElement = getDragAfterElement(list, event.clientY);
+      if (afterElement == null) {
+        list.appendChild(draggingItem);
+      } else {
+        list.insertBefore(draggingItem, afterElement);
+      }
+    });
+
+    list.addEventListener('drop', function(event) {
+      event.preventDefault();
+      const id = event.dataTransfer.getData('text/plain');
+      const draggable = document.getElementById(id);
+      list.appendChild(draggable);
+    });
   });
 }
 
-stars.forEach(star => {
-  star.addEventListener('mouseover', function() {
-    const value = parseInt(this.getAttribute('data-value'));
-    highlightStars(value);
+function disableDragAndDrop() {
+  document.querySelectorAll('.result-tg-t ol li, .result-tg-t-teamleader p').forEach(item => {
+    item.removeAttribute('draggable');
+    item.removeEventListener('dragstart', function() {});
+    item.removeEventListener('dragend', function() {});
   });
 
-  star.addEventListener('mouseleave', function() {
-    const value = parseInt(ratingValue.value);
-    highlightStars(value);
+  document.querySelectorAll('.result-tg-t ol, .result-tg-t-teamleader').forEach(list => {
+    list.removeEventListener('dragover', function() {});
+    list.removeEventListener('drop', function() {});
   });
+}
 
-  star.addEventListener('click', function() {
-    const value = parseInt(this.getAttribute('data-value'));
-    ratingValue.value = value;
-    highlightStars(value);
-  });
-});
+function getDragAfterElement(list, y) {
+  const draggableElements = [...list.querySelectorAll('li:not(.dragging), p:not(.dragging)')];
 
-function highlightStars(value) {
-  stars.forEach(star => {
-    const starValue = parseInt(star.getAttribute('data-value'));
-    if (starValue <= value) {
-      star.classList.add('active');
+  return draggableElements.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height / 2;
+    if (offset < 0 && offset > closest.offset) {
+      return { offset: offset, element: child };
     } else {
-      star.classList.remove('active');
+      return closest;
+    }
+  }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+if (editButton && feedbackArea) {
+  // Show feedback area on page load
+  feedbackArea.style.display = 'block';
+  enableDragAndDrop();
+  dragAlert.textContent = '';
+
+  editButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    const isVisible = feedbackArea.style.display === 'block';
+    feedbackArea.style.display = isVisible ? 'none' : 'block';
+
+    if (!isVisible) {
+      disableDragAndDrop();
+      dragAlert.textContent = '';
+    } else {
+      enableDragAndDrop();
+      dragAlert.textContent = 'You can drag and drop to swap members and leaders across teams';
     }
   });
 }
-
 document.getElementById('logoutButton').addEventListener('click', function() {
   localStorage.setItem('showSwal', 'true');
   window.location.href = 'home.html';
