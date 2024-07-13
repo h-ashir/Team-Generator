@@ -267,7 +267,6 @@ function validateWeightage() {
 }
 
 // Function to handle the Generate Teams button click
-// Function to handle the Generate Teams button click
 function handleGenerateButtonClick(event) {
     if (!validateWeightage()) {
         event.preventDefault();
@@ -324,7 +323,7 @@ function generateTeams(numberOfTeams) {
                     team.leader = team.members[0].name;
 
         });
-
+        team.members=team.members.filter(member=> member.name!==team.leader);
     });
 
     return teams;

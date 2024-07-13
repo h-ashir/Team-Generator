@@ -138,9 +138,9 @@
                     <div class="result-tg-t">
                         <div class="result-tg-t-title"><p>${team.name}</p></div>
                         <div class="result-tg-t-members">
-                            <div class="result-tg-t-teamleader"><p>Team Leader: ${team.leader}</p></div>
+                          <div class="result-tg-t-teamleader">Team Leader:<p> ${team.leader}</p></div>
                             <ol>
-                                ${team.members.map(member => `<li>${member.name}</li>`).join('')}
+                                ${team.members.map(member => `<li style="list-style-type: none;">${member.name}</li>`).join('')}
                             </ol>
                         </div>
                     </div>
