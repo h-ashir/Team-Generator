@@ -138,6 +138,7 @@
 /* Pie chart CSS */
 
 .chart-area {
+    gap: 5rem;
     text-align: center;
     padding: 20px;
 }
@@ -166,11 +167,15 @@ canvas {
 
 .generate-area {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 25px; 
-    padding-bottom: 25px;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* padding-top: 25px; 
+    padding-bottom: 25px; */
+    margin-top: 10px;
+    flex-direction: column;
 }
+
+
 
 .generate-area button {
     background-color: #5A639C;    
@@ -178,6 +183,7 @@ canvas {
     border: none;
     letter-spacing: 2px;
     padding: 15px 15px;
+    margin-top: 18px;
 }
 
 .generate-area button a {
@@ -196,6 +202,19 @@ canvas {
     color: red;
     display: none;
 }
+.hidden {
+    display: none;
+}
+
+.team-gen-weightage{
+    display: flex;
+    justify-content: center;
+    padding: auto;
+}
+
+.team-gen-header{
+font-size: 1.5rem;
+}
 
 /* footer area */
 footer{
@@ -205,6 +224,7 @@ footer{
     display: flex;
     flex-direction: column;
     padding-top: 20px;
+    margin-top: 70px;
 }
 footer .footer-content{
     display: flex;
@@ -280,3 +300,54 @@ input[type=file]::file-selector-button {
     background: #9B86BD;
   }
 
+  #weightageInput{
+    display: flex;
+    /* display: none; */
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 15px;
+    
+   
+}
+#weightageInput #weightageValue{
+    border: 1px solid gray;
+    border-radius: 5px;
+    text-align: center;
+    color: #9B86BD;
+}
+#weightageInput #increaseButton {
+    height: auto;
+    width:20px;
+text-align: center;
+background: linear-gradient(to right, #9B86BD, #F3F3F3); 
+border-style: hidden;
+border-radius: 2px;
+
+
+}
+/* .weightage-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; 
+    width: 20px;
+} */
+#weightageInput #decreaseButton {
+    height: auto;
+    width:20px;
+    background: linear-gradient(to right, #9B86BD, #F3F3F3); 
+    border-radius: 2px;
+
+text-align: center;
+border-style: hidden;
+    
+}
+.weightage-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    gap:10px;
+}
