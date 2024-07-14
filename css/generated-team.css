@@ -1,7 +1,7 @@
 :root{
     --lavendar: hsla(263, 25%, 55%, 0.502);
     --lavender-dark: #5A639C;
-    --lavender-dark-hover: #5A639C;
+    --lavender-dark-hover: #313c82;
 }
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 *{
@@ -73,6 +73,16 @@
     text-decoration: none;
     transition: .4s linear;
 }
+.navbar-toggler {
+    margin-right: 1rem;
+}
+.navbar-collapse {
+  flex-grow: 0;
+}
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+}
 #loginButton{
     background-color: var(--lavender-dark);
     text-decoration: none;
@@ -84,6 +94,29 @@
 .header-leftarea img{
     height: 50px;
     width: 50px;
+}
+.generated-project-name{
+    color: var(--lavender-dark-hover);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.generated-project-name #project-name-heading{
+    font-weight: 600;
+    font-size: 3.2rem;
+    text-transform: uppercase;
+}
+#drag-drop{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#drag-drop .drag-alert{
+    font-weight: 600;
+    font-size: 1.4rem;
+    text-align: center;
 }
 .teamname-area{
     display: flex;
@@ -219,14 +252,24 @@ footer{
 }
 footer .footer-content{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
-
+.footer-leftarea{
+    display: flex;
+    justify-content: center;
+}
 .footer-leftarea img{
-    margin-top: 30px;
-    height: 70px;
-    width: 70px;
+    height: 60px;
+    width: 60px;
+}
+.get-in-touch-text{
+    display: flex;
+    justify-content: center;
+}
+.get-in-touch-text p{
+    color: white;
+    font-size: 22px;
 }
 
 .social-icons-area{
@@ -237,7 +280,8 @@ footer .footer-content{
 
 .social-media{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 30px;
 }
 .social-media i{
     padding-top: 20px;
@@ -245,12 +289,12 @@ footer .footer-content{
 }
 
 .three-spacing{
-    width: 200px;
+    width: 100%;
 }
 .three-spacing button{
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 3px;
 }
 .three-spacing button i{
     font-size: 30px;
@@ -265,26 +309,269 @@ footer .footer-content{
     color: white;
     opacity: .6;
 }
+@media(max-width: 992px){
+    .home-header{
+        height: 130px;
+    }
 
-.generated-project-name{
-    color: var(--lavender-dark-hover);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
+    .navbar-toggler{
+        background-color: var(--lavender-dark);
+        position: relative;
+    }
+    .navbar-nav{
+        display: flex;
+        align-items: center;
+        gap: 0px;
+    }
+    .navbar-nav .nav-item{
+        width: 100%;
+    }
+    .dropdown-menu {
+        width: 10px;
+        max-width: 50px;
+        width: 100%;
+    } 
+    .home-header{
+        height: 130px;
+    }
+    .header-leftarea{
+        gap: 15px;
+    }
+    .header-leftarea img{
+        height: 40px;
+        width: 40px;
+    }
+    .header-leftarea span{
+        font-size: 25px;
+    }
+    .container-fluid{
+        font-size: 20px;
+    }
+    .navbar-nav{
+        display: flex;
+        align-items: center;
+        gap: 0px;
+    }
+    .navbar-nav .nav-item{
+        font-size: 16px;
+    }
+    .navbar-nav .nav-item .log-item{
+        padding: 10px 20px;
+    }
+    #loginButton{
+        padding: 10px 20px;
+    }
 }
-.generated-project-name #project-name-heading{
-    font-weight: 600;
-    font-size: 3.2rem;
-    text-transform: uppercase;
+@media(max-width: 768px){
+    .home-header{
+        height: 130px;
+        display: flex;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .header-leftarea{
+        gap: 10px;
+    }
+    .header-leftarea span{
+        font-size: 22px;
+    }
+    .navbar-nav .nav-item{
+        font-size: 15px;
+    }
+    .header-leftarea img{
+        height: 35px;
+        width: 35px;
+    }
+    .generated-project-name{
+        margin-top: 40px;
+    }
+    .generated-project-name #project-name-heading{
+        font-size: 2.5rem;
+    }
+    #drag-drop{
+        margin-top: 20px;
+    }
+    #drag-drop .drag-alert{
+        font-size: 1.2rem;
+    }
+    .teamname-area{
+        gap: 25px;
+     }
+    .result-tg-t{
+        width: calc(50% - 30px);
+        border-radius: 10px;
+    }
+    .result-tg-t-title{
+        font-size: 1.5rem;
+    }
+    .result-tg-t-teamleader{
+        padding: 10px 0px 10px 0px;
+        font-size: 1.1rem;
+    }
+    .result-tg-t ol{
+        gap: 30px;
+        padding: 15px 10px;
+        font-size: 1rem;
+    }
+    .result-tg-container2 a{
+        gap: 7px;
+        font-size: 20px;
+    }
+    .result-tg-container2-icon{
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+    .feedback-area h2{
+        margin-bottom: 40px;
+        font-size: 1.5rem;
+    }
+    .feedback-area{
+        padding: 50px;
+        margin-bottom: 7rem;
+    }
+    .feedback-form{
+        margin-bottom: 40px;
+    }
+    .tg-feedback-btn{
+        padding: 8px 34px;
+        font-size: 20px;
+    }
+    footer{
+        padding-top: 20px;
+    }
+    .footer-leftarea{
+        display: flex;
+        justify-content: center;
+    }
+    .footer-leftarea img{
+        margin-top: 0px;
+        height: 40px;
+        width: 40px;
+    }
+    .social-icons-area{
+        gap: 10px;
+    }
+    .social-media{
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .social-media i{
+        padding-top: 10px;
+        font-size: 20px;
+    } 
+    .three-spacing{
+        width: 100%;
+    }
+    .three-spacing button{
+        gap: 5px;
+        font-size: 15px;
+    }
+    .three-spacing button i{
+        font-size: 20px;
+    }
+    .sub-footer{
+        height: 35px;
+        margin-top: 30px;
+        font-size: .8rem;
+    }
 }
-#drag-drop{
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#drag-drop .drag-alert{
-    font-weight: 600;
-    font-size: 1.4rem;
+@media(max-width: 480px){
+    .header-leftarea{
+        gap: 8px;
+    }
+    .header-leftarea span{
+        font-size: 20px;
+    }
+    .navbar-nav .nav-item{
+        font-size: 14px;
+    }
+    .header-leftarea img{
+        height: 30px;
+        width: 30px;
+    }
+    .generated-project-name{
+        margin-top: 40px;
+    }
+    .generated-project-name #project-name-heading{
+        font-size: 2.1rem;
+    }
+    #drag-drop{
+        margin-top: 15px;
+    }
+    #drag-drop .drag-alert{
+        font-size: 1.1rem;
+    }
+    .teamname-area{
+        gap: 20px;
+     }
+    .result-tg-t{
+        width: calc(100% - 30px);
+        border-radius: 10px;
+    }
+    .result-tg-t-title{
+        font-size: 1.25rem;
+    }
+    .result-tg-t-teamleader{
+        font-size: 1rem;
+    }
+    .result-tg-t ol{
+        gap: 20px;
+        padding: 15px 10px;
+        font-size: .9rem;
+    }
+    .result-tg-container2 a{
+        font-size: 15px;
+    }
+    .feedback-area h2{
+        margin-bottom: 30px;
+        font-size: 1.2rem;
+    }
+    .feedback-area{
+        padding: 40px;
+        margin-bottom: 6rem;
+    }
+    .feedback-form{
+        margin-bottom: 30px;
+    }
+    .tg-feedback-btn{
+        padding: 7px 30px;
+        font-size: 15px;
+    }
+    footer{
+        padding-top: 20px;
+    }
+    .footer-content{
+        display: flex;
+        flex-direction: column;
+    }
+    .footer-leftarea img{
+        display: none;
+    }
+    .social-icons-area{
+        gap: 10px;
+    }
+    .social-media{
+        justify-content: center;
+        gap: 20px;
+    }
+    .social-media i{
+        padding-top: 10px;
+        font-size: 15px;
+    } 
+    .three-spacing:nth-child(3) div{
+        display: flex;
+        justify-content: center;
+        margin: 10px 0;
+    }
+    .three-spacing button{
+        gap: 5px;
+        font-size: 15px;
+    }
+    .three-spacing button i{
+        font-size: 20px;
+    }
+    .sub-footer{
+        height: 35px;
+        margin-top: 30px;
+    }
 }
