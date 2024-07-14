@@ -74,7 +74,7 @@
           <div class="result-tg-container2-icon">
             <a href="#" class="edit-feedback">
               <i class="fa-solid fa-pencil fa-xs"></i>
-              <p style="margin-bottom: 0;">Edit</p>
+              <p style="margin-bottom: 0;" id="editButtonText">Edit</p>
             </a>  
           </div>
         </div>
@@ -138,7 +138,7 @@
                     <div class="result-tg-t">
                         <div class="result-tg-t-title"><p>${team.name}</p></div>
                         <div class="result-tg-t-members">
-                          <div class="result-tg-t-teamleader">Team Leader:<p> ${team.leader}</p></div>
+                          <div class="result-tg-t-teamleader">Team Leader:&nbsp;<p> ${team.leader}</p></div>
                             <ol>
                                 ${team.members.map(member => `<li style="list-style-type: none;">${member.name}</li>`).join('')}
                             </ol>
