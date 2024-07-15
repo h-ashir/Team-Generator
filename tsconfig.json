@@ -1,16 +1,13 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "es6",
+    "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./js",
-    "paths": {
-      "sweetalert2": ["./node_modules/sweetalert2"]
-    }
+    "outDir": "./dist"
   },
   "include": ["./src"]
 }
