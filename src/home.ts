@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2';
+
 window.addEventListener('load', () => {
     const showSwal = localStorage.getItem('showSwal');
     if (showSwal === 'true') {
