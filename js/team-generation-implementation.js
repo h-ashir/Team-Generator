@@ -14,31 +14,28 @@ const firebaseConfig = {
  
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
+ 
 // const loginButton = document.getElementById('loginButton');
 // const logoutButton = document.getElementById('logoutButton');
 // const historyButton = document.getElementById('historyButton');
 // const slider = document.getElementById('customRange3');
 // const sliderValue = document.getElementById('sliderValue');
 // const generateTeamsButton = document.querySelector('.generate-area button');
-
+ 
 function updateAuthButton(isSignedIn) {
   const loginButton = document.getElementById('loginButton');
   const logoutButton = document.getElementById('logoutButton');
   const historyButton = document.getElementById('historyButton');
-  const dropdownButton = document.getElementById('dropdownButton');
  
-  if (loginButton && logoutButton && historyButton && dropdownButton) {
+  if (loginButton && logoutButton && historyButton) {
       if (isSignedIn) {
           historyButton.style.display = "block";
           logoutButton.style.display = "block";
           loginButton.style.display = "none";
-          dropdownButton.style.display = "block";
       } else {
           historyButton.style.display = "none";
           logoutButton.style.display = "none";
           loginButton.style.display = "block";
-          dropdownButton.style.display = "none";
       }
   }
 }
@@ -52,30 +49,30 @@ updateAuthButton(false);
 document.getElementById('logoutButton').addEventListener('click', function() {
   localStorage.setItem('showSwal', 'true');
   window.location.href = 'home.html';
-  
+ 
 });
-
+ 
 const projectNameInput = document.getElementById('exampleFormControlInput1');
   const generateButton = document.getElementById('generate-teams');
   const generateProjectNameButton = document.getElementById('generateButton');
-
+ 
   // Enable button when input is not empty
   projectNameInput.addEventListener('input', () => {
     generateButton.disabled = !projectNameInput.value;
   });
-
+ 
   // Save project name to localStorage when button is clicked
   generateProjectNameButton.addEventListener('click', (event) => {
     event.preventDefault(); // Prevent the default form submission
     localStorage.setItem('projectName', projectNameInput.value);
     // window.location.href = generateLink.href; // Redirect to generated-team page
   });
-
+ 
 // part 1 end
-
-// part 2 start 
+ 
+// part 2 start
   // Logic implementation
-
+ 
 // // Add event listener for the Generate Teams button
 // document.querySelector('.generate-area button').addEventListener('click', handleGenerateButtonClick);
 let pieChartInstance;
@@ -87,22 +84,22 @@ let parameterWeightages = [];
 let currentWeightage = 0;
 const minWeightage = 0;
 const maxWeightage = 100;
-
+ 
 document.getElementById('fileInput').addEventListener('change', function() {
     const file = this.files[0];
     const reader = new FileReader();
-
+ 
     reader.onload = function(e) {
         const data = new Uint8Array(e.target.result);
         const workbook = XLSX.read(data, { type: 'array' });
         const sheetName = workbook.SheetNames[0]; // Assuming the first sheet is used
         const sheet = workbook.Sheets[sheetName];
         const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-
+ 
         // Extract headers (parameters)
         parameters = rows[0].slice(1); // Exclude the first column (name)
         const parameterCount = parameters.length;
-
+ 
         // Extract member names and scores
         memberScores = [];
         for (let i = 1; i < rows.length; i++) {
@@ -112,11 +109,11 @@ document.getElementById('fileInput').addEventListener('change', function() {
             };
             memberScores.push(member);
         }
-
+ 
         // Display parameter count in textarea
         document.getElementById('parameterCount').value = `${parameterCount}`;
         document.getElementById('fileUploadSection').classList.remove('hidden');
-
+ 
         // Initialize Chart.js pie chart data with dynamic opacity and initial weightage
         const initialWeightage = Array(parameterCount).fill(100 / parameterCount); // Equal weightage initially
         const pieData = {
@@ -126,7 +123,7 @@ document.getElementById('fileInput').addEventListener('change', function() {
                 backgroundColor: generateColorPalette(parameterCount)
             }]
         };
-
+ 
         // Configure Chart.js options
         const pieOptions = {
             responsive: true,
@@ -156,12 +153,12 @@ document.getElementById('fileInput').addEventListener('change', function() {
                 }
             }
         };
-
+ 
         // Destroy existing chart instance if it exists
         if (pieChartInstance) {
             pieChartInstance.destroy();
         }
-
+ 
         // Create the Chart.js pie chart
         const ctx = document.getElementById('pieChart').getContext('2d');
         pieChartInstance = new Chart(ctx, {
@@ -170,64 +167,69 @@ document.getElementById('fileInput').addEventListener('change', function() {
             options: pieOptions
         });
         // document.getElementById('fileUploadSection').classList.remove('hidden');
-
+ 
         // Show the Generate Teams and Randomly Generate buttons
         document.getElementById('generateButton').style.display = 'block';
         // document.getElementById('randomGenerateButton').style.display = 'block';
     };
-
+ 
     reader.readAsArrayBuffer(file);
 });
-
+ 
 // Function to show text input for editing weightage
 function showTextInput(label, currentWeightage, index) {
-    // hideAllTextInput();
-   
-   
     document.getElementById('weightageInput').style.display = 'block';
     const weightageLabel = document.getElementById('weightageLabel');
-    document.getElementById('weightageValue').value = currentWeightage.toFixed(2);
-    activeInput = document.getElementById('weightageValue');
+    const weightageValue = document.getElementById('weightageValue');
+    weightageValue.value = currentWeightage.toFixed(2);
+    weightageValue.dataset.index = index;
     weightageLabel.textContent = `Enter the weightage for '${label}'`;
-   
-    activeInput.dataset.index = index;
-   
-    activeInput.addEventListener('input', function() {
-      const newValue = parseFloat(this.value);
-      if (!isNaN(newValue) && newValue >= 0) {
-        pieChartInstance.data.datasets[0].data[index] = newValue;
-        pieChartInstance.update();
-      }
-    });
-
-    activeInput.focus();
-}
-
-// Function to hide all text input fields
-function hideAllTextInput() {
-    if (activeInput) {
-        activeInput.remove(); // Remove input element from DOM
-        activeInput = null;
+  weightageLabel.style.color="#42497b";
+    activeInput = weightageValue; // Set the activeInput
+    weightageValue.addEventListener('input', handleWeightageInput);
+  }
+  function handleWeightageInput(event) {
+    const index = parseInt(event.target.dataset.index);
+    const newValue = parseFloat(event.target.value);
+    if (!isNaN(newValue) && newValue >= 0 && newValue <= 100) {
+      updatePieChartWeightage(index, newValue);
     }
-    document.getElementById('weightageInput').style.display = 'none';
-}
-
+  }
+  function updatePieChartWeightage(index, value) {
+    pieChartInstance.data.datasets[0].data[index] = value;
+    pieChartInstance.update();
+  }
+ 
+// Function to hide all text input fields
+// function hideAllTextInput() {
+//     if (activeInput) {
+//         activeInput.remove(); // Remove input element from DOM
+//         activeInput = null;
+//     }
+//     document.getElementById('weightageInput').style.display = 'none';
+// }
+ 
 // Function to generate random color palette
 function generateColorPalette(count) {
     const colors = [];
-    const opacity = 0.7; // Set initial opacity
     for (let i = 0; i < count; i++) {
-        const color = `rgba(${randomInt(90, 150)}, ${randomInt(90, 150)}, ${randomInt(90, 150)}, ${opacity})`;
+        const color = generateShadeOfPurple();
         colors.push(color);
     }
     return colors;
 }
-
+function generateShadeOfPurple() {
+    const hue = randomInt(240, 300); //0 Hue range for purple/lavender/lilac
+    const saturation = randomInt(30, 40); // Saturation range (lighter shades)
+    const lightness = randomInt(50, 70); // Lightness range (lighter shades)
+    return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+}
+ 
 // Function to generate random integer
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
-
+ 
 // Function to validate total weightage
 function validateWeightage() {
     const totalWeightage = pieChartInstance.data.datasets[0].data.reduce((a, b) => a + b, 0);
@@ -237,17 +239,18 @@ function validateWeightage() {
     }
     return true;
 }
-
+ 
+// Function to handle the Generate Teams button click
 // Function to handle the Generate Teams button click
 function handleGenerateButtonClick(event) {
     if (!validateWeightage()) {
         event.preventDefault();
         return;
     }
-
+ 
     const numberOfTeams = parseInt(document.getElementById('exampleFormControlInput2').value);
     const teams = generateTeams(numberOfTeams);
-
+ 
     // Display teams on the generated-team page
     sessionStorage.setItem('generatedTeams', JSON.stringify(teams));
     window.location.href = 'generated-team.html';
@@ -256,10 +259,10 @@ function generateTeams(numberOfTeams) {
    
     const teams = [];
     const weightedMembers = calculateWeightedScores(memberScores, parameterWeightages);
-
+ 
     // Sort members by total weighted score in descending order
     weightedMembers.sort((a, b) => b.totalWeightedScore - a.totalWeightedScore);
-
+ 
     // Initialize teams with empty arrays
     for (let i = 0; i < numberOfTeams; i++) {
         teams.push({
@@ -268,17 +271,17 @@ function generateTeams(numberOfTeams) {
             leader: null
         });
     }
-
+ 
     // Distribute members to teams
     weightedMembers.forEach((member, index) => {
         const teamIndex = index % numberOfTeams;
         teams[teamIndex].members.push(member);
     });
-
+ 
     // Ensure minimal difference in team sizes (members)
     let maxMembers = Math.ceil(memberScores.length / numberOfTeams);
     let minMembers = Math.floor(memberScores.length / numberOfTeams);
-
+ 
     // Adjust teams to balance the number of members
     teams.sort((a, b) => b.members.length - a.members.length);
     for (let i = 0; i < numberOfTeams; i++) {
@@ -287,20 +290,20 @@ function generateTeams(numberOfTeams) {
             teams[i === numberOfTeams - 1 ? 0 : i + 1].members.push(memberToMove);
         }
     }
-
+ 
     // Select leader for each team (highest weighted score member)
     teams.forEach(team => {
         let maxWeightedScore = -Infinity;
         team.members.forEach(member => {
                     team.leader = team.members[0].name;
-
+ 
         });
-        team.members=team.members.filter(member=> member.name!==team.leader);
+ 
     });
-
+ 
     return teams;
 }
-
+ 
 // Function to calculate weighted scores based on parameter weightages
 function calculateWeightedScores(members, weightages) {
     return members.map(member => {
@@ -314,42 +317,77 @@ function calculateWeightedScores(members, weightages) {
         };
     });
 }
-
-
+ 
+ 
 // Add event listener for the Generate Teams button
 document.getElementById('generateButton').addEventListener('click', handleGenerateButtonClick);
 // let memberScores = []; // This will store the member scores from the Excel file
-
+ 
 // function handleFileUpload(event) {
 //     const file = event.target.files[0];
 //     const reader = new FileReader();
-
+ 
 //     reader.onload = function (e) {
 //         const data = new Uint8Array(e.target.result);
 //         const workbook = XLSX.read(data, { type: 'array' });
 //         const sheetName = workbook.SheetNames[0];
 //         const worksheet = workbook.Sheets[sheetName];
-
+ 
 //         const jsonSheet = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-
+ 
 //         const headers = jsonSheet[0];
 //         const parameters = headers.slice(1);
-
+ 
 //         memberScores = jsonSheet.slice(1).map(row => {
 //             return {
 //                 name: row[0],
 //                 scores: row.slice(1)
 //             };
 //         });
-
+ 
 //         // Update parameter count and pie chart
 //         document.getElementById('parameterCount').value = parameters.length;
 //         updatePieChart(parameters);
 //     };
-
+ 
 //     reader.readAsArrayBuffer(file);
 // }
+document.getElementById('weightageInput').addEventListener('keypress', function(event) {
+    // Check if the key pressed is Enter (key code 13)
+    if (event.key === 'Enter') {
+        // Prevent the default action (form submission, if any)
+        event.preventDefault();
 
+        // Get the current active input index from the weightageValue dataset
+        const currentIndex = parseInt(document.getElementById('weightageValue').dataset.index);
+
+        // Update the weightage for the current index
+        const newValue = parseFloat(document.getElementById('weightageValue').value);
+        updatePieChartWeightage(currentIndex, newValue);
+
+        // Hide the current weightage input
+        hideWeightageInput();
+
+        // Find the next index to move to (assuming circular movement)
+        const nextIndex = (currentIndex + 1) % parameters.length;
+
+        // Show the input for the next parameter
+        const nextLabel = parameters[nextIndex];
+        showTextInput(nextLabel, pieChartInstance.data.datasets[0].data[nextIndex], nextIndex);
+    }
+});
+function hideWeightageInput() {
+    if (activeInput) {
+        activeInput.blur(); // Remove focus from current input
+        activeInput = null; // Clear active input reference
+        document.getElementById('weightageInput').style.display = 'none'; // Hide input field
+        
+        // Example logic to move to next input if needed
+        // You can implement logic to focus on the next input or proceed
+    }
+}
+
+ 
 
 document.getElementById('increaseButton').addEventListener('click', () => {
     if (activeInput) {
@@ -364,24 +402,21 @@ document.getElementById('increaseButton').addEventListener('click', () => {
    
   document.getElementById('decreaseButton').addEventListener('click', () => {
     if (activeInput) {
-      const index = parseInt(activeInput.dataset.index);
       let newValue = parseFloat(activeInput.value) - 1;
       newValue = Math.max(newValue, minWeightage);
-      activeInput.value = newValue.toFixed(2);
-      pieChartInstance.data.datasets[0].data[index] = newValue;
-      pieChartInstance.update();
+      updateWeightageInput(newValue);
     }
   });
-  
-
+ 
+ 
 document.getElementById('fileInput').addEventListener('change', handleFileUpload);
-
+ 
 // function validateWeightage() {
 //     const totalWeightages = pieChartInstance.data.datasets[0].data;
 //     const total = totalWeightages.reduce((acc, curr) => acc + curr, 0);
 //     return total === 100;
 // }
-
+ 
 function updatePieChart(parameters) {
     const ctx = document.getElementById('pieChart').getContext('2d');
     pieChartInstance = new Chart(ctx, {
@@ -403,7 +438,7 @@ function updatePieChart(parameters) {
         }
     });
 }
-
+ 
 function generateRandomColors(num) {
     const colors = [];
     for (let i = 0; i < num; i++) {
@@ -412,7 +447,7 @@ function generateRandomColors(num) {
     return colors;
 }
 document.getElementById('fileInput').addEventListener('change', handleFileUpload);
-
+ 
 function handleFileUpload(event) {
       document.getElementById('weightageInput').style.display = 'block';
      const file = event.target.files[0];
@@ -436,24 +471,33 @@ function handleFileUpload(event) {
     };
     reader.readAsArrayBuffer(file);
 }
-
-document.getElementById('increaseButton').addEventListener('click', function() {
-    if (currentWeightage < maxWeightage) {
-        currentWeightage++;
-        updateWeightageInput(currentWeightage);
-    }
-});
  
-document.getElementById('decreaseButton').addEventListener('click', function() {
-    if (currentWeightage > minWeightage) {
-        currentWeightage--;
-        updateWeightageInput(currentWeightage);
-    }
-});
-
+// document.getElementById('increaseButton').addEventListener('click', function() {
+//     if (currentWeightage < maxWeightage) {
+//         currentWeightage++;
+//         updateWeightageInput(currentWeightage);
+//     }
+// });
+ 
+// document.getElementById('decreaseButton').addEventListener('click', function() {
+//     if (currentWeightage > minWeightage) {
+//         currentWeightage--;
+//         updateWeightageInput(currentWeightage);
+//     }
+// });
+ 
+ 
+// function updateWeightageInput(value) {
+//     document.getElementById('weightageValue').value = value;
+//     // Update the pie chart weightage here if needed
+//     updatePieChartWeightage(value);
+// }
 
 function updateWeightageInput(value) {
-    document.getElementById('weightageValue').value = value;
-    // Update the pie chart weightage here if needed
-    updatePieChartWeightage(value);
-}
+    if (activeInput) {
+      const index = parseInt(activeInput.dataset.index);
+      activeInput.value = value.toFixed(2);
+      pieChartInstance.data.datasets[0].data[index] = value;
+      pieChartInstance.update();
+    }
+  }
