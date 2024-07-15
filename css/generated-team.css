@@ -1,4 +1,8 @@
-:root{--lavendar: hsla(263, 25%, 55%, 0.502) ;}
+:root{
+    --lavendar: hsla(263, 25%, 55%, 0.502);
+    --lavender-dark: #5A639C;
+    --lavender-dark-hover: #5A639C;
+}
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 *{
     margin: 0;
@@ -44,15 +48,15 @@
     font-size: 17px;
 }
 .navbar-nav .nav-item input{
-    background-color: #5A639C;
+    background-color: var(--lavender-dark);
     width: 100%;
 }
 .navbar-nav .nav-item input:hover{
-    background-color: #313c82;
+    background-color: var(--lavender-dark-hover);
     transition: .4s linear;
 }
 .navbar-nav .nav-item .log-item{
-    background-color: #5A639C;
+    background-color: var(--lavender-dark);
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -65,12 +69,12 @@
     color: black;
 }
 .navbar-nav .nav-item .log-item:hover{
-    background-color: #313c82;
+    background-color: var(--lavender-dark-hover);
     text-decoration: none;
     transition: .4s linear;
 }
 #loginButton{
-    background-color: #5A639C;
+    background-color: var(--lavender-dark);
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -82,7 +86,6 @@
     width: 50px;
 }
 .teamname-area{
-    /* background-color: red; */
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -90,27 +93,21 @@
     gap: 20px;
  }
 .result-tg-t{
-    width: calc(50% - 20px); /* Adjust to fit three items per row, considering the gap */
-    background-color: var(--lavender); /* Example background color */
+    width: calc(50% - 20px);
+    background-color: var(--lavender);
     border-radius: 10px;
     overflow: hidden;
-
-}
-.result-tg-t ol{
-    padding: 15px 0;
-    background-color: rgb(221, 221, 221);
-    border-radius: 0px 0px 8px 8px;
 }
 .result-tg-t-title{
-    background-color: #5A639C;
+    background-color: var(--lavender-dark);
     border-radius: 5px 5px 0 0;
-    font-size: 1.5rem;
+    font-size: 1.9rem;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: white;
-   
+    font-weight: bold;
 }
 .result-tg-t-title p{
     margin-bottom: 0;
@@ -120,8 +117,10 @@
     background-color: #C1C1C1;
     padding: 10px 0px 10px 0px;
     display: flex;
+    font-size: 1.25rem;
     justify-content: center;
     align-items: center;
+    font-weight: bold;
 }
 .result-tg-t-teamleader p{
     margin-bottom: 0;
@@ -130,17 +129,22 @@
     background-color: white;
     min-height: 5rem;
     text-align: center;
-    /* display: flex; */
     border-radius: 0 0 5px 5px;
 }
 .result-tg-t-members ol{
-    background-color: rgb(227, 226, 226);
-    justify-content: space-around;
     padding-top: 10px;
-    /* flex-wrap: wrap; */
-    height: auto;
     margin: 0;
     padding: 0;
+}
+.result-tg-t ol{
+    justify-content: space-around;
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+    padding: 15px 10px;
+    background-color: rgb(221, 221, 221);
+    border-radius: 0px 0px 8px 8px;
+    font-size: 1.1rem;
 }
 .result-tg-container2{
     display: flex;
@@ -167,10 +171,9 @@
 }
 
 .feedback-area{
-    background-color: var(--lavendar);
-    width: 90%;
+    background-color: var(--lavender-dark);
+    width: 100%;
     padding: 50px;
-    /* height: 400px; */
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -180,47 +183,36 @@
 }
 .feedback-area h2{
     margin-bottom: 50px;
-    font-size: 22px;
+    font-size: 1.8rem;
+    color: white;
+    font-weight: bold;
 }
-.rating {
-    display: flex;
-    justify-content: center;
-}
-.star {
-    font-size: 40px;
-    color: #f9f8f8;
-    cursor: pointer;
-}
-.star:hover,
-.star.active {
-    color: #f90;
-}
-
 .feedback-form{
     width: 100%;
     margin-bottom: 50px;
 }
-
+.feedback-submit-btn{
+    display: flex;
+    justify-content: center;
+}
 .tg-feedback-btn{
-    background-color: #5A639C; 
+    background-color: #9B86BD; 
     color: white; 
     border: none; 
     border-radius: 4px;
     transition: background-color 0.4s, color 0.4s; 
     padding: 10px 44px;
     font-size: 24px;
+    font-weight: bold;
 }
-
 .tg-feedback-btn:hover {
-    background-color: #313c82; 
+    background-color: #9d6deb; 
     color: white; 
 }
-
 /* footer area */
 footer{
     width: 100%;
-    /* height: 120px; */
-    background-color: #5A639C;
+    background-color: var(--lavender-dark);
     display: flex;
     flex-direction: column;
     padding-top: 20px;
@@ -267,7 +259,7 @@ footer .footer-content{
     width: 100%;
     height: 35px;
     margin-top: 40px;
-    background-color: #5A639C; 
+    background-color: var(--lavender-dark);
 }
 .sub-footer span{
     color: white;
@@ -275,8 +267,7 @@ footer .footer-content{
 }
 
 .generated-project-name{
-    /* margin-left:400px; */
-    color: #313c82;
+    color: var(--lavender-dark-hover);
     display: flex;
     justify-content: center;
     align-items: center;

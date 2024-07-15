@@ -204,12 +204,21 @@ if (editButton && feedbackArea) {
     const isVisible = feedbackArea.style.display === 'block';
     feedbackArea.style.display = isVisible ? 'none' : 'block';
 
+    const editButtonText = document.getElementById('editButtonText');
+    const editButtonIcon = editButton.querySelector('i');
+
     if (!isVisible) {
       disableDragAndDrop();
       dragAlert.textContent = '';
+      editButtonText.textContent = 'Edit';
+      editButtonIcon.classList.remove('fa-check');
+      editButtonIcon.classList.add('fa-pencil');
     } else {
       enableDragAndDrop();
       dragAlert.textContent = 'You can drag and drop to swap members and leaders across teams';
+      editButtonText.textContent = 'Done';
+      editButtonIcon.classList.remove('fa-pencil');
+      editButtonIcon.classList.add('fa-check');
     }
   });
 }

@@ -69,14 +69,21 @@
 
 /* dropdown css */
 .dropdown-menu {
-    width: auto; /* Adjust width as needed */
+    width: auto;
+    max-width: 200px;
+    overflow-wrap: break-word;
+    white-space: normal;
+} 
+.show{
+    width: 100%;
 }
- 
 .dropdown-item {
-    padding: 0.5rem 1rem; /* Adjust padding as needed */
-    font-size: 14px; /* Adjust font size as needed */
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
-
 /* banner area */
 .banner-image{
     display: block;
@@ -85,9 +92,6 @@
     width: 50%;
     height: 50%;
 }
-/* .implementation-content{
-    padding: 5px 70px;
-} */
 .implementation-content .uploadMsgTitle{
     display: flex;
     justify-content: center;
@@ -177,17 +181,10 @@ canvas {
 
 .generate-area {
     display: flex;
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* padding-top: 25px; 
-    padding-bottom: 25px; */
     margin-top: 10px;
     flex-direction: column;
     align-items: center;
 }
-
-
-
 .generate-area button {
     background-color: #5A639C;    
     border-radius: 6px;
@@ -314,12 +311,9 @@ input[type=file]::file-selector-button {
 
   #weightageInput{
     display: flex;
-    /* display: none; */
     justify-content: center;
     padding: 20px;
     margin-bottom: 15px;
-    
-   
 }
 #weightageInput #weightageValue{
     border: 1px solid gray;
@@ -334,24 +328,14 @@ text-align: center;
 background: linear-gradient(to right, #9B86BD, #F3F3F3); 
 border-style: hidden;
 border-radius: 2px;
-
-
 }
-/* .weightage-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px; 
-    width: 20px;
-} */
 #weightageInput #decreaseButton {
     height: auto;
     width:20px;
     background: linear-gradient(to right, #9B86BD, #F3F3F3); 
     border-radius: 2px;
-
-text-align: center;
-border-style: hidden;
+    text-align: center;
+    border-style: hidden;
     
 }
 .weightage-area {
