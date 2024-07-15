@@ -266,6 +266,7 @@ footer .footer-content{
 .get-in-touch-text{
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 .get-in-touch-text p{
     color: white;
@@ -447,6 +448,9 @@ footer .footer-content{
         margin-top: 0px;
         height: 40px;
         width: 40px;
+    }
+    .get-in-touch-text p{
+        font-size: 17px;
     }
     .social-icons-area{
         gap: 10px;
