@@ -183,10 +183,12 @@ canvas {
     display: flex;
     margin-top: 10px;
     flex-direction: column;
+    align-items: center;
 }
 .generate-area button {
     background-color: #5A639C;    
     border-radius: 6px;
+    width: max-content;
     border: none;
     letter-spacing: 2px;
     padding: 15px 15px;
