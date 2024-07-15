@@ -298,7 +298,7 @@ function generateTeams(numberOfTeams) {
                     team.leader = team.members[0].name;
  
         });
- 
+        team.members=team.members.filter(member=> member.name!==team.leader);
     });
  
     return teams;
