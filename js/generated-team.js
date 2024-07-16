@@ -83,13 +83,13 @@ document.getElementById('downloadButton').addEventListener('click', async functi
   const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
   const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
 
-  // // Upload the file to Firebase Storage
-  // const projectName = localStorage.getItem('projectName') || 'NoProjectName';
-  // const storageRef = ref(storage, `projects/${projectName}_${Date.now()}.xlsx`);
-  // await uploadBytes(storageRef, blob);
+  // Upload the file to Firebase Storage
+  const projectName = localStorage.getItem('projectName') || 'NoProjectName';
+  const storageRef = ref(storage, `projects/${projectName}_${Date.now()}.xlsx`);
+  await uploadBytes(storageRef, blob);
 
   // Get the download URL
-  // const downloadURL = await getDownloadURL(storageRef);
+  const downloadURL = await getDownloadURL(storageRef);
 
   // Save project metadata to Firestore with user ID
   await addDoc(collection(db, 'projects'), {
@@ -161,7 +161,7 @@ document.getElementById('saveButton').addEventListener('click', async function()
   });
 
   // Trigger download of the Excel file (optional)
-  XLSX.writeFile(wb, 'teams.xlsx');
+  // XLSX.writeFile(wb, 'teams.xlsx');
 
   // Display success message
   Swal.fire({
