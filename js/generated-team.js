@@ -56,11 +56,9 @@ document.getElementById('downloadButton').addEventListener('click', async functi
   const teams = [];
   document.querySelectorAll('.result-tg-t').forEach(teamDiv => {
     const teamName = teamDiv.querySelector('.result-tg-t-title p').textContent;
-    // const teamLeaderText = teamDiv.querySelector('.result-tg-t-teamleader').textContent;
-    // const teamLeader = teamLeaderText.split(': ')[1];
     const teamLeaderText = teamDiv.querySelector('.result-tg-t-teamleader').textContent;
-const startIndex = teamLeaderText.indexOf(':') ;  // Find the index after ": "
-const teamLeader = teamLeaderText.substring(startIndex+2);
+    const startIndex = teamLeaderText.indexOf(':');
+    const teamLeader = teamLeaderText.substring(startIndex+2);
         const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent);
     
     teams.push({
@@ -122,8 +120,8 @@ document.getElementById('saveButton').addEventListener('click', async function()
     // const teamLeader = teamLeaderText.split(': ')[1];
     const teamLeaderText = teamDiv.querySelector('.result-tg-t-teamleader').textContent;
 const startIndex = teamLeaderText.indexOf(':') ;  // Find the index after ": "
-const teamLeader = teamLeaderText.substring(startIndex+2);
-        const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent);
+const teamLeader = teamLeaderText.substring(startIndex + 2);
+    const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent.replace('Delete', '').trim());
     
     teams.push({
       teamName,
@@ -259,7 +257,6 @@ function getDragAfterElement(list, y) {
 }
 
 if (editButton && feedbackArea) {
-  // Show feedback area on page load
   feedbackArea.style.display = 'block';
   enableDragAndDrop();
   dragAlert.textContent = '';
@@ -273,6 +270,13 @@ if (editButton && feedbackArea) {
     const editButtonIcon = editButton.querySelector('i');
 
     if (!isVisible) {
+      disableDragAndDrop();
+      dragAlert.textContent = '';
+      editButtonText.textContent = 'Edit';
+      editButtonIcon.classList.remove('fa-check');
+      editButtonIcon.classList.add('fa-pencil');
+      hideAddRemoveButtons();
+    } else {
       enableDragAndDrop();
       document.querySelectorAll('.result-tg-t').forEach(team => {
         team.classList.add('editable');
@@ -289,26 +293,53 @@ if (editButton && feedbackArea) {
       editButtonText.textContent = 'Done';
       editButtonIcon.classList.remove('fa-pencil');
       editButtonIcon.classList.add('fa-check');
-    } else {
-      disableDragAndDrop();
-      document.querySelectorAll('.result-tg-t').forEach(team => {
-        team.classList.remove('editable');
-        team.querySelectorAll('.result-tg-t-teamleader').forEach(leader => {
-          leader.style.backgroundColor = ''; // Reset background color
-          leader.style.color = ''; // Reset text color
-          leader.style.border = ''; // Reset border
-        });
-        team.querySelectorAll('.result-tg-t-members li').forEach(member => {
-          member.style.border = ''; // Reset border
-        });
-      });
-      dragAlert.textContent = '';
-      editButtonText.textContent = 'Edit';
-      editButtonIcon.classList.remove('fa-check');
-      editButtonIcon.classList.add('fa-pencil');
+      showAddRemoveButtons();
     }
   });
 }
+
+function showAddRemoveButtons() {
+  document.querySelectorAll('.result-tg-t ol li').forEach(li => {
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = '-';
+    deleteButton.classList.add('delete-member');
+    deleteButton.addEventListener('click', function() {
+      li.remove();
+    });
+    li.appendChild(deleteButton);
+  });
+
+  document.querySelectorAll('.result-tg-t ol').forEach(ol => {
+    const addButton = document.createElement('button');
+    addButton.textContent = '+';
+    addButton.classList.add('add-member');
+    addButton.addEventListener('click', function() {
+      const newMember = prompt('Enter the name of the new member:');
+      if (newMember) {
+        const newLi = document.createElement('li');
+        newLi.textContent = newMember;
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = '-';
+        deleteButton.classList.add('delete-member');
+        deleteButton.addEventListener('click', function() {
+          newLi.remove();
+        });
+        newLi.appendChild(deleteButton);
+        ol.appendChild(newLi);
+        // Enable drag and drop for the new member
+        enableDragAndDrop();
+      }
+    });
+    ol.appendChild(addButton);
+  });
+}
+
+function hideAddRemoveButtons() {
+  document.querySelectorAll('.delete-member, .add-member').forEach(button => {
+    button.remove();
+  });
+}
+
 document.getElementById('logoutButton').addEventListener('click', function() {
   localStorage.setItem('showSwal', 'true');
   window.location.href = 'home.html';
