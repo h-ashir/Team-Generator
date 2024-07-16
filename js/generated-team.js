@@ -85,6 +85,68 @@ const teamLeader = teamLeaderText.substring(startIndex+2);
   const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
   const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
 
+  // // Upload the file to Firebase Storage
+  // const projectName = localStorage.getItem('projectName') || 'NoProjectName';
+  // const storageRef = ref(storage, `projects/${projectName}_${Date.now()}.xlsx`);
+  // await uploadBytes(storageRef, blob);
+
+  // Get the download URL
+  // const downloadURL = await getDownloadURL(storageRef);
+
+  // Save project metadata to Firestore with user ID
+  // await addDoc(collection(db, 'projects'), {
+  //   projectName: projectName,
+  //   fileURL: downloadURL,
+  //   uploadDate: new Date().toISOString(),
+  //   userId: user.uid // Include user ID here
+  // });
+
+  // Trigger download of the Excel file (optional)
+  XLSX.writeFile(wb, 'teams.xlsx');
+
+  
+});
+document.getElementById('saveButton').addEventListener('click', async function() {
+  // Ensure the user is authenticated
+  const user = auth.currentUser;
+  if (!user) {
+    console.error('User is not authenticated');
+    return;
+  }
+
+  // Extract team data from the webpage
+  const teams = [];
+  document.querySelectorAll('.result-tg-t').forEach(teamDiv => {
+    const teamName = teamDiv.querySelector('.result-tg-t-title p').textContent;
+    // const teamLeaderText = teamDiv.querySelector('.result-tg-t-teamleader').textContent;
+    // const teamLeader = teamLeaderText.split(': ')[1];
+    const teamLeaderText = teamDiv.querySelector('.result-tg-t-teamleader').textContent;
+const startIndex = teamLeaderText.indexOf(':') ;  // Find the index after ": "
+const teamLeader = teamLeaderText.substring(startIndex+2);
+        const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent);
+    
+    teams.push({
+      teamName,
+      teamLeader,
+      members
+    });
+  });
+
+  // Convert team data to worksheet
+  const ws_data = [['Team Name', 'Team Leader', 'Members']];
+  teams.forEach(team => {
+    ws_data.push([team.teamName, team.teamLeader, team.members.join(', ')]);
+  });
+  const ws = XLSX.utils.aoa_to_sheet(ws_data);
+
+  // Create a new workbook and append the worksheet
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Teams');
+
+  // Write the workbook to a Blob
+  const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+  const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
+
   // Upload the file to Firebase Storage
   const projectName = localStorage.getItem('projectName') || 'NoProjectName';
   const storageRef = ref(storage, `projects/${projectName}_${Date.now()}.xlsx`);
@@ -101,12 +163,10 @@ const teamLeader = teamLeaderText.substring(startIndex+2);
     userId: user.uid // Include user ID here
   });
 
-  // Trigger download of the Excel file (optional)
-  XLSX.writeFile(wb, 'teams.xlsx');
-
+ 
   // Display success message
   Swal.fire({
-    title: 'File uploaded and saved successfully',
+    title: 'Saved to History',
     icon: 'success',
     confirmButtonText: 'OK'
   });
