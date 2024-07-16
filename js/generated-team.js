@@ -310,7 +310,7 @@ if (editButton && feedbackArea) {
 function showAddRemoveButtons() {
   document.querySelectorAll('.result-tg-t ol li').forEach(li => {
     const deleteButton = document.createElement('button');
-    deleteButton.textContent = '-';
+    deleteButton.textContent = ' - ';
     deleteButton.classList.add('delete-member');
     deleteButton.addEventListener('click', function() {
       li.remove();
@@ -320,7 +320,7 @@ function showAddRemoveButtons() {
 
   document.querySelectorAll('.result-tg-t ol').forEach(ol => {
     const addButton = document.createElement('button');
-    addButton.textContent = '+';
+    addButton.textContent = '+ Add member';
     addButton.classList.add('add-member');
     addButton.addEventListener('click', function() {
       const newMember = prompt('Enter the name of the new member:');
