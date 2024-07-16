@@ -117,10 +117,11 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    gap: 10px;
 }
 
 .project-teams-area div{
-    width: 40%;
+    width: 30%;
 }
 
 .parameter-area{

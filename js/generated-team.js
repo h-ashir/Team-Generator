@@ -147,6 +147,7 @@ const teamLeader = teamLeaderText.substring(startIndex + 2);
 
   // Upload the file to Firebase Storage
   const projectName = localStorage.getItem('projectName') || 'NoProjectName';
+  const projectCategory = localStorage.getItem('projectCategory') || 'NoProjectCategory';
   const storageRef = ref(storage, `projects/${projectName}_${Date.now()}.xlsx`);
   await uploadBytes(storageRef, blob);
 
@@ -156,6 +157,7 @@ const teamLeader = teamLeaderText.substring(startIndex + 2);
   // Save project metadata to Firestore with user ID
   await addDoc(collection(db, 'projects'), {
     projectName: projectName,
+    projectCategory: projectCategory,
     fileURL: downloadURL,
     uploadDate: new Date().toISOString(),
     userId: user.uid // Include user ID here
@@ -265,6 +267,8 @@ if (editButton && feedbackArea) {
     event.preventDefault();
     const isVisible = feedbackArea.style.display === 'block';
     feedbackArea.style.display = isVisible ? 'none' : 'block';
+    
+
 
     const editButtonText = document.getElementById('editButtonText');
     const editButtonIcon = editButton.querySelector('i');
@@ -276,6 +280,8 @@ if (editButton && feedbackArea) {
       editButtonIcon.classList.remove('fa-check');
       editButtonIcon.classList.add('fa-pencil');
       hideAddRemoveButtons();
+      document.getElementById('downloadButton').style.display='block';
+      document.getElementById('saveButton').style.display='block';
     } else {
       enableDragAndDrop();
       document.querySelectorAll('.result-tg-t').forEach(team => {
@@ -294,6 +300,8 @@ if (editButton && feedbackArea) {
       editButtonIcon.classList.remove('fa-pencil');
       editButtonIcon.classList.add('fa-check');
       showAddRemoveButtons();
+      document.getElementById('downloadButton').style.display='none';
+      document.getElementById('saveButton').style.display='none';
     }
   });
 }
@@ -347,9 +355,17 @@ document.getElementById('logoutButton').addEventListener('click', function() {
 
 const projectNameHeading = document.getElementById('project-name-heading');
 const projectName = localStorage.getItem('projectName');
+const projectCategoryHeading = document.getElementById('project-category-heading');
+const projectCategory = localStorage.getItem('projectCategory');
 
 if (projectName) {
   projectNameHeading.textContent = ` ${projectName}`;
+  projectNameHeading.style.display = 'block';
 } else {
   projectNameHeading.textContent = 'No project name provided';
+}
+if (projectCategory) {
+  projectCategoryHeading.textContent = ` ${projectCategory}`;
+} else {
+  projectCategoryHeading.textContent = 'No project category provided';
 }
