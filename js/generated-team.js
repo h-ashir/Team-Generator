@@ -83,27 +83,28 @@ document.getElementById('downloadButton').addEventListener('click', async functi
   const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
   const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
 
-  // // Upload the file to Firebase Storage
-  // const projectName = localStorage.getItem('projectName') || 'NoProjectName';
-  // const storageRef = ref(storage, `projects/${projectName}_${Date.now()}.xlsx`);
-  // await uploadBytes(storageRef, blob);
+  // Upload the file to Firebase Storage
+  const projectName = localStorage.getItem('projectName') || 'NoProjectName';
+  const storageRef = ref(storage, `projects/${projectName}_${Date.now()}.xlsx`);
+  await uploadBytes(storageRef, blob);
 
   // Get the download URL
-  // const downloadURL = await getDownloadURL(storageRef);
+  const downloadURL = await getDownloadURL(storageRef);
 
   // Save project metadata to Firestore with user ID
-  // await addDoc(collection(db, 'projects'), {
-  //   projectName: projectName,
-  //   fileURL: downloadURL,
-  //   uploadDate: new Date().toISOString(),
-  //   userId: user.uid // Include user ID here
-  // });
+  await addDoc(collection(db, 'projects'), {
+    projectName: projectName,
+    fileURL: downloadURL,
+    uploadDate: new Date().toISOString(),
+    userId: user.uid // Include user ID here
+  });
 
   // Trigger download of the Excel file (optional)
   XLSX.writeFile(wb, 'teams.xlsx');
 
   
 });
+
 document.getElementById('saveButton').addEventListener('click', async function() {
   // Ensure the user is authenticated
   const user = auth.currentUser;
@@ -116,13 +117,11 @@ document.getElementById('saveButton').addEventListener('click', async function()
   const teams = [];
   document.querySelectorAll('.result-tg-t').forEach(teamDiv => {
     const teamName = teamDiv.querySelector('.result-tg-t-title p').textContent;
-    // const teamLeaderText = teamDiv.querySelector('.result-tg-t-teamleader').textContent;
-    // const teamLeader = teamLeaderText.split(': ')[1];
     const teamLeaderText = teamDiv.querySelector('.result-tg-t-teamleader').textContent;
-const startIndex = teamLeaderText.indexOf(':') ;  // Find the index after ": "
-const teamLeader = teamLeaderText.substring(startIndex + 2);
-    const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent.replace('Delete', '').trim());
-    
+    const startIndex = teamLeaderText.indexOf(':');
+    const teamLeader = teamLeaderText.substring(startIndex + 1).trim();
+    const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent);
+
     teams.push({
       teamName,
       teamLeader,
@@ -163,7 +162,9 @@ const teamLeader = teamLeaderText.substring(startIndex + 2);
     userId: user.uid // Include user ID here
   });
 
- 
+  // Trigger download of the Excel file (optional)
+  // XLSX.writeFile(wb, 'teams.xlsx');
+
   // Display success message
   Swal.fire({
     title: 'Saved to History',

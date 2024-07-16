@@ -103,7 +103,19 @@
     align-items: center;
     margin-top: 50px;
 }
+.generated-project-category{
+    color: var(--lavender-dark-hover);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
 .generated-project-name #project-name-heading{
+    font-weight: 500;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+.generated-project-category #project-category-heading{
     font-weight: 600;
     font-size: 3.2rem;
     text-transform: uppercase;
