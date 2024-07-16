@@ -51,14 +51,18 @@ document.getElementById('logoutButton').addEventListener('click', function() {
   window.location.href = 'home.html';
  
 });
- 
+const projectCategoryInput = document.getElementById('exampleFormControlInput3');
 const projectNameInput = document.getElementById('exampleFormControlInput1');
   const generateButton = document.getElementById('generate-teams');
   const generateProjectNameButton = document.getElementById('generateButton');
- 
+  const generateProjectCategoryButton = document.getElementById('generateButton');
+
   // Enable button when input is not empty
   projectNameInput.addEventListener('input', () => {
     generateButton.disabled = !projectNameInput.value;
+  });
+  projectCategoryInput.addEventListener('input', () => {
+    generateButton.disabled = !projectCategoryInput.value;
   });
  
   // Save project name to localStorage when button is clicked
@@ -67,7 +71,56 @@ const projectNameInput = document.getElementById('exampleFormControlInput1');
     localStorage.setItem('projectName', projectNameInput.value);
     // window.location.href = generateLink.href; // Redirect to generated-team page
   });
- 
+  generateProjectCategoryButton.addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent the default form submission
+    localStorage.setItem('projectCategory', projectCategoryInput.value);
+    // window.location.href = generateLink.href; // Redirect to generated-team page
+  });
+  document.addEventListener("DOMContentLoaded", function() {
+    const guidelinesText = document.getElementById("guidelinesText");
+    const guidelinesCard = document.getElementById("guidelinesCard");
+
+    // Function to show guidelines card
+    function showGuidelinesCard() {
+        guidelinesCard.classList.add("active");
+    }
+
+    // Function to hide guidelines card
+    function hideGuidelinesCard() {
+        guidelinesCard.classList.remove("active");
+    }
+
+    // Click event to toggle guidelines card visibility
+    guidelinesText.addEventListener("click", function(event) {
+        // event.stopPropagation(); // Prevents the click from bubbling up and hiding the card
+        showGuidelinesCard();
+    });
+
+    // Close the card if user clicks outside of it
+    document.addEventListener("click", function(event) {
+        if (!guidelinesCard.contains(event.target) && event.target !== guidelinesText) {
+            hideGuidelinesCard();
+        }
+    });
+
+    // // Hover events to show/hide guidelines card
+    // guidelinesText.addEventListener("mouseenter", function() {
+    //     showGuidelinesCard();
+    // });
+
+    // guidelinesText.addEventListener("mouseleave", function() {
+    //     hideGuidelinesCard();
+    // });
+
+    // guidelinesCard.addEventListener("mouseenter", function() {
+    //     showGuidelinesCard();
+    // });
+
+    // guidelinesCard.addEventListener("mouseleave", function() {
+    //     hideGuidelinesCard();
+    // });
+});
+
 // part 1 end
  
 // part 2 start
@@ -219,8 +272,8 @@ function generateColorPalette(count) {
     return colors;
 }
 function generateShadeOfPurple() {
-    const hue = randomInt(240, 300); //0 Hue range for purple/lavender/lilac
-    const saturation = randomInt(30, 40); // Saturation range (lighter shades)
+    const hue = randomInt(0, 300); //0 Hue range for purple/lavender/lilac
+    const saturation = randomInt(0, 400); // Saturation range (lighter shades)
     const lightness = randomInt(50, 70); // Lightness range (lighter shades)
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }

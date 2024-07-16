@@ -92,18 +92,19 @@ document.getElementById('downloadButton').addEventListener('click', async functi
   // const downloadURL = await getDownloadURL(storageRef);
 
   // Save project metadata to Firestore with user ID
-  // await addDoc(collection(db, 'projects'), {
-  //   projectName: projectName,
-  //   fileURL: downloadURL,
-  //   uploadDate: new Date().toISOString(),
-  //   userId: user.uid // Include user ID here
-  // });
+  await addDoc(collection(db, 'projects'), {
+    projectName: projectName,
+    fileURL: downloadURL,
+    uploadDate: new Date().toISOString(),
+    userId: user.uid // Include user ID here
+  });
 
   // Trigger download of the Excel file (optional)
   XLSX.writeFile(wb, 'teams.xlsx');
 
   
 });
+
 document.getElementById('saveButton').addEventListener('click', async function() {
   // Ensure the user is authenticated
   const user = auth.currentUser;
@@ -116,13 +117,11 @@ document.getElementById('saveButton').addEventListener('click', async function()
   const teams = [];
   document.querySelectorAll('.result-tg-t').forEach(teamDiv => {
     const teamName = teamDiv.querySelector('.result-tg-t-title p').textContent;
-    // const teamLeaderText = teamDiv.querySelector('.result-tg-t-teamleader').textContent;
-    // const teamLeader = teamLeaderText.split(': ')[1];
     const teamLeaderText = teamDiv.querySelector('.result-tg-t-teamleader').textContent;
-const startIndex = teamLeaderText.indexOf(':') ;  // Find the index after ": "
-const teamLeader = teamLeaderText.substring(startIndex + 2);
-    const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent.replace('Delete', '').trim());
-    
+    const startIndex = teamLeaderText.indexOf(':');
+    const teamLeader = teamLeaderText.substring(startIndex + 1).trim();
+    const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent);
+
     teams.push({
       teamName,
       teamLeader,
@@ -161,7 +160,9 @@ const teamLeader = teamLeaderText.substring(startIndex + 2);
     userId: user.uid // Include user ID here
   });
 
- 
+  // Trigger download of the Excel file (optional)
+  XLSX.writeFile(wb, 'teams.xlsx');
+
   // Display success message
   Swal.fire({
     title: 'Saved to History',
@@ -347,9 +348,16 @@ document.getElementById('logoutButton').addEventListener('click', function() {
 
 const projectNameHeading = document.getElementById('project-name-heading');
 const projectName = localStorage.getItem('projectName');
+const projectCategoryHeading = document.getElementById('project-category-heading');
+const projectCategory = localStorage.getItem('projectCategory');
 
 if (projectName) {
   projectNameHeading.textContent = ` ${projectName}`;
 } else {
   projectNameHeading.textContent = 'No project name provided';
+}
+if (projectCategory) {
+  projectCategoryHeading.textContent = ` ${projectCategory}`;
+} else {
+  projectCategoryHeading.textContent = 'No project category provided';
 }
