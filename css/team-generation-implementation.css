@@ -357,7 +357,7 @@ border-radius: 2px;
 
 .guidelines-text {
     font-size: 20px;
-    /* font-weight: bold; */
+    font-weight: bold;
     cursor: pointer;
     color: #5A639C;
     position: relative; /* Ensure positioning context for hover */
