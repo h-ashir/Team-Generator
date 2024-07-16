@@ -51,7 +51,6 @@ document.getElementById('logoutButton').addEventListener('click', function() {
   window.location.href = 'home.html';
  
 });
-const projectCategoryInput = document.getElementById('exampleFormControlInput3');
 const projectNameInput = document.getElementById('exampleFormControlInput1');
 const projectCategoryInput = document.getElementById('exampleFormControlInput3');
   const generateButton = document.getElementById('generate-teams');
