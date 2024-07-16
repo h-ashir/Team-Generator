@@ -56,8 +56,12 @@ document.getElementById('downloadButton').addEventListener('click', async functi
   const teams = [];
   document.querySelectorAll('.result-tg-t').forEach(teamDiv => {
     const teamName = teamDiv.querySelector('.result-tg-t-title p').textContent;
-    const teamLeader = teamDiv.querySelector('.result-tg-t-teamleader').textContent.split(': ')[1];
-    const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent);
+    // const teamLeaderText = teamDiv.querySelector('.result-tg-t-teamleader').textContent;
+    // const teamLeader = teamLeaderText.split(': ')[1];
+    const teamLeaderText = teamDiv.querySelector('.result-tg-t-teamleader').textContent;
+const startIndex = teamLeaderText.indexOf(':') ;  // Find the index after ": "
+const teamLeader = teamLeaderText.substring(startIndex+2);
+        const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent);
     
     teams.push({
       teamName,

@@ -294,11 +294,11 @@ function generateTeams(numberOfTeams) {
     // Select leader for each team (highest weighted score member)
     teams.forEach(team => {
         // let maxWeightedScore = -Infinity;
-        // team.members.forEach(member => {
+        team.members.forEach(member => {
                     team.leader = team.members[0].name;
  
-        // });
-        team.members=team.members.filter(member=> member.name!==team.leader);
+        });
+        // team.members=team.members.filter(member=> member.name!==team.leader);
     });
  
     return teams;

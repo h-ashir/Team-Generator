@@ -141,9 +141,16 @@
                         <div class="result-tg-t-title"><p>${team.name}</p></div>
                         <div class="result-tg-t-members">
                           <div class="result-tg-t-teamleader">Team Leader:&nbsp;<p> ${team.leader}</p></div>
+                            
                             <ol>
-                                ${team.members.map(member => `<li style="list-style-type: none;">${member.name}</li>`).join('')}
-                            </ol>
+    ${team.members.map(member => {
+        if (member.name !== team.leader) {
+            return `<li style="list-style-type: none;">${member.name}</li>`;
+        } else {
+            return ''; // Skip the leader from the list
+        }
+    }).join('')}
+</ol>
                         </div>
                     </div>
                 `;
