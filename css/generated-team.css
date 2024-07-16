@@ -193,11 +193,9 @@
     padding: 5px;
 }
 .result-tg-t-members li.dropped {
-    background-color: #ffeb3b; /* Highlight color for newly dropped items */
     transition: background-color 0.3s;
 }
 .result-tg-t-teamleader p.dropped {
-    background-color: #ffeb3b; /* Highlight color for newly dropped items */
     transition: background-color 0.3s;
 }
 
@@ -268,6 +266,16 @@
     gap: 1rem;
     padding-top: 5rem;
     padding-bottom: 5rem;
+}
+.result-tg-t ol button{
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 1px 10px;
+}
+.result-tg-t li button{
+    color: red;
+    font-size: 1.5rem;
+    font-weight: bolder;
 }
 
 .feedback-area{

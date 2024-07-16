@@ -269,8 +269,6 @@ if (editButton && feedbackArea) {
     const isVisible = feedbackArea.style.display === 'block';
     feedbackArea.style.display = isVisible ? 'none' : 'block';
     
-
-
     const editButtonText = document.getElementById('editButtonText');
     const editButtonIcon = editButton.querySelector('i');
 
@@ -317,12 +315,40 @@ if (editButton && feedbackArea) {
       document.getElementById('saveButton').style.display='none';
     }
   });
+  // function alignButton(buttonId, iconClass) {
+  //   const button = document.getElementById(buttonId);
+  //   if (button) {
+  //     const icon = button.querySelector('i');
+  //     if (!icon) {
+  //       const newIcon = document.createElement('i');
+  //       newIcon.className = iconClass;
+  //       button.prepend(newIcon);
+  //     }
+  //     button.style.display = 'flex';
+  //     button.style.alignItems = 'center';
+  //     button.style.justifyContent = 'center';
+  //   }
+  // }
+
+  // // Align buttons on page load
+  // alignButton('saveButton', 'fa fa-save');
+  // alignButton('downloadButton', 'fa fa-download');
+  
+  // // Ensure buttons are aligned after toggling edit mode
+  // editButton.addEventListener('click', () => {
+  //   alignButton('saveButton', 'fa fa-save');
+  //   alignButton('downloadButton', 'fa fa-download');
+  // });
 }
 
 function showAddRemoveButtons() {
   document.querySelectorAll('.result-tg-t ol li').forEach(li => {
     const deleteButton = document.createElement('button');
-    deleteButton.textContent = ' - ';
+    // deleteButton.textContent = ' - ';
+    const deleteIcon = document.createElement('i');
+      deleteIcon.classList.add('fas', 'fa-trash');
+      deleteButton.appendChild(deleteIcon);
+
     deleteButton.classList.add('delete-member');
     deleteButton.addEventListener('click', function() {
       li.remove();
@@ -339,9 +365,14 @@ function showAddRemoveButtons() {
       if (newMember) {
         const newLi = document.createElement('li');
         newLi.textContent = newMember;
+
         const deleteButton = document.createElement('button');
-        deleteButton.textContent = '-';
         deleteButton.classList.add('delete-member');
+        // deleteButton.textContent = '-';
+        const deleteIcon = document.createElement('i');
+        deleteIcon.classList.add('fas', 'fa-trash');
+        deleteButton.appendChild(deleteIcon);
+
         deleteButton.addEventListener('click', function() {
           newLi.remove();
         });
