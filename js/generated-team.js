@@ -146,6 +146,7 @@ document.getElementById('saveButton').addEventListener('click', async function()
 
   // Upload the file to Firebase Storage
   const projectName = localStorage.getItem('projectName') || 'NoProjectName';
+  const projectCategory = localStorage.getItem('projectCategory') || 'NoProjectCategory';
   const storageRef = ref(storage, `projects/${projectName}_${Date.now()}.xlsx`);
   await uploadBytes(storageRef, blob);
 
@@ -155,6 +156,7 @@ document.getElementById('saveButton').addEventListener('click', async function()
   // Save project metadata to Firestore with user ID
   await addDoc(collection(db, 'projects'), {
     projectName: projectName,
+    projectCategory: projectCategory,
     fileURL: downloadURL,
     uploadDate: new Date().toISOString(),
     userId: user.uid // Include user ID here
@@ -266,6 +268,8 @@ if (editButton && feedbackArea) {
     event.preventDefault();
     const isVisible = feedbackArea.style.display === 'block';
     feedbackArea.style.display = isVisible ? 'none' : 'block';
+    
+
 
     const editButtonText = document.getElementById('editButtonText');
     const editButtonIcon = editButton.querySelector('i');
@@ -277,6 +281,8 @@ if (editButton && feedbackArea) {
       editButtonIcon.classList.remove('fa-check');
       editButtonIcon.classList.add('fa-pencil');
       hideAddRemoveButtons();
+      document.getElementById('downloadButton').style.display='block';
+      document.getElementById('saveButton').style.display='block';
     } else {
       enableDragAndDrop();
       document.querySelectorAll('.result-tg-t').forEach(team => {
@@ -295,6 +301,8 @@ if (editButton && feedbackArea) {
       editButtonIcon.classList.remove('fa-pencil');
       editButtonIcon.classList.add('fa-check');
       showAddRemoveButtons();
+      document.getElementById('downloadButton').style.display='none';
+      document.getElementById('saveButton').style.display='none';
     }
   });
 }
@@ -302,7 +310,7 @@ if (editButton && feedbackArea) {
 function showAddRemoveButtons() {
   document.querySelectorAll('.result-tg-t ol li').forEach(li => {
     const deleteButton = document.createElement('button');
-    deleteButton.textContent = '-';
+    deleteButton.textContent = ' - ';
     deleteButton.classList.add('delete-member');
     deleteButton.addEventListener('click', function() {
       li.remove();
@@ -312,7 +320,7 @@ function showAddRemoveButtons() {
 
   document.querySelectorAll('.result-tg-t ol').forEach(ol => {
     const addButton = document.createElement('button');
-    addButton.textContent = '+';
+    addButton.textContent = '+ Add member';
     addButton.classList.add('add-member');
     addButton.addEventListener('click', function() {
       const newMember = prompt('Enter the name of the new member:');
@@ -353,6 +361,7 @@ const projectCategory = localStorage.getItem('projectCategory');
 
 if (projectName) {
   projectNameHeading.textContent = ` ${projectName}`;
+  projectNameHeading.style.display = 'block';
 } else {
   projectNameHeading.textContent = 'No project name provided';
 }

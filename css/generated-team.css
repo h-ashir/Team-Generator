@@ -99,6 +99,7 @@
     color: var(--lavender-dark-hover);
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     margin-top: 50px;
 }
@@ -279,6 +280,11 @@
     align-items: center;
     margin-bottom: 10rem;
     border-radius: 10px;
+}
+
+.download{
+    display: flex;
+    align-items: center;
 }
 .feedback-area h2{
     margin-bottom: 50px;

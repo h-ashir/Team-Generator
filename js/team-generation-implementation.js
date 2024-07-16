@@ -51,8 +51,8 @@ document.getElementById('logoutButton').addEventListener('click', function() {
   window.location.href = 'home.html';
  
 });
-const projectCategoryInput = document.getElementById('exampleFormControlInput3');
 const projectNameInput = document.getElementById('exampleFormControlInput1');
+const projectCategoryInput = document.getElementById('exampleFormControlInput3');
   const generateButton = document.getElementById('generate-teams');
   const generateProjectNameButton = document.getElementById('generateButton');
   const generateProjectCategoryButton = document.getElementById('generateButton');
@@ -69,6 +69,7 @@ const projectNameInput = document.getElementById('exampleFormControlInput1');
   generateProjectNameButton.addEventListener('click', (event) => {
     event.preventDefault(); // Prevent the default form submission
     localStorage.setItem('projectName', projectNameInput.value);
+    localStorage.setItem('projectCategory',projectCategoryInput.value);
     // window.location.href = generateLink.href; // Redirect to generated-team page
   });
   generateProjectCategoryButton.addEventListener('click', (event) => {

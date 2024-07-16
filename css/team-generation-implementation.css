@@ -119,10 +119,11 @@
     grid-row: auto;
     gap: 70px;
     align-items: center;
+    gap: 10px;
 }
 
 .project-teams-area div{
-    width: 20%;
+    width: 30%;
 }
 
 .parameter-area{
