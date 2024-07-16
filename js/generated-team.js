@@ -141,11 +141,11 @@ function enableDragAndDrop() {
 
     item.addEventListener('dragstart', function(event) {
       event.dataTransfer.setData('text/plain', event.target.id);
-      event.target.classList.add('dragging');
+      event.target.classList.add('dragging', 'dragging-large');
     });
 
     item.addEventListener('dragend', function(event) {
-      event.target.classList.remove('dragging');
+      event.target.classList.remove('dragging', 'dragging-large');
     });
   });
 
@@ -166,6 +166,7 @@ function enableDragAndDrop() {
       const id = event.dataTransfer.getData('text/plain');
       const draggable = document.getElementById(id);
       list.appendChild(draggable);
+      
     });
   });
 }
@@ -212,17 +213,39 @@ if (editButton && feedbackArea) {
     const editButtonIcon = editButton.querySelector('i');
 
     if (!isVisible) {
-      disableDragAndDrop();
-      dragAlert.textContent = '';
-      editButtonText.textContent = 'Edit';
-      editButtonIcon.classList.remove('fa-check');
-      editButtonIcon.classList.add('fa-pencil');
-    } else {
       enableDragAndDrop();
+      document.querySelectorAll('.result-tg-t').forEach(team => {
+        team.classList.add('editable');
+        team.querySelectorAll('.result-tg-t-teamleader').forEach(leader => {
+          leader.style.backgroundColor = 'var(--lavender-dark-hover)';
+          leader.style.color = 'white';
+          leader.style.border = '2px dashed black';
+        });
+        team.querySelectorAll('.result-tg-t-members li').forEach(member => {
+          member.style.border = '2px dashed black';
+        });
+      });
       dragAlert.textContent = 'You can drag and drop to swap members and leaders across teams';
       editButtonText.textContent = 'Done';
       editButtonIcon.classList.remove('fa-pencil');
       editButtonIcon.classList.add('fa-check');
+    } else {
+      disableDragAndDrop();
+      document.querySelectorAll('.result-tg-t').forEach(team => {
+        team.classList.remove('editable');
+        team.querySelectorAll('.result-tg-t-teamleader').forEach(leader => {
+          leader.style.backgroundColor = ''; // Reset background color
+          leader.style.color = ''; // Reset text color
+          leader.style.border = ''; // Reset border
+        });
+        team.querySelectorAll('.result-tg-t-members li').forEach(member => {
+          member.style.border = ''; // Reset border
+        });
+      });
+      dragAlert.textContent = '';
+      editButtonText.textContent = 'Edit';
+      editButtonIcon.classList.remove('fa-check');
+      editButtonIcon.classList.add('fa-pencil');
     }
   });
 }
