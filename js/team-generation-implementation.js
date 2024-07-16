@@ -51,15 +51,15 @@ document.getElementById('logoutButton').addEventListener('click', function() {
   window.location.href = 'home.html';
  
 });
- 
 const projectNameInput = document.getElementById('exampleFormControlInput1');
   const generateButton = document.getElementById('generate-teams');
   const generateProjectNameButton = document.getElementById('generateButton');
- 
+
   // Enable button when input is not empty
   projectNameInput.addEventListener('input', () => {
     generateButton.disabled = !projectNameInput.value;
   });
+  
  
   // Save project name to localStorage when button is clicked
   generateProjectNameButton.addEventListener('click', (event) => {
@@ -68,6 +68,51 @@ const projectNameInput = document.getElementById('exampleFormControlInput1');
     // window.location.href = generateLink.href; // Redirect to generated-team page
   });
  
+  document.addEventListener("DOMContentLoaded", function() {
+    const guidelinesText = document.getElementById("guidelinesText");
+    const guidelinesCard = document.getElementById("guidelinesCard");
+
+    // Function to show guidelines card
+    function showGuidelinesCard() {
+        guidelinesCard.classList.add("active");
+    }
+
+    // Function to hide guidelines card
+    function hideGuidelinesCard() {
+        guidelinesCard.classList.remove("active");
+    }
+
+    // Click event to toggle guidelines card visibility
+    guidelinesText.addEventListener("click", function(event) {
+        // event.stopPropagation(); // Prevents the click from bubbling up and hiding the card
+        showGuidelinesCard();
+    });
+
+    // Close the card if user clicks outside of it
+    document.addEventListener("click", function(event) {
+        if (!guidelinesCard.contains(event.target) && event.target !== guidelinesText) {
+            hideGuidelinesCard();
+        }
+    });
+
+    // // Hover events to show/hide guidelines card
+    // guidelinesText.addEventListener("mouseenter", function() {
+    //     showGuidelinesCard();
+    // });
+
+    // guidelinesText.addEventListener("mouseleave", function() {
+    //     hideGuidelinesCard();
+    // });
+
+    // guidelinesCard.addEventListener("mouseenter", function() {
+    //     showGuidelinesCard();
+    // });
+
+    // guidelinesCard.addEventListener("mouseleave", function() {
+    //     hideGuidelinesCard();
+    // });
+});
+
 // part 1 end
  
 // part 2 start

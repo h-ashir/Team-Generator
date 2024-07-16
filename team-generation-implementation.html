@@ -64,9 +64,36 @@
     </section>
 
     <div class="implementation-content">
-        <div class="uploadMsgTitle">
+        <div class="guidelines-container">
+            <div class="guidelines-text" id="guidelinesText">
+                File Upload Guidelines click here to view guidelines
+            </div>
+           <!-- <div class="hover-text"> -->
+
+            <div class="guidelines-card" id="guidelinesCard">
+                <div class="card-content">
+                    <h2>File Upload Guidelines</h2>
+                    <ul>
+                        <li><strong>Format Requirements:</strong>
+                            <ul>
+                                <li>The first column should contain the names.</li>
+                                <li>Subsequent columns should contain the corresponding parameters.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Additional Notes:</strong>
+                            <ul>
+                                <li>Ensure all data is correctly formatted to avoid processing errors.</li>
+                                <li>Contact support if you encounter any issues or have questions.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- </div> -->
+        </div>
+        <!-- <div class="uploadMsgTitle">
             <h2 class="uploadmsg">Please upload an excel sheet containing the information of the team members and their parameters.</h2>
-          </div>
+          </div> -->
         <div class="upload-area">
             <input
                 id="fileInput"
@@ -78,6 +105,17 @@
         </div>
 
         <div class="project-teams-area">
+            <div class="mb-3">
+                <label for="exampleFormControlInput3" class="form-label">Project Category</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="exampleFormControlInput3"
+                    placeholder="Enter your project category here"
+                    required
+                />
+            </div>
+            
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Project Name</label>
                 <input
