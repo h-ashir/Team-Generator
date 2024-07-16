@@ -142,6 +142,7 @@
     background-color: var(--lavender);
     border-radius: 10px;
     overflow: hidden;
+    transition: background-color 0.3s;
 }
 .result-tg-t-title{
     background-color: var(--lavender-dark);
@@ -176,6 +177,35 @@
     text-align: center;
     border-radius: 0 0 5px 5px;
 }
+.result-tg-t-members li{
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, background-color 0.2s;
+    padding: 5px;
+}
+.result-tg-t-teamleader p{
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, background-color 0.2s;
+    padding: 5px;
+}
+.result-tg-t-members li.dropped {
+    background-color: #ffeb3b; /* Highlight color for newly dropped items */
+    transition: background-color 0.3s;
+}
+.result-tg-t-teamleader p.dropped {
+    background-color: #ffeb3b; /* Highlight color for newly dropped items */
+    transition: background-color 0.3s;
+}
+
+.result-tg-t-members li.dropped-transition {
+    background-color: red;
+}
+.result-tg-t-teamleader p.dropped-transition{
+    background-color: red;
+}
 .result-tg-t-members ol{
     padding-top: 10px;
     margin: 0;
@@ -190,6 +220,30 @@
     background-color: rgb(221, 221, 221);
     border-radius: 0px 0px 8px 8px;
     font-size: 1.1rem;
+}
+.result-tg-t-members li.dragging {
+    opacity: 0.5;
+    transform: scale(1.05);
+    background-color: #ddd;
+}
+.result-tg-t-members li.dragging-large, .result-tg-t-teamleader p.dragging-large {
+    font-size: 1.7em;
+    font-weight: bolder;
+}
+.result-tg-t.editable {
+    background-color: #fffae6;
+}
+
+.result-tg-t.editable .result-tg-t-teamleader p{
+    /* background-color: var(--lavender-dark); */
+    border: 3px solid black;
+    border-style: dashed;
+}
+
+.result-tg-t.editable .result-tg-t-members li {
+    /* background-color: var(--lavender-dark); */
+    border: 3px solid black;
+    border-style: dashed;
 }
 .result-tg-container2{
     display: flex;

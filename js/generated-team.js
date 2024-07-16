@@ -58,9 +58,9 @@ document.getElementById('downloadButton').addEventListener('click', async functi
     const teamName = teamDiv.querySelector('.result-tg-t-title p').textContent;
     const teamLeaderText = teamDiv.querySelector('.result-tg-t-teamleader').textContent;
     const startIndex = teamLeaderText.indexOf(':');
-    const teamLeader = teamLeaderText.substring(startIndex + 1).trim();
-    const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent);
-
+    const teamLeader = teamLeaderText.substring(startIndex+2);
+        const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent);
+    
     teams.push({
       teamName,
       teamLeader,
@@ -83,13 +83,13 @@ document.getElementById('downloadButton').addEventListener('click', async functi
   const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
   const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
 
-  // Upload the file to Firebase Storage
-  const projectName = localStorage.getItem('projectName') || 'NoProjectName';
-  const storageRef = ref(storage, `projects/${projectName}_${Date.now()}.xlsx`);
-  await uploadBytes(storageRef, blob);
+  // // Upload the file to Firebase Storage
+  // const projectName = localStorage.getItem('projectName') || 'NoProjectName';
+  // const storageRef = ref(storage, `projects/${projectName}_${Date.now()}.xlsx`);
+  // await uploadBytes(storageRef, blob);
 
   // Get the download URL
-  const downloadURL = await getDownloadURL(storageRef);
+  // const downloadURL = await getDownloadURL(storageRef);
 
   // Save project metadata to Firestore with user ID
   await addDoc(collection(db, 'projects'), {
@@ -102,12 +102,7 @@ document.getElementById('downloadButton').addEventListener('click', async functi
   // Trigger download of the Excel file (optional)
   XLSX.writeFile(wb, 'teams.xlsx');
 
-  // Display success message
-  Swal.fire({
-    title: 'File uploaded and saved successfully',
-    icon: 'success',
-    confirmButtonText: 'OK'
-  });
+  
 });
 
 document.getElementById('saveButton').addEventListener('click', async function() {
@@ -205,11 +200,11 @@ function enableDragAndDrop() {
 
     item.addEventListener('dragstart', function(event) {
       event.dataTransfer.setData('text/plain', event.target.id);
-      event.target.classList.add('dragging');
+      event.target.classList.add('dragging', 'dragging-large');
     });
 
     item.addEventListener('dragend', function(event) {
-      event.target.classList.remove('dragging');
+      event.target.classList.remove('dragging', 'dragging-large');
     });
   });
 
@@ -230,6 +225,7 @@ function enableDragAndDrop() {
       const id = event.dataTransfer.getData('text/plain');
       const draggable = document.getElementById(id);
       list.appendChild(draggable);
+      
     });
   });
 }
@@ -262,7 +258,6 @@ function getDragAfterElement(list, y) {
 }
 
 if (editButton && feedbackArea) {
-  // Show feedback area on page load
   feedbackArea.style.display = 'block';
   enableDragAndDrop();
   dragAlert.textContent = '';
@@ -281,13 +276,68 @@ if (editButton && feedbackArea) {
       editButtonText.textContent = 'Edit';
       editButtonIcon.classList.remove('fa-check');
       editButtonIcon.classList.add('fa-pencil');
+      hideAddRemoveButtons();
     } else {
       enableDragAndDrop();
+      document.querySelectorAll('.result-tg-t').forEach(team => {
+        team.classList.add('editable');
+        team.querySelectorAll('.result-tg-t-teamleader').forEach(leader => {
+          leader.style.backgroundColor = 'var(--lavender-dark-hover)';
+          leader.style.color = 'white';
+          leader.style.border = '2px dashed black';
+        });
+        team.querySelectorAll('.result-tg-t-members li').forEach(member => {
+          member.style.border = '2px dashed black';
+        });
+      });
       dragAlert.textContent = 'You can drag and drop to swap members and leaders across teams';
       editButtonText.textContent = 'Done';
       editButtonIcon.classList.remove('fa-pencil');
       editButtonIcon.classList.add('fa-check');
+      showAddRemoveButtons();
     }
+  });
+}
+
+function showAddRemoveButtons() {
+  document.querySelectorAll('.result-tg-t ol li').forEach(li => {
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = '-';
+    deleteButton.classList.add('delete-member');
+    deleteButton.addEventListener('click', function() {
+      li.remove();
+    });
+    li.appendChild(deleteButton);
+  });
+
+  document.querySelectorAll('.result-tg-t ol').forEach(ol => {
+    const addButton = document.createElement('button');
+    addButton.textContent = '+';
+    addButton.classList.add('add-member');
+    addButton.addEventListener('click', function() {
+      const newMember = prompt('Enter the name of the new member:');
+      if (newMember) {
+        const newLi = document.createElement('li');
+        newLi.textContent = newMember;
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = '-';
+        deleteButton.classList.add('delete-member');
+        deleteButton.addEventListener('click', function() {
+          newLi.remove();
+        });
+        newLi.appendChild(deleteButton);
+        ol.appendChild(newLi);
+        // Enable drag and drop for the new member
+        enableDragAndDrop();
+      }
+    });
+    ol.appendChild(addButton);
+  });
+}
+
+function hideAddRemoveButtons() {
+  document.querySelectorAll('.delete-member, .add-member').forEach(button => {
+    button.remove();
   });
 }
 
