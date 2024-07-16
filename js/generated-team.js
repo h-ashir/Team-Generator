@@ -283,6 +283,18 @@ if (editButton && feedbackArea) {
       hideAddRemoveButtons();
       document.getElementById('downloadButton').style.display='block';
       document.getElementById('saveButton').style.display='block';
+      // Revert styles for teams and members
+      document.querySelectorAll('.result-tg-t').forEach(team => {
+        team.classList.remove('editable');
+        team.querySelectorAll('.result-tg-t-teamleader').forEach(leader => {
+            leader.style.backgroundColor = '';
+            leader.style.color = '';
+            leader.style.border = '';
+        });
+        team.querySelectorAll('.result-tg-t-members li').forEach(member => {
+            member.style.border = '';
+        });
+    });
     } else {
       enableDragAndDrop();
       document.querySelectorAll('.result-tg-t').forEach(team => {
