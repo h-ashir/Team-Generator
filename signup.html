@@ -1,91 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Signup - Team Generator</title>
-    <link rel="stylesheet" href="./css/signup.css" />
-    <script type="module" src="js/signup.js"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup - Team Generator</title>
+  <link rel="stylesheet" href="./css/signup.css" />
+</head>
   <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-
-  <body>
-    
-    <div class="login-page">
-      <div class="image-area">
-        <img src="./assets/images/Frame (2).png" alt="teamwork-people-with-book-icons-template">
-      </div>
-
-      <div class="login-details">
-        <div class="col-md-6 d-flex main-content">
-            <div class="row" style="width: 500px">
-              <div class="col-md-11">
-                <div class="mb-4">
-                  <h2 class="login-here" >
-                    <span style="font-size: 50px;">SIGN UP</span>
-                  </h2>
-                  <p class="mb-1 d-flex" style="width: 300px;">
-                    <br />
-                    <a class="login-item" href="login.html">Login</a>&nbsp;
-                      if you already have an account
-                  </p>
-                  <div
-                    id="signUpMessage"
-                    class="messageDiv"
-                    style="display: none"
-                  ></div>
-                </div>
-                <form action="#" method="post">
-                  <div class="form-group first mb-4">
-                    <label for="email">E-mail</label>
-                    <input
-                      type="email"
-                      class="form-control opacity-50" 
-                      id="rEmail"
-                      placeholder="Enter your email" required
-                    />
-                  </div>
-                  <div class="form-group last mb-4">
-                    <label for="username">Username</label>
-                    <input
-                      type="text"
-                      class="form-control opacity-50"
-                      id="username"
-                      placeholder="Enter your username" required
-                    />
-                  </div>
-                  <div class="form-group last mb-4">
-                    <label for="password">Password</label>
-                    <input
-                      type="password"
-                      class="form-control opacity-50"
-                      id="rPassword"
-                      placeholder="Enter your password" required
-                    />
-                  </div>
-                  <div class="form-group last mb-4">
-                    <label for="phone">Phone</label>
-                    <input
-                      type="tel"
-                      class="form-control opacity-50"
-                      id="phonenumber"
-                      placeholder="Enter your phone number" required
-                    />
-                  </div>
-                  
-                  <div class="submit-centre">
-                    <input class="btn btn-primary" type="submit" value="Submit" id="submitSignUp" style="background-color: #5A639C; width: 100px;">
-                  </div>
-                </form>
-              </div>
-            </div>
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+  
+<body>
+  <div class="login-page d-flex flex-column flex-md-row">
+    <div class="image-area d-flex justify-content-center align-items-center">
+      <img src="./assets/images/Frame (2).png" alt="teamwork-people-with-book-icons-template" class="img-fluid">
+    </div>
+    <div class="login-details d-flex justify-content-center align-items-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="mb-4 text-center">
+          <h2 class="login-here">SIGN UP</h2>
+          <p class="mb-1">
+            <br />
+            <a class="login-item" href="login.html">Login</a>&nbsp; if you already have an account
+          </p>
+          <div id="signUpMessage" class="messageDiv" style="display: none"></div>
         </div>
+        <form action="#" method="post">
+          <div class="form-group first mb-4">
+            <label for="email">E-mail</label>
+            <input type="email" class="form-control opacity-50" id="rEmail" placeholder="Enter your email" required />
+          </div>
+          <div class="form-group last mb-4">
+            <label for="username">Username</label>
+            <input type="text" class="form-control opacity-50" id="username" placeholder="Enter your username" required />
+          </div>
+          <div class="form-group last mb-4">
+            <label for="password">Password</label>
+            <input type="password" class="form-control opacity-50" id="rPassword" placeholder="Enter your password" required />
+          </div>
+          <div class="form-group last mb-4">
+            <label for="phone">Phone</label>
+            <input type="tel" class="form-control opacity-50" id="phonenumber" placeholder="Enter your phone number" required />
+          </div>
+          <div class="submit-centre">
+            <input class="btn btn-primary" type="submit" value="Submit" id="submitSignUp" style="background-color: #5A639C;">
+          </div>
+        </form>
       </div>
     </div>
-
-  </body>
+  </div>
+  <script type="module" src="js/signup.js"></script>
+</body>
+</html>
