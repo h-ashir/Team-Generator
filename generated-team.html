@@ -126,13 +126,11 @@
               </div>
             </div>
           </div>
-   
           <section class="sub-footer" style="text-align: center; color: #373270;">
             <span>&copy;Team Generator - All Rights Reserved</span>
           </section>
      </footer>
     <!-- footer end -->
-   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script> document.addEventListener('DOMContentLoaded', function() {
         const teams = JSON.parse(sessionStorage.getItem('generatedTeams'));
@@ -142,7 +140,11 @@
             teams.forEach((team, index) => {
                 const teamHtml = `
                     <div class="result-tg-t">
-                        <div class="result-tg-t-title"><p>${team.name}</p></div>
+                        <div class="result-tg-t-title">    <input type="text" id="team-name-input" placeholder="${team.name}" READONLY style="background-color: #5A639C; color: white;">        <p id="icon" class="icon">   <img src="./assets/images/pencilicon.png" alt="">
+
+</p> <!-- This is the icon element -->
+
+</div>
                         <div class="result-tg-t-members">
                           <div class="result-tg-t-teamleader">Team Leader:&nbsp;<p> ${team.leader}</p></div>
                             

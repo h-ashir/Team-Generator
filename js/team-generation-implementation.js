@@ -218,8 +218,8 @@ function generateColorPalette(count) {
 }
 function generateShadeOfPurple() {
     const hue = randomInt(0, 300); //0 Hue range for purple/lavender/lilac
-    const saturation = randomInt(0, 400); // Saturation range (lighter shades)
-    const lightness = randomInt(50, 70); // Lightness range (lighter shades)
+    const saturation = randomInt(0, 40); // Saturation range (lighter shades)
+    const lightness = randomInt(5, 70); // Lightness range (lighter shades)
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 } 
 // Function to generate random integer
@@ -380,10 +380,14 @@ function handleFileUpload(event) {
         const data = new Uint8Array(event.target.result);
         const workbook = XLSX.read(data, { type: 'array' });
         const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+        const parameters = Object.keys(firstSheet).slice(1);
+
         const membersData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 }).slice(1).map(row => ({
             name: row[0],
             scores: row.slice(1)
         }));
+        parameterWeightages = new Array(parameters.length).fill(100 / parameters.length);
+
         localStorage.setItem('membersData', JSON.stringify(membersData));
         alert('File uploaded successfully');
         document.getElementById('parameterCount').value = parameters.length;
@@ -392,8 +396,31 @@ function handleFileUpload(event) {
         document.getElementById('weightageInput').style.display = 'block';
  
     };
+    
     reader.readAsArrayBuffer(file);
 }
+
+// document.getElementById('increaseButton').addEventListener('click', function() {
+//     if (currentWeightage < maxWeightage) {
+//         currentWeightage++;
+//         updateWeightageInput(currentWeightage);
+//     }
+// });
+ 
+// document.getElementById('decreaseButton').addEventListener('click', function() {
+//     if (currentWeightage > minWeightage) {
+//         currentWeightage--;
+//         updateWeightageInput(currentWeightage);
+//     }
+// });
+ 
+ 
+// function updateWeightageInput(value) {
+//     document.getElementById('weightageValue').value = value;
+//     // Update the pie chart weightage here if needed
+//     updatePieChartWeightage(value);
+// }
+
 function updateWeightageInput(value) {
     if (activeInput) {
       const index = parseInt(activeInput.dataset.index);

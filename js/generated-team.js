@@ -157,6 +157,10 @@ document.getElementById('saveButton').addEventListener('click', async function()
     userId: user.uid
   });
 
+  // Trigger download of the Excel file (optional)
+  // XLSX.writeFile(wb, 'teams.xlsx');
+
+  // Display success message
   Swal.fire({
     title: 'Saved to History',
     icon: 'success',
@@ -201,6 +205,7 @@ function enableDragAndDrop() {
   });
 
   document.querySelectorAll('.result-tg-t ol, .result-tg-t-teamleader').forEach(list => {
+    
     list.addEventListener('dragover', function(event) {
       event.preventDefault();
       const draggingItem = document.querySelector('.dragging');
@@ -256,6 +261,7 @@ if (editButton && feedbackArea) {
 
   editButton.addEventListener('click', (event) => {
     event.preventDefault();
+    
     const isVisible = feedbackArea.style.display === 'block';
     feedbackArea.style.display = isVisible ? 'none' : 'block';
     
@@ -263,6 +269,7 @@ if (editButton && feedbackArea) {
     const editButtonIcon = editButton.querySelector('i');
 
     if (!isVisible) {
+
       disableDragAndDrop();
       dragAlert.textContent = '';
       editButtonText.textContent = 'Edit';
@@ -303,6 +310,22 @@ if (editButton && feedbackArea) {
       document.getElementById('downloadButton').style.display='none';
       document.getElementById('saveButton').style.display='none';
     }
+    const inputField = document.getElementById('team-name-input');
+    const icon = document.getElementById('icon');
+
+    // const editButton = document.getElementById('editbutton2');
+
+    // editButton.addEventListener('click', function() {
+      inputField.readOnly = false;
+      inputField.focus();
+      icon.classList.add('show'); // Show the icon    // });
+
+      
+
+    // inputField.addEventListener('blur', function() {
+    //     inputField.readOnly = true;
+    //     console.log('Input field lost focus, should be readonly now');
+    // });
   });
 }
 
