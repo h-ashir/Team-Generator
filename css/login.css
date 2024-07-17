@@ -8,13 +8,11 @@
 body{
   background-color: #F3F3F3;
 }
- 
 .login-page{
   width: 100%;
   display: flex;
   height: 100vh;
 }
- 
 .image-area{
   width: 50%;
   font-family: "Roboto", sans-serif;
@@ -27,22 +25,18 @@ body{
   justify-content: center;
   align-items: center;
 }
- 
 .image-area img{
   width: 60vh;
   height: 60vh;
  
 }
- 
 .login-details{
   width: 50%;
   background-color: #F3F3F3;
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   padding-left: 20px;
 }
- 
 .submit-centre{
   display: flex;
   justify-content: center;
@@ -63,12 +57,12 @@ body{
 }
 @media (max-width: 768px) {
   .login-page {
-    flex-direction: column; /* Stack for mobile */
+    flex-direction: column;
   }
 
   .image-area,
   .login-details {
-    width: 100%; /* Full width for mobile */
+    width: 100%;
     padding: 20px;
   }
   #login-text{
@@ -108,24 +102,19 @@ body{
   .login-here {
     font-size: 24px;
   }
-
   .image-area img {
     width: 70%;
     height: auto;
   }
-
   .login-details {
     padding: 5px;
   }
-
   .form-group label {
     font-size: 12px;
   }
-
   .form-control {
     font-size: 12px;
   }
-
   .submit-centre input {
     width: 70px;
     font-size: 12px;

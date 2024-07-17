@@ -12,7 +12,6 @@ const firebaseConfig = {
     measurementId: "G-Q9C3E9L2P6"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 function showMessage(message, divId) {
@@ -41,7 +40,7 @@ function setupAuthEventListeners() {
                     showMessage('Login is successful', 'signInMessage');
                     const user = userCredential.user;
                     localStorage.setItem('loggedInUserId', user.uid);
-                    window.location.href = 'team-generation-implementation.html'; // Redirect to the desired page
+                    window.location.href = 'team-generation-implementation.html';
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -60,14 +59,12 @@ function setupAuthEventListeners() {
             event.preventDefault();
             const auth = getAuth();
             signOut(auth).then(() => {
-                // Sign-out successful.
                 showMessage('Logout successful', 'logOutMessage');
                 updateAuthButton(false);
                 console.log("Logged out");
                 localStorage.removeItem('loggedInUserId');
-                window.location.href = 'home.html'; // Redirect to the home page after logout
+                window.location.href = 'home.html';
             }).catch((error) => {
-                // An error happened.
                 console.error('Logout error:', error);
                 showMessage('Logout failed', 'logOutMessage');
             });
@@ -75,7 +72,6 @@ function setupAuthEventListeners() {
         });
     }
 }
-
 function updateAuthButton(isSignedIn) {
     const loginButton = document.getElementById('loginButton');
     const logoutButton = document.getElementById('logoutButton');
@@ -93,7 +89,6 @@ function updateAuthButton(isSignedIn) {
         }
     }
 }
-
 document.addEventListener('DOMContentLoaded', (event) => {
     setupAuthEventListeners();
 });

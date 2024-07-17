@@ -96,23 +96,18 @@ document.getElementById('downloadButton').addEventListener('click', async functi
     projectName: projectName,
     fileURL: downloadURL,
     uploadDate: new Date().toISOString(),
-    userId: user.uid // Include user ID here
+    userId: user.uid
   });
-
   // Trigger download of the Excel file (optional)
   XLSX.writeFile(wb, 'teams.xlsx');
-
-  
 });
 
 document.getElementById('saveButton').addEventListener('click', async function() {
-  // Ensure the user is authenticated
   const user = auth.currentUser;
   if (!user) {
     console.error('User is not authenticated');
     return;
   }
-
   // Extract team data from the webpage
   const teams = [];
   document.querySelectorAll('.result-tg-t').forEach(teamDiv => {
@@ -159,13 +154,9 @@ document.getElementById('saveButton').addEventListener('click', async function()
     projectCategory: projectCategory,
     fileURL: downloadURL,
     uploadDate: new Date().toISOString(),
-    userId: user.uid // Include user ID here
+    userId: user.uid
   });
 
-  // Trigger download of the Excel file (optional)
-  // XLSX.writeFile(wb, 'teams.xlsx');
-
-  // Display success message
   Swal.fire({
     title: 'Saved to History',
     icon: 'success',
@@ -194,7 +185,6 @@ window.addEventListener('load', function() {
 const editButton = document.querySelector('.edit-feedback');
 const feedbackArea = document.querySelector('.feedback-area');
 const dragAlert = document.querySelector('.drag-alert');
-const downloadButton = document.querySelector('.download');
 
 function enableDragAndDrop() {
   document.querySelectorAll('.result-tg-t ol li, .result-tg-t-teamleader p').forEach(item => {
@@ -281,7 +271,6 @@ if (editButton && feedbackArea) {
       hideAddRemoveButtons();
       document.getElementById('downloadButton').style.display='block';
       document.getElementById('saveButton').style.display='block';
-      // Revert styles for teams and members
       document.querySelectorAll('.result-tg-t').forEach(team => {
         team.classList.remove('editable');
         team.querySelectorAll('.result-tg-t-teamleader').forEach(leader => {
@@ -315,36 +304,11 @@ if (editButton && feedbackArea) {
       document.getElementById('saveButton').style.display='none';
     }
   });
-  // function alignButton(buttonId, iconClass) {
-  //   const button = document.getElementById(buttonId);
-  //   if (button) {
-  //     const icon = button.querySelector('i');
-  //     if (!icon) {
-  //       const newIcon = document.createElement('i');
-  //       newIcon.className = iconClass;
-  //       button.prepend(newIcon);
-  //     }
-  //     button.style.display = 'flex';
-  //     button.style.alignItems = 'center';
-  //     button.style.justifyContent = 'center';
-  //   }
-  // }
-
-  // // Align buttons on page load
-  // alignButton('saveButton', 'fa fa-save');
-  // alignButton('downloadButton', 'fa fa-download');
-  
-  // // Ensure buttons are aligned after toggling edit mode
-  // editButton.addEventListener('click', () => {
-  //   alignButton('saveButton', 'fa fa-save');
-  //   alignButton('downloadButton', 'fa fa-download');
-  // });
 }
 
 function showAddRemoveButtons() {
   document.querySelectorAll('.result-tg-t ol li').forEach(li => {
     const deleteButton = document.createElement('button');
-    // deleteButton.textContent = ' - ';
     const deleteIcon = document.createElement('i');
       deleteIcon.classList.add('fas', 'fa-trash');
       deleteButton.appendChild(deleteIcon);
@@ -368,7 +332,6 @@ function showAddRemoveButtons() {
 
         const deleteButton = document.createElement('button');
         deleteButton.classList.add('delete-member');
-        // deleteButton.textContent = '-';
         const deleteIcon = document.createElement('i');
         deleteIcon.classList.add('fas', 'fa-trash');
         deleteButton.appendChild(deleteIcon);
@@ -378,7 +341,6 @@ function showAddRemoveButtons() {
         });
         newLi.appendChild(deleteButton);
         ol.appendChild(newLi);
-        // Enable drag and drop for the new member
         enableDragAndDrop();
       }
     });

@@ -32,7 +32,6 @@
                           <li class="nav-item">
                             <a class="log-item" id="loginButton" href="login.html">Login</a>
                           </li>
-                          <!-- drop down name -->
                           <li class="nav-item dropdown" id="dropdownButton" style="display: none;">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="userButton">
         
@@ -42,7 +41,6 @@
                               <li><a class="dropdown-item logout-item" id="logoutButton" href="home.html">Logout</a></li>
                             </ul>
                           </li>
-                            <!-- till here  -->
                         </ul>
                       </div>
                     </div>
@@ -62,7 +60,6 @@
 
     <section>
         <div class="teamname-area" id="teamsContainer">
-          
             <!-- Teams will be dynamically generated here -->
         </div>
        
@@ -98,10 +95,8 @@
               </div>
             </div>
         </div>
- 
    <!-- </div>  -->
   </section>
-   
     <!-- footer -->
     <footer>
         <div class="footer-content">
@@ -163,21 +158,11 @@
                         </div>
                     </div>
                 `;
-                // <div class="result-tg-t">
-                //         <div class="result-tg-t-title"><p>${team.name}</p></div>
-                //         <div class="result-tg-t-members">
-                //             <div class="result-tg-t-teamleader"><p>Team Leader: ${team.leader}</p></div>
-                //             <ol>
-                //                 ${team.members.map(member => `<li>${member.name}</li>`).join('')}
-                //             </ol>
-                //         </div>
-                //     </div>
                 teamsContainer.innerHTML += teamHtml;
             });
         }
     });
   </script>
-  <script type="module" src="js/feedback.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script type="module" src="js/generated-team.js"></script>

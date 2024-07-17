@@ -144,11 +144,9 @@
     background-color: #313c82;
     transition: .4s linear;
 }
-
 /* footer area */
 footer{
     width: 100%;
-    /* height: 120px; */
     background-color: #5A639C;
     display: flex;
     flex-direction: column;
@@ -226,17 +224,11 @@ input[type=file]::file-selector-button {
 input[type=file]::file-selector-button:hover {
     background: #9B86BD;
 }
-
-/* Media Queries for Responsive Design */
-
-/* Tablets */
 @media (max-width: 992px) {
-    
     .home-header {
         min-height: 90px;
         height: auto;
     }
-
     #home-section {
         align-items: center;
     }
@@ -248,20 +240,13 @@ input[type=file]::file-selector-button:hover {
     .home-left-content .left-img img {
         height: 130px;
         width: 130px;
-    }
-    
-    /* Ensure dropdown menu does not overflow */
+    }    
     .navbar-collapse {
-
         overflow: hidden;
-
     }
     .navbar-collapse.show {
-
         max-height: calc(100vh - 90px);
-
         overflow-y: auto;
-
     }
 }
 
@@ -271,8 +256,6 @@ input[type=file]::file-selector-button:hover {
         margin: 0;
     }
 }
-
-/* Mobile Devices */
 @media (max-width: 768px) {
     .home-header {
         height: auto;
@@ -354,15 +337,6 @@ input[type=file]::file-selector-button:hover {
         gap: 0;
     }
 }
-
-/* @media (max-width: 660px) {
-    .team-formation-intro h1{
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-} */
-
-/* Small Mobile Devices */
 @media (max-width: 576px) {
     .home-header {
         height: auto;

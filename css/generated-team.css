@@ -234,13 +234,11 @@
 }
 
 .result-tg-t.editable .result-tg-t-teamleader p{
-    /* background-color: var(--lavender-dark); */
     border: 3px solid black;
     border-style: dashed;
 }
 
 .result-tg-t.editable .result-tg-t-members li {
-    /* background-color: var(--lavender-dark); */
     border: 3px solid black;
     border-style: dashed;
 }

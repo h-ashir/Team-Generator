@@ -98,24 +98,19 @@ body {
   .login-here {
     font-size: 24px;
   }
-
   .image-area img {
     width: 70%;
     height: auto;
   }
-
   .login-details {
     padding: 5px;
   }
-
   .form-group label {
     font-size: 12px;
   }
-
   .form-control {
     font-size: 12px;
   }
-
   .submit-centre input {
     width: 70px;
     font-size: 12px;
