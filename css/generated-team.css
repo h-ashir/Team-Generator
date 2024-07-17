@@ -143,6 +143,8 @@
     border-radius: 10px;
     overflow: hidden;
     transition: background-color 0.3s;
+    background-color: var(--lavender-dark);
+
 }
 .result-tg-t-title{
     background-color: var(--lavender-dark);
@@ -644,4 +646,29 @@ footer .footer-content{
         height: 35px;
         margin-top: 30px;
     }
+}
+
+#team-name-input {
+    background-color: var(--lavender-dark);
+    border-style: hidden;
+
+}
+#team-name-input::placeholder {
+    background-color: var(--lavender-dark);
+    color:white; 
+    /* font-style: italic;  */
+    font-weight: 400;
+    opacity: 1; 
+}
+.icon  {
+    display: none;
+    /* margin-left: px; */
+    color: green;
+#icon{
+    height: 2px;
+    width: 2px;
+}
+}
+.icon.show {
+    display: inline;
 }

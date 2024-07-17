@@ -83,13 +83,13 @@ document.getElementById('downloadButton').addEventListener('click', async functi
   const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
   const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
 
-  // // Upload the file to Firebase Storage
-  // const projectName = localStorage.getItem('projectName') || 'NoProjectName';
-  // const storageRef = ref(storage, `projects/${projectName}_${Date.now()}.xlsx`);
-  // await uploadBytes(storageRef, blob);
+  // Upload the file to Firebase Storage
+  const projectName = localStorage.getItem('projectName') || 'NoProjectName';
+  const storageRef = ref(storage, `projects/${projectName}_${Date.now()}.xlsx`);
+  await uploadBytes(storageRef, blob);
 
   // Get the download URL
-  // const downloadURL = await getDownloadURL(storageRef);
+  const downloadURL = await getDownloadURL(storageRef);
 
   // Save project metadata to Firestore with user ID
   await addDoc(collection(db, 'projects'), {
@@ -161,7 +161,7 @@ document.getElementById('saveButton').addEventListener('click', async function()
   });
 
   // Trigger download of the Excel file (optional)
-  XLSX.writeFile(wb, 'teams.xlsx');
+  // XLSX.writeFile(wb, 'teams.xlsx');
 
   // Display success message
   Swal.fire({
@@ -209,6 +209,7 @@ function enableDragAndDrop() {
   });
 
   document.querySelectorAll('.result-tg-t ol, .result-tg-t-teamleader').forEach(list => {
+    
     list.addEventListener('dragover', function(event) {
       event.preventDefault();
       const draggingItem = document.querySelector('.dragging');
@@ -264,6 +265,7 @@ if (editButton && feedbackArea) {
 
   editButton.addEventListener('click', (event) => {
     event.preventDefault();
+    
     const isVisible = feedbackArea.style.display === 'block';
     feedbackArea.style.display = isVisible ? 'none' : 'block';
 
@@ -271,6 +273,7 @@ if (editButton && feedbackArea) {
     const editButtonIcon = editButton.querySelector('i');
 
     if (!isVisible) {
+
       disableDragAndDrop();
       dragAlert.textContent = '';
       editButtonText.textContent = 'Edit';
@@ -296,6 +299,22 @@ if (editButton && feedbackArea) {
       editButtonIcon.classList.add('fa-check');
       showAddRemoveButtons();
     }
+    const inputField = document.getElementById('team-name-input');
+    const icon = document.getElementById('icon');
+
+    // const editButton = document.getElementById('editbutton2');
+
+    // editButton.addEventListener('click', function() {
+      inputField.readOnly = false;
+      inputField.focus();
+      icon.classList.add('show'); // Show the icon    // });
+
+      
+
+    // inputField.addEventListener('blur', function() {
+    //     inputField.readOnly = true;
+    //     console.log('Input field lost focus, should be readonly now');
+    // });
   });
 }
 
