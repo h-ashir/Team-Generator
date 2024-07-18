@@ -96,23 +96,18 @@ document.getElementById('downloadButton').addEventListener('click', async functi
     projectName: projectName,
     fileURL: downloadURL,
     uploadDate: new Date().toISOString(),
-    userId: user.uid // Include user ID here
+    userId: user.uid
   });
-
   // Trigger download of the Excel file (optional)
   XLSX.writeFile(wb, 'teams.xlsx');
-
-  
 });
 
 document.getElementById('saveButton').addEventListener('click', async function() {
-  // Ensure the user is authenticated
   const user = auth.currentUser;
   if (!user) {
     console.error('User is not authenticated');
     return;
   }
-
   // Extract team data from the webpage
   const teams = [];
   document.querySelectorAll('.result-tg-t').forEach(teamDiv => {
@@ -146,6 +141,7 @@ document.getElementById('saveButton').addEventListener('click', async function()
 
   // Upload the file to Firebase Storage
   const projectName = localStorage.getItem('projectName') || 'NoProjectName';
+  const projectCategory = localStorage.getItem('projectCategory') || 'NoProjectCategory';
   const storageRef = ref(storage, `projects/${projectName}_${Date.now()}.xlsx`);
   await uploadBytes(storageRef, blob);
 
@@ -155,9 +151,10 @@ document.getElementById('saveButton').addEventListener('click', async function()
   // Save project metadata to Firestore with user ID
   await addDoc(collection(db, 'projects'), {
     projectName: projectName,
+    projectCategory: projectCategory,
     fileURL: downloadURL,
     uploadDate: new Date().toISOString(),
-    userId: user.uid // Include user ID here
+    userId: user.uid
   });
 
   // Trigger download of the Excel file (optional)
@@ -192,7 +189,6 @@ window.addEventListener('load', function() {
 const editButton = document.querySelector('.edit-feedback');
 const feedbackArea = document.querySelector('.feedback-area');
 const dragAlert = document.querySelector('.drag-alert');
-const downloadButton = document.querySelector('.download');
 
 function enableDragAndDrop() {
   document.querySelectorAll('.result-tg-t ol li, .result-tg-t-teamleader p').forEach(item => {
@@ -268,9 +264,12 @@ if (editButton && feedbackArea) {
     
     const isVisible = feedbackArea.style.display === 'block';
     feedbackArea.style.display = isVisible ? 'none' : 'block';
-
+    
     const editButtonText = document.getElementById('editButtonText');
     const editButtonIcon = editButton.querySelector('i');
+
+    const inputField = document.getElementById('team-name-input');
+    const icon = document.getElementById('icon');
 
     if (!isVisible) {
 
@@ -280,6 +279,23 @@ if (editButton && feedbackArea) {
       editButtonIcon.classList.remove('fa-check');
       editButtonIcon.classList.add('fa-pencil');
       hideAddRemoveButtons();
+      document.getElementById('downloadButton').style.display='block';
+      document.getElementById('saveButton').style.display='block';
+      document.querySelectorAll('.result-tg-t').forEach(team => {
+        team.classList.remove('editable');
+        team.querySelectorAll('.result-tg-t-teamleader').forEach(leader => {
+            leader.style.backgroundColor = '';
+            leader.style.color = '';
+            leader.style.border = '';
+            inputField.style.border = 'none';
+            inputField.style.outline = 'none';
+            icon.style.display = 'none';
+        });
+        team.querySelectorAll('.result-tg-t-members li').forEach(member => {
+            member.style.border = '';
+            inputField.style.border = '';
+        });
+    });
     } else {
       enableDragAndDrop();
       document.querySelectorAll('.result-tg-t').forEach(team => {
@@ -298,9 +314,9 @@ if (editButton && feedbackArea) {
       editButtonIcon.classList.remove('fa-pencil');
       editButtonIcon.classList.add('fa-check');
       showAddRemoveButtons();
+      document.getElementById('downloadButton').style.display='none';
+      document.getElementById('saveButton').style.display='none';
     }
-    const inputField = document.getElementById('team-name-input');
-    const icon = document.getElementById('icon');
 
     // const editButton = document.getElementById('editbutton2');
 
@@ -321,7 +337,10 @@ if (editButton && feedbackArea) {
 function showAddRemoveButtons() {
   document.querySelectorAll('.result-tg-t ol li').forEach(li => {
     const deleteButton = document.createElement('button');
-    deleteButton.textContent = '-';
+    const deleteIcon = document.createElement('i');
+      deleteIcon.classList.add('fas', 'fa-trash');
+      deleteButton.appendChild(deleteIcon);
+
     deleteButton.classList.add('delete-member');
     deleteButton.addEventListener('click', function() {
       li.remove();
@@ -331,22 +350,25 @@ function showAddRemoveButtons() {
 
   document.querySelectorAll('.result-tg-t ol').forEach(ol => {
     const addButton = document.createElement('button');
-    addButton.textContent = '+';
+    addButton.textContent = '+ Add member';
     addButton.classList.add('add-member');
     addButton.addEventListener('click', function() {
       const newMember = prompt('Enter the name of the new member:');
       if (newMember) {
         const newLi = document.createElement('li');
         newLi.textContent = newMember;
+
         const deleteButton = document.createElement('button');
-        deleteButton.textContent = '-';
         deleteButton.classList.add('delete-member');
+        const deleteIcon = document.createElement('i');
+        deleteIcon.classList.add('fas', 'fa-trash');
+        deleteButton.appendChild(deleteIcon);
+
         deleteButton.addEventListener('click', function() {
           newLi.remove();
         });
         newLi.appendChild(deleteButton);
         ol.appendChild(newLi);
-        // Enable drag and drop for the new member
         enableDragAndDrop();
       }
     });
@@ -372,6 +394,7 @@ const projectCategory = localStorage.getItem('projectCategory');
 
 if (projectName) {
   projectNameHeading.textContent = ` ${projectName}`;
+  projectNameHeading.style.display = 'block';
 } else {
   projectNameHeading.textContent = 'No project name provided';
 }

@@ -397,3 +397,26 @@ border-radius: 2px;
 .guidelines-card.active {
     display: block;
 }
+#teamMembersInput {
+    display: none; /* Initially hide the div */
+    margin-top: 20px; /* Optional margin for top spacing */
+    padding: 20px; /* Optional padding for content inside */
+    border: 2px solid #9B86BD; /* Optional border for visual separation */
+    border-radius: 8px; /* Optional border radius for rounded corners */
+    background-color: #f9f9f9; /* Optional background color */
+    box-shadow: 0 0 10px #9B86BD; /* Optional box shadow for depth */
+    align-items: center;
+    display: flex;
+    
+}
+
+#teamMembersInput h2 {
+    font-size: 24px; /* Example: Larger font size for heading */
+    color: #333; /* Example: Dark text color */
+    margin-bottom: 15px; /* Optional margin for bottom spacing */
+}
+.numberofmember-area{
+    display: flex;
+    justify-content: center;
+
+}

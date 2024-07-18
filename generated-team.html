@@ -147,15 +147,14 @@
         if (teams && teams.length > 0) {
             teams.forEach((team, index) => {
                 const teamHtml = `
-                    <div class="result-tg-t">
-                        <div class="result-tg-t-title">    <input type="text" id="team-name-input" placeholder="${team.name}" READONLY style="background-color: #5A639C; color: white;">        <p id="icon" class="icon">   <img src="./assets/images/pencilicon.png" alt="">
-
-</p> <!-- This is the icon element -->
-
+                   <div class="result-tg-t">
+                        <div class="result-tg-t-title">
+                          <div class="result-tg-t-title"><p>${team.name}</p></div>
+ 
 </div>
                         <div class="result-tg-t-members">
                           <div class="result-tg-t-teamleader">Team Leader:&nbsp;<p> ${team.leader}</p></div>
-                            
+                           
                             <ol>
     ${team.members.map(member => {
         if (member.name !== team.leader) {
@@ -168,15 +167,8 @@
                         </div>
                     </div>
                 `;
-                // <div class="result-tg-t">
-                //         <div class="result-tg-t-title"><p>${team.name}</p></div>
-                //         <div class="result-tg-t-members">
-                //             <div class="result-tg-t-teamleader"><p>Team Leader: ${team.leader}</p></div>
-                //             <ol>
-                //                 ${team.members.map(member => `<li>${member.name}</li>`).join('')}
-                //             </ol>
-                //         </div>
-                //     </div>
+              
+                
                 teamsContainer.innerHTML += teamHtml;
             });
         }

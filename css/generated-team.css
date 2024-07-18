@@ -99,6 +99,7 @@
     color: var(--lavender-dark-hover);
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     margin-top: 50px;
 }
@@ -194,11 +195,9 @@
     padding: 5px;
 }
 .result-tg-t-members li.dropped {
-    background-color: #ffeb3b; /* Highlight color for newly dropped items */
     transition: background-color 0.3s;
 }
 .result-tg-t-teamleader p.dropped {
-    background-color: #ffeb3b; /* Highlight color for newly dropped items */
     transition: background-color 0.3s;
 }
 
@@ -237,13 +236,11 @@
 }
 
 .result-tg-t.editable .result-tg-t-teamleader p{
-    /* background-color: var(--lavender-dark); */
     border: 3px solid black;
     border-style: dashed;
 }
 
 .result-tg-t.editable .result-tg-t-members li {
-    /* background-color: var(--lavender-dark); */
     border: 3px solid black;
     border-style: dashed;
 }
@@ -270,6 +267,16 @@
     padding-top: 5rem;
     padding-bottom: 5rem;
 }
+.result-tg-t ol button{
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 1px 10px;
+}
+.result-tg-t li button{
+    color: red;
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
 
 .feedback-area{
     background-color: var(--lavender-dark);
@@ -281,6 +288,11 @@
     align-items: center;
     margin-bottom: 10rem;
     border-radius: 10px;
+}
+
+.download{
+    display: flex;
+    align-items: center;
 }
 .feedback-area h2{
     margin-bottom: 50px;
@@ -647,28 +659,4 @@ footer .footer-content{
         margin-top: 30px;
     }
 }
-
-#team-name-input {
-    background-color: var(--lavender-dark);
-    border-style: hidden;
-
-}
-#team-name-input::placeholder {
-    background-color: var(--lavender-dark);
-    color:white; 
-    /* font-style: italic;  */
-    font-weight: 400;
-    opacity: 1; 
-}
-.icon  {
-    display: none;
-    /* margin-left: px; */
-    color: green;
-#icon{
-    height: 2px;
-    width: 2px;
-}
-}
-.icon.show {
-    display: inline;
-}
+/*  */

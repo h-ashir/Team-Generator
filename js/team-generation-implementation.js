@@ -295,67 +295,20 @@ function validateWeightage() {
  
 // Function to handle the Generate Teams button click
 // Function to handle the Generate Teams button click
-function handleGenerateButtonClick(event) {
-    if (!validateWeightage()) {
-        event.preventDefault();
-        return;
-    }
+// function handleGenerateButtonClick(event) {
+//     if (!validateWeightage()) {
+//         event.preventDefault();
+//         return;
+//     }
  
-    const numberOfTeams = parseInt(document.getElementById('exampleFormControlInput2').value);
-    const teams = generateTeams(numberOfTeams);
+    // const numberOfTeams = parseInt(document.getElementById('exampleFormControlInput2').value);
+    // const teams = generateTeams(numberOfTeams);
  
     // Display teams on the generated-team page
-    sessionStorage.setItem('generatedTeams', JSON.stringify(teams));
-    window.location.href = 'generated-team.html';
-}
-function generateTeams(numberOfTeams) {
-   
-    const teams = [];
-    const weightedMembers = calculateWeightedScores(memberScores, parameterWeightages);
- 
-    // Sort members by total weighted score in descending order
-    weightedMembers.sort((a, b) => b.totalWeightedScore - a.totalWeightedScore);
- 
-    // Initialize teams with empty arrays
-    for (let i = 0; i < numberOfTeams; i++) {
-        teams.push({
-            name: `TEAM ${i + 1}`,
-            members: [],
-            leader: null
-        });
-    }
- 
-    // Distribute members to teams
-    weightedMembers.forEach((member, index) => {
-        const teamIndex = index % numberOfTeams;
-        teams[teamIndex].members.push(member);
-    });
- 
-    // Ensure minimal difference in team sizes (members)
-    let maxMembers = Math.ceil(memberScores.length / numberOfTeams);
-    let minMembers = Math.floor(memberScores.length / numberOfTeams);
- 
-    // Adjust teams to balance the number of members
-    teams.sort((a, b) => b.members.length - a.members.length);
-    for (let i = 0; i < numberOfTeams; i++) {
-        while (teams[i].members.length > maxMembers) {
-            const memberToMove = teams[i].members.pop();
-            teams[i === numberOfTeams - 1 ? 0 : i + 1].members.push(memberToMove);
-        }
-    }
- 
-    // Select leader for each team (highest weighted score member)
-    teams.forEach(team => {
-        // let maxWeightedScore = -Infinity;
-        team.members.forEach(member => {
-                    team.leader = team.members[0].name;
- 
-        });
-        // team.members=team.members.filter(member=> member.name!==team.leader);
-    });
- 
-    return teams;
-}
+//     sessionStorage.setItem('generatedTeams', JSON.stringify(teams));
+//     window.location.href = 'generated-team.html';
+// }
+
  
 // Function to calculate weighted scores based on parameter weightages
 function calculateWeightedScores(members, weightages) {
@@ -559,3 +512,202 @@ function updateWeightageInput(value) {
       pieChartInstance.update();
     }
   }
+  const numberOfTeamsInput = document.getElementById('exampleFormControlInput2');
+  const teamMembersInput = document.getElementById('teamMembersInput');
+  const teamMembersFields = document.getElementById('teamMembersFields');
+  
+  numberOfTeamsInput.addEventListener('input', function() {
+      const numberOfTeams = parseInt(numberOfTeamsInput.value);
+  
+      // Prompt user to enter number of members manually
+      const answer = prompt('Do you want to enter the number of members for each team manually? Enter YES or NO.');
+  
+      if (answer && answer.toLowerCase() === 'yes') {
+          teamMembersFields.innerHTML = ''; // Clear previous fields
+  
+          for (let i = 1; i <= numberOfTeams; i++) {
+              const teamInputField = document.createElement('div');
+              teamInputField.classList.add('mb-3');
+              teamInputField.innerHTML = `
+                  <input
+                      type="number"
+                      class="form-control"
+                      id="team${i}Members"
+                      placeholder="Enter number of members for Team ${i}"
+                      required
+                  />
+              `;
+              teamMembersFields.appendChild(teamInputField);
+          }
+  
+          teamMembersInput.style.display = 'block'; // Show the input section
+      } else {
+          teamMembersInput.style.display = 'none'; // Hide the input section if not selected
+  
+          // If user chooses not to enter manually, extract number of members from dynamically generated fields
+          const membersCounts = [];
+          for (let i = 1; i <= numberOfTeams; i++) {
+              const inputField = document.getElementById(`team${i}Members`);
+              if (inputField) {
+                  const memberCount = parseInt(inputField.value);
+                  if (!isNaN(memberCount) && memberCount > 0) {
+                      membersCounts.push(memberCount);
+                  } else {
+                      alert(`Please enter a valid number of members for Team ${i}`);
+                      return;
+                  }
+              } 
+            //   else {
+            //       alert(`Input field for Team ${i} not found`);
+            //       return;
+            //   }
+          }
+  
+          // Proceed to generate teams with the extracted number of members
+          const teams = generateTeams1(numberOfTeams, membersCounts);
+  
+          // Display teams on the generated-team page
+          sessionStorage.setItem('generatedTeams', JSON.stringify(teams));
+          window.location.href = 'generated-team.html';
+      }
+  });
+function generateTeams1(numberOfTeams, membersCounts) {
+    const teams = [];
+    const weightedMembers = calculateWeightedScores(memberScores, parameterWeightages);
+function calculateWeightedScores(members, weightages) {
+    return members.map(member => {
+        const weightedScores = member.scores.map((score, index) => score * weightages[index] / 100);
+        const totalWeightedScore = weightedScores.reduce((acc, val) => acc + val, 0);
+        return {
+            name: member.name,
+            scores: member.scores,
+            weightedScores: weightedScores,
+            totalWeightedScore: totalWeightedScore
+        };
+    });
+}
+    // Sort members by total weighted score in descending order
+    weightedMembers.sort((a, b) => b.totalWeightedScore - a.totalWeightedScore);
+
+    // Initialize teams with empty arrays
+    for (let i = 0; i < numberOfTeams; i++) {
+        teams.push({
+            name: `TEAM ${i + 1}`,
+            members: [],
+            leader: null
+        });
+    }
+
+    // Distribute members to teams
+     let memberIndex = 0;
+    while (memberIndex < weightedMembers.length) {
+        for (let i = 0; i < numberOfTeams; i++) {
+            if (teams[i].members.length < membersCounts[i] && memberIndex < weightedMembers.length) {
+                teams[i].members.push(weightedMembers[memberIndex]);
+                memberIndex++;
+            }
+        }
+    }
+
+    // Select leader for each team (highest weighted score member)
+    teams.forEach(team => {
+        if (team.members.length > 0) {
+            team.leader = team.members[0].name;
+        }
+    });
+
+    return teams;
+}
+// Add event listener for the Generate Teams button
+// document.getElementById('generateButton').addEventListener('click', handleGenerateButtonClick);
+
+function handleGenerateButtonClick(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const numberOfTeams = parseInt(document.getElementById('exampleFormControlInput2').value);
+
+    // Check if the user has manually entered number of members for each team
+    const teamMembersInput = document.getElementById('teamMembersInput');
+    const manuallyEntered = teamMembersInput.style.display === 'block';
+
+    if (manuallyEntered) {
+        // Logic 1: Manually entered number of members for each team
+        const membersCounts = [];
+        for (let i = 1; i <= numberOfTeams; i++) {
+            const inputField = document.getElementById(`team${i}Members`);
+            if (inputField) {
+                const memberCount = parseInt(inputField.value);
+                if (!isNaN(memberCount) && memberCount > 0) {
+                    membersCounts.push(memberCount);
+                } else {
+                    alert(`Please enter a valid number of members for Team ${i}`);
+                    return;
+                }
+            } else {
+                alert(`Input field for Team ${i} not found`);
+                return;
+            }
+        }
+
+        const teams = generateTeams1(numberOfTeams, membersCounts);
+
+        // Display teams on the generated-team page
+        sessionStorage.setItem('generatedTeams', JSON.stringify(teams));
+        window.location.href = 'generated-team.html';
+    } else {
+        // Logic 2: Extracted from dynamically generated fields
+        const teams = generateTeams(numberOfTeams);
+        function generateTeams(numberOfTeams) {
+   
+            const teams = [];
+            const weightedMembers = calculateWeightedScores(memberScores, parameterWeightages);
+         
+            // Sort members by total weighted score in descending order
+            weightedMembers.sort((a, b) => b.totalWeightedScore - a.totalWeightedScore);
+         
+            // Initialize teams with empty arrays
+            for (let i = 0; i < numberOfTeams; i++) {
+                teams.push({
+                    name: `TEAM ${i + 1}`,
+                    members: [],
+                    leader: null
+                });
+            }
+         
+            // Distribute members to teams
+            weightedMembers.forEach((member, index) => {
+                const teamIndex = index % numberOfTeams;
+                teams[teamIndex].members.push(member);
+            });
+         
+            // Ensure minimal difference in team sizes (members)
+            let maxMembers = Math.ceil(memberScores.length / numberOfTeams);
+            let minMembers = Math.floor(memberScores.length / numberOfTeams);
+         
+            // Adjust teams to balance the number of members
+            teams.sort((a, b) => b.members.length - a.members.length);
+            for (let i = 0; i < numberOfTeams; i++) {
+                while (teams[i].members.length > maxMembers) {
+                    const memberToMove = teams[i].members.pop();
+                    teams[i === numberOfTeams - 1 ? 0 : i + 1].members.push(memberToMove);
+                }
+            }
+         
+            // Select leader for each team (highest weighted score member)
+            teams.forEach(team => {
+                // let maxWeightedScore = -Infinity;
+                team.members.forEach(member => {
+                            team.leader = team.members[0].name;
+         
+                });
+                // team.members=team.members.filter(member=> member.name!==team.leader);
+            });
+         
+            return teams;
+        }
+        // Display teams on the generated-team page
+        sessionStorage.setItem('generatedTeams', JSON.stringify(teams));
+        window.location.href = 'generated-team.html';
+    }
+}
+  
