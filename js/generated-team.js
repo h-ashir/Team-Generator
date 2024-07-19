@@ -396,7 +396,7 @@ function showAddRemoveButtons() {
             });
           });
           newLi.appendChild(deleteButton);
-          ul.appendChild(newLi);
+          ul.insertBefore(newLi, addButton);
           enableDragAndDrop();
         }
       });
