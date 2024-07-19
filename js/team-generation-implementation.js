@@ -14,14 +14,6 @@ const firebaseConfig = {
  
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
- 
-// const loginButton = document.getElementById('loginButton');
-// const logoutButton = document.getElementById('logoutButton');
-// const historyButton = document.getElementById('historyButton');
-// const slider = document.getElementById('customRange3');
-// const sliderValue = document.getElementById('sliderValue');
-// const generateTeamsButton = document.querySelector('.generate-area button');
- 
 function updateAuthButton(isSignedIn) {
   const loginButton = document.getElementById('loginButton');
   const logoutButton = document.getElementById('logoutButton');
@@ -45,7 +37,6 @@ onAuthStateChanged(auth, user => {
 });
  
 updateAuthButton(false);
-//logout successful popup
 document.getElementById('logoutButton').addEventListener('click', function() {
   localStorage.setItem('showSwal', 'true');
   window.location.href = 'home.html';
@@ -57,7 +48,6 @@ const projectNameInput = document.getElementById('exampleFormControlInput1');
   const generateProjectNameButton = document.getElementById('generateButton');
   const generateProjectCategoryButton = document.getElementById('generateButton');
 
-  // Enable button when input is not empty
   projectNameInput.addEventListener('input', () => {
     generateButton.disabled = !projectNameInput.value;
   });
@@ -69,30 +59,24 @@ const projectNameInput = document.getElementById('exampleFormControlInput1');
   generateProjectNameButton.addEventListener('click', (event) => {
     event.preventDefault(); // Prevent the default form submission
     localStorage.setItem('projectName', projectNameInput.value);
-    // window.location.href = generateLink.href; // Redirect to generated-team page
   });
   generateProjectCategoryButton.addEventListener('click', (event) => {
-    event.preventDefault(); // Prevent the default form submission
+    event.preventDefault();
     localStorage.setItem('projectCategory', projectCategoryInput.value);
-    // window.location.href = generateLink.href; // Redirect to generated-team page
   });
   document.addEventListener("DOMContentLoaded", function() {
     const guidelinesText = document.getElementById("guidelinesText");
     const guidelinesCard = document.getElementById("guidelinesCard");
-
     // Function to show guidelines card
     function showGuidelinesCard() {
         guidelinesCard.classList.add("active");
     }
-
     // Function to hide guidelines card
     function hideGuidelinesCard() {
         guidelinesCard.classList.remove("active");
     }
-
     // Click event to toggle guidelines card visibility
     guidelinesText.addEventListener("click", function(event) {
-        // event.stopPropagation(); // Prevents the click from bubbling up and hiding the card
         showGuidelinesCard();
     });
 
@@ -103,31 +87,7 @@ const projectNameInput = document.getElementById('exampleFormControlInput1');
         }
     });
 
-    // // Hover events to show/hide guidelines card
-    // guidelinesText.addEventListener("mouseenter", function() {
-    //     showGuidelinesCard();
-    // });
-
-    // guidelinesText.addEventListener("mouseleave", function() {
-    //     hideGuidelinesCard();
-    // });
-
-    // guidelinesCard.addEventListener("mouseenter", function() {
-    //     showGuidelinesCard();
-    // });
-
-    // guidelinesCard.addEventListener("mouseleave", function() {
-    //     hideGuidelinesCard();
-    // });
 });
-
-// part 1 end
- 
-// part 2 start
-  // Logic implementation
- 
-// // Add event listener for the Generate Teams button
-// document.querySelector('.generate-area button').addEventListener('click', handleGenerateButtonClick);
 let pieChartInstance;
 let activeInput = null;
 let activeLabel = null;
@@ -145,7 +105,7 @@ document.getElementById('fileInput').addEventListener('change', function() {
     reader.onload = function(e) {
         const data = new Uint8Array(e.target.result);
         const workbook = XLSX.read(data, { type: 'array' });
-        const sheetName = workbook.SheetNames[0]; // Assuming the first sheet is used
+        const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
         const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
  
@@ -207,11 +167,6 @@ document.getElementById('fileInput').addEventListener('change', function() {
             }
         };
  
-        // Destroy existing chart instance if it exists
-        // if (pieChartInstance) {
-        //     pieChartInstance.destroy();
-        // }
- 
         // Create the Chart.js pie chart
         const ctx = document.getElementById('pieChart').getContext('2d');
         pieChartInstance = new Chart(ctx, {
@@ -219,11 +174,8 @@ document.getElementById('fileInput').addEventListener('change', function() {
             data: pieData,
             options: pieOptions
         });
-        // document.getElementById('fileUploadSection').classList.remove('hidden');
  
-        // Show the Generate Teams and Randomly Generate buttons
         document.getElementById('generateButton').style.display = 'block';
-        // document.getElementById('randomGenerateButton').style.display = 'block';
     };
  
     reader.readAsArrayBuffer(file);
@@ -238,7 +190,7 @@ function showTextInput(label, currentWeightage, index) {
     weightageValue.dataset.index = index;
     weightageLabel.textContent = `Enter the weightage for '${label}'`;
   weightageLabel.style.color="#42497b";
-    activeInput = weightageValue; // Set the activeInput
+    activeInput = weightageValue;
     weightageValue.addEventListener('input', handleWeightageInput);
   }
   function handleWeightageInput(event) {
@@ -251,18 +203,7 @@ function showTextInput(label, currentWeightage, index) {
   function updatePieChartWeightage(index, value) {
     pieChartInstance.data.datasets[0].data[index] = value;
     pieChartInstance.update();
-  }
- 
-// Function to hide all text input fields
-// function hideAllTextInput() {
-//     if (activeInput) {
-//         activeInput.remove(); // Remove input element from DOM
-//         activeInput = null;
-//     }
-//     document.getElementById('weightageInput').style.display = 'none';
-// }
- 
-// Function to generate random color palette
+  } 
 function generateColorPalette(count) {
     const colors = [];
     for (let i = 0; i < count; i++) {
@@ -272,18 +213,16 @@ function generateColorPalette(count) {
     return colors;
 }
 function generateShadeOfPurple() {
-    const hue = randomInt(0, 300); //0 Hue range for purple/lavender/lilac
-    const saturation = randomInt(0, 40); // Saturation range (lighter shades)
-    const lightness = randomInt(5, 70); // Lightness range (lighter shades)
+    const hue = randomInt(0, 300);
+    const saturation = randomInt(0, 40);
+    const lightness = randomInt(5, 70); 
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }
  
-// Function to generate random integer
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
  
-// Function to validate total weightage
 function validateWeightage() {
     const totalWeightage = pieChartInstance.data.datasets[0].data.reduce((a, b) => a + b, 0);
     if (totalWeightage !== 100) {
@@ -293,24 +232,6 @@ function validateWeightage() {
     return true;
 }
  
-// Function to handle the Generate Teams button click
-// Function to handle the Generate Teams button click
-// function handleGenerateButtonClick(event) {
-//     if (!validateWeightage()) {
-//         event.preventDefault();
-//         return;
-//     }
- 
-    // const numberOfTeams = parseInt(document.getElementById('exampleFormControlInput2').value);
-    // const teams = generateTeams(numberOfTeams);
- 
-    // Display teams on the generated-team page
-//     sessionStorage.setItem('generatedTeams', JSON.stringify(teams));
-//     window.location.href = 'generated-team.html';
-// }
-
- 
-// Function to calculate weighted scores based on parameter weightages
 function calculateWeightedScores(members, weightages) {
     return members.map(member => {
         const weightedScores = member.scores.map((score, index) => score * weightages[index] / 100);
@@ -323,45 +244,10 @@ function calculateWeightedScores(members, weightages) {
         };
     });
 }
- 
- 
-// Add event listener for the Generate Teams button
+  
 document.getElementById('generateButton').addEventListener('click', handleGenerateButtonClick);
-// let memberScores = []; // This will store the member scores from the Excel file
- 
-// function handleFileUpload(event) {
-//     const file = event.target.files[0];
-//     const reader = new FileReader();
- 
-//     reader.onload = function (e) {
-//         const data = new Uint8Array(e.target.result);
-//         const workbook = XLSX.read(data, { type: 'array' });
-//         const sheetName = workbook.SheetNames[0];
-//         const worksheet = workbook.Sheets[sheetName];
- 
-//         const jsonSheet = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
- 
-//         const headers = jsonSheet[0];
-//         const parameters = headers.slice(1);
- 
-//         memberScores = jsonSheet.slice(1).map(row => {
-//             return {
-//                 name: row[0],
-//                 scores: row.slice(1)
-//             };
-//         });
- 
-//         // Update parameter count and pie chart
-//         document.getElementById('parameterCount').value = parameters.length;
-//         updatePieChart(parameters);
-//     };
- 
-//     reader.readAsArrayBuffer(file);
-// }
 document.getElementById('weightageInput').addEventListener('keypress', function(event) {
-    // Check if the key pressed is Enter (key code 13)
     if (event.key === 'Enter') {
-        // Prevent the default action (form submission, if any)
         event.preventDefault();
 
         // Get the current active input index from the weightageValue dataset
@@ -370,26 +256,19 @@ document.getElementById('weightageInput').addEventListener('keypress', function(
         // Update the weightage for the current index
         const newValue = parseFloat(document.getElementById('weightageValue').value);
         updatePieChartWeightage(currentIndex, newValue);
-
-        // Hide the current weightage input
         hideWeightageInput();
-
         // Find the next index to move to (assuming circular movement)
         const nextIndex = (currentIndex + 1) % parameters.length;
 
-        // Show the input for the next parameter
         const nextLabel = parameters[nextIndex];
         showTextInput(nextLabel, pieChartInstance.data.datasets[0].data[nextIndex], nextIndex);
     }
 });
 function hideWeightageInput() {
     if (activeInput) {
-        activeInput.blur(); // Remove focus from current input
-        activeInput = null; // Clear active input reference
-        document.getElementById('weightageInput').style.display = 'none'; // Hide input field
-        
-        // Example logic to move to next input if needed
-        // You can implement logic to focus on the next input or proceed
+        activeInput.blur();
+        activeInput = null; 
+        document.getElementById('weightageInput').style.display = 'none';
     }
 }
 
@@ -417,16 +296,7 @@ document.getElementById('increaseButton').addEventListener('click', () => {
  
 document.getElementById('fileInput').addEventListener('change', handleFileUpload);
  
-// function validateWeightage() {
-//     const totalWeightages = pieChartInstance.data.datasets[0].data;
-//     const total = totalWeightages.reduce((acc, curr) => acc + curr, 0);
-//     return total === 100;
-// }
- 
 function updatePieChart(parameters) {
-    // if (pieChartInstance) {
-    //     pieChartInstance.destroy();
-    // }
     const ctx = document.getElementById('pieChart').getContext('2d');
     pieChartInstance = new Chart(ctx, {
         type: 'pie',
@@ -458,8 +328,8 @@ function generateRandomColors(num) {
 document.getElementById('fileInput').addEventListener('change', handleFileUpload);
  
 function handleFileUpload(event) {
-      document.getElementById('weightageInput').style.display = 'block';
-     const file = event.target.files[0];
+    document.getElementById('weightageInput').style.display = 'block';
+    const file = event.target.files[0];
     const reader = new FileReader();
      reader.onload = function(event) {
         const data = new Uint8Array(event.target.result);
@@ -475,37 +345,13 @@ function handleFileUpload(event) {
 
         localStorage.setItem('membersData', JSON.stringify(membersData));
         alert('File uploaded successfully');
-                // Update parameter count and pie chart
         document.getElementById('parameterCount').value = parameters.length;
         updatePieChart(parameters);
         updateWeightageInput(value);
         document.getElementById('weightageInput').style.display = 'block';
- 
     };
-    
     reader.readAsArrayBuffer(file);
 }
-
-// document.getElementById('increaseButton').addEventListener('click', function() {
-//     if (currentWeightage < maxWeightage) {
-//         currentWeightage++;
-//         updateWeightageInput(currentWeightage);
-//     }
-// });
- 
-// document.getElementById('decreaseButton').addEventListener('click', function() {
-//     if (currentWeightage > minWeightage) {
-//         currentWeightage--;
-//         updateWeightageInput(currentWeightage);
-//     }
-// });
- 
- 
-// function updateWeightageInput(value) {
-//     document.getElementById('weightageValue').value = value;
-//     // Update the pie chart weightage here if needed
-//     updatePieChartWeightage(value);
-// }
 
 function updateWeightageInput(value) {
     if (activeInput) {
@@ -526,7 +372,7 @@ function updateWeightageInput(value) {
       const answer = prompt('Do you want to enter the number of members for each team manually? Enter YES or NO.');
   
       if (answer && answer.toLowerCase() === 'yes') {
-          teamMembersFields.innerHTML = ''; // Clear previous fields
+          teamMembersFields.innerHTML = '';
   
           for (let i = 1; i <= numberOfTeams; i++) {
               const teamInputField = document.createElement('div');
@@ -543,11 +389,9 @@ function updateWeightageInput(value) {
               teamMembersFields.appendChild(teamInputField);
           }
   
-          teamMembersInput.style.display = 'block'; // Show the input section
+          teamMembersInput.style.display = 'block';
       } else {
-          teamMembersInput.style.display = 'none'; // Hide the input section if not selected
-  
-          // If user chooses not to enter manually, extract number of members from dynamically generated fields
+          teamMembersInput.style.display = 'none'; 
           const membersCounts = [];
           for (let i = 1; i <= numberOfTeams; i++) {
               const inputField = document.getElementById(`team${i}Members`);
@@ -561,11 +405,9 @@ function updateWeightageInput(value) {
                   }
               } 
               else {
-                //   alert(`Input field for Team ${i} not found`);
                   return;
               }
           }
-  
           // Proceed to generate teams with the extracted number of members
           const teams = generateTeams1(numberOfTeams, membersCounts);
   
@@ -621,8 +463,6 @@ function calculateWeightedScores(members, weightages) {
 
     return teams;
 }
-// Add event listener for the Generate Teams button
-// document.getElementById('generateButton').addEventListener('click', handleGenerateButtonClick);
 
 function handleGenerateButtonClick(event) {
     event.preventDefault(); // Prevent the default form submission
@@ -634,7 +474,6 @@ function handleGenerateButtonClick(event) {
     const manuallyEntered = teamMembersInput.style.display === 'block';
 
     if (manuallyEntered) {
-        // Logic 1: Manually entered number of members for each team
         const membersCounts = [];
         for (let i = 1; i <= numberOfTeams; i++) {
             const inputField = document.getElementById(`team${i}Members`);
@@ -658,7 +497,6 @@ function handleGenerateButtonClick(event) {
         sessionStorage.setItem('generatedTeams', JSON.stringify(teams));
         window.location.href = 'generated-team.html';
     } else {
-        // Logic 2: Extracted from dynamically generated fields
         const teams = generateTeams(numberOfTeams);
         function generateTeams(numberOfTeams) {
    
@@ -698,12 +536,10 @@ function handleGenerateButtonClick(event) {
          
             // Select leader for each team (highest weighted score member)
             teams.forEach(team => {
-                // let maxWeightedScore = -Infinity;
                 team.members.forEach(member => {
                             team.leader = team.members[0].name;
          
                 });
-                // team.members=team.members.filter(member=> member.name!==team.leader);
             });
          
             return teams;

@@ -45,7 +45,6 @@ onAuthStateChanged(auth, user => {
 updateAuthButton(false);
 
 document.getElementById('downloadButton').addEventListener('click', async function() {
-  // Ensure the user is authenticated
   const user = auth.currentUser;
   if (!user) {
     console.error('User is not authenticated');
@@ -156,9 +155,6 @@ document.getElementById('saveButton').addEventListener('click', async function()
     uploadDate: new Date().toISOString(),
     userId: user.uid
   });
-
-  // Trigger download of the Excel file (optional)
-  // XLSX.writeFile(wb, 'teams.xlsx');
 
   // Display success message
   Swal.fire({
@@ -314,19 +310,9 @@ if (editButton && feedbackArea) {
       document.getElementById('saveButton').style.display='none';
     }
 
-    // const editButton = document.getElementById('editbutton2');
-
-    // editButton.addEventListener('click', function() {
       inputField.readOnly = false;
       inputField.focus();
-      icon.classList.add('show'); // Show the icon    // });
-
-      
-
-    // inputField.addEventListener('blur', function() {
-    //     inputField.readOnly = true;
-    //     console.log('Input field lost focus, should be readonly now');
-    // });
+      icon.classList.add('show'); 
   });
 }
 

@@ -20,7 +20,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebas
    
     const feedbackMessage = document.getElementById("exampleFormControlTextarea1").value;
    
-    const newFeedbackRef = push(ref(db, 'feedback/')); // Generate a new unique key under 'feedback/' path
+    const newFeedbackRef = push(ref(db, 'feedback/'));
    
     set(newFeedbackRef, {
         feedback: feedbackMessage,

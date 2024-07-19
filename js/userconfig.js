@@ -66,9 +66,6 @@ async function retrieveUsername(uid) {
         updateUserUI("Guest");
     }
 }
- 
-
-
 function updateUserUI(username = "Guest") {
     onAuthStateChanged(auth, user => {
         const loginButton = document.getElementById('loginButton');
@@ -88,7 +85,6 @@ function updateUserUI(username = "Guest") {
     console.log(username);
 }
 
-// Ensure the window is fully loaded before running the script
 window.onload = () => {
     onAuthStateChanged(auth, user => {
         if (user) {

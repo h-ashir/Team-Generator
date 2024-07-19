@@ -59,7 +59,7 @@ async function fetchAndDisplayProjects(userId) {
   const projectsSnapshot = await getDocs(q);
   const projectsList = document.querySelector('.history-container-content');
 
-  projectsList.innerHTML = ''; // Clear the list before adding new items
+  projectsList.innerHTML = '';
 
   if (projectsSnapshot.empty) {
     console.log("No projects found for this user.");
@@ -87,7 +87,6 @@ async function fetchAndDisplayProjects(userId) {
       projectsList.appendChild(projectRow);
     });
 
-    // Add event listeners to download links
     const downloadLinks = document.querySelectorAll('.download-link');
     downloadLinks.forEach(link => {
       link.addEventListener('click', async (event) => {
@@ -110,10 +109,8 @@ async function fetchAndDisplayProjects(userId) {
 // Add your existing authentication and logout logic here
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    // User is signed in
     console.log("User is signed in:", user);
   } else {
-    // User is signed out
     window.location.href = 'login.html';
   }
 });
@@ -121,10 +118,8 @@ onAuthStateChanged(auth, (user) => {
 const logoutButton = document.getElementById('logoutButton');
 logoutButton.addEventListener('click', () => {
   signOut(auth).then(() => {
-    // Sign-out successful
     window.location.href = 'login.html';
   }).catch((error) => {
-    // An error happened
     console.error("Error signing out:", error);
   });
 });

@@ -7,7 +7,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-// src/utils.ts
 export function loadScript(url) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve, reject) => {
@@ -23,7 +22,6 @@ window.addEventListener('load', () => __awaiter(void 0, void 0, void 0, function
     const showSwal = localStorage.getItem('showSwal');
     if (showSwal === 'true') {
         yield loadScript('https://cdn.jsdelivr.net/npm/sweetalert2@11');
-        // SweetAlert2 is now available globally as Swal
         window.Swal.fire({
             title: 'Logged Out',
             text: 'You have successfully logged out.',

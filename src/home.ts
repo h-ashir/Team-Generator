@@ -1,4 +1,3 @@
-// src/utils.ts
 export async function loadScript(url: string): Promise<void> {
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');
@@ -14,7 +13,6 @@ window.addEventListener('load', async () => {
     if (showSwal === 'true') {
         await loadScript('https://cdn.jsdelivr.net/npm/sweetalert2@11');
 
-        // SweetAlert2 is now available globally as Swal
         (window as any).Swal.fire({
             title: 'Logged Out',
             text: 'You have successfully logged out.',
