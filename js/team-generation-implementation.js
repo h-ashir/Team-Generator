@@ -465,7 +465,11 @@ function calculateWeightedScores(members, weightages) {
 }
 
 function handleGenerateButtonClick(event) {
-    validateWeightage();
+    if(!validateWeightage())
+    {
+        return;
+
+    }
     event.preventDefault(); // Prevent the default form submission
 
     const numberOfTeams = parseInt(document.getElementById('exampleFormControlInput2').value);
