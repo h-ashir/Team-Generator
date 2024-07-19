@@ -3,6 +3,7 @@ import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/fi
 import { getFirestore, collection, getDocs, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 import { getStorage } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
 
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAIuCN5NMapt-HyvTWmEXPOhXTdBYlVhOk",
   authDomain: "login-backend-59af8.firebaseapp.com",
@@ -50,6 +51,7 @@ onAuthStateChanged(auth, user => {
 
 updateAuthButton(false);
 
+// Function to fetch projects from Firestore and display them
 async function fetchAndDisplayProjects(userId) {
   console.log("Fetching projects for userId:", userId);
   const projectsCollection = collection(db, 'projects');
@@ -65,8 +67,8 @@ async function fetchAndDisplayProjects(userId) {
     console.log("Projects found:", projectsSnapshot.size);
     projectsSnapshot.forEach((doc, index) => {
       const projectData = doc.data();
+      const projectCategory = projectData.projectCategory;
       const projectName = projectData.projectName;
-      const projectCategory= projectData.projectCategory;
       const creationDate = new Date(projectData.uploadDate).toLocaleDateString();
       const fileURL = projectData.fileURL;
 
@@ -104,6 +106,7 @@ async function fetchAndDisplayProjects(userId) {
   }
 }
 
+// Add your existing authentication and logout logic here
 onAuthStateChanged(auth, (user) => {
   if (user) {
     console.log("User is signed in:", user);

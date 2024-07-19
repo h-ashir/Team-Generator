@@ -12,6 +12,7 @@ const firebaseConfig = {
     measurementId: "G-Q9C3E9L2P6"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 function showMessage(message, divId) {
@@ -59,6 +60,7 @@ function setupAuthEventListeners() {
             event.preventDefault();
             const auth = getAuth();
             signOut(auth).then(() => {
+                // Sign-out successful.
                 showMessage('Logout successful', 'logOutMessage');
                 updateAuthButton(false);
                 console.log("Logged out");
@@ -72,6 +74,7 @@ function setupAuthEventListeners() {
         });
     }
 }
+
 function updateAuthButton(isSignedIn) {
     const loginButton = document.getElementById('loginButton');
     const logoutButton = document.getElementById('logoutButton');
@@ -89,6 +92,7 @@ function updateAuthButton(isSignedIn) {
         }
     }
 }
+
 document.addEventListener('DOMContentLoaded', (event) => {
     setupAuthEventListeners();
 });

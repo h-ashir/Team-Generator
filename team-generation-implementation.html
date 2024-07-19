@@ -56,14 +56,17 @@
         </header>
     </nav>
     <!-- Navbar End-->
+
     <section class="banner-area">
         <img src="./assets/images/2668382[1] 1.png" alt="" class="banner-image" />
     </section>
+
     <div class="implementation-content">
         <div class="guidelines-container">
             <div class="guidelines-text" id="guidelinesText">
                 Click here to view file upload guidelines 
             </div>
+
             <div class="guidelines-card" id="guidelinesCard">
                 <div class="card-content">
                     <h2>File Upload Guidelines</h2>
@@ -81,6 +84,7 @@
                     </ul>
                 </div>
             </div>
+            <!-- </div> -->
         </div>
         <div class="upload-area">
             <input
@@ -92,7 +96,18 @@
             />
         </div>
 
-        <div class="project-teams-area"> 
+        <div class="project-teams-area">
+            <div class="mb-3">
+                <label for="exampleFormControlInput3" class="form-label">Project Category</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="exampleFormControlInput3"
+                    placeholder="Enter your project category here"
+                    required
+                />
+            </div>
+            
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Project Name</label>
                 <input
@@ -100,16 +115,6 @@
                     class="form-control"
                     id="exampleFormControlInput1"
                     placeholder="Enter your project name here"
-                    required
-                />
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlInput3" class="form-label">Category Name</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="exampleFormControlInput3"
-                    placeholder="Enter your category here"
                     required
                 />
             </div>
@@ -138,6 +143,15 @@
                     ></input>
                 </div>
             </div>
+            <div class="numberofmember-area">
+                <div id="teamMembersInput" style="display: none;">
+                    <h2>Enter Number of Members for Each Team</h2>
+                    <div id="teamMembersFields">
+                        <!-- Fields will be dynamically added here based on user input -->
+                    </div>
+                </div>
+            </div>
+           
 
             <div class="team-gen-weightage">
                 <h2 class="team-gen-header">Set weightage for the parameters</h2>
@@ -160,6 +174,7 @@
             </div>
         </div>
     </div>
+
     <!-- footer -->
     <footer>
         <div class="footer-content">
@@ -193,6 +208,7 @@
           </section>
      </footer>
     <!-- footer end -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="./js/team-generation-implementation.js"></script>

@@ -45,7 +45,6 @@ onAuthStateChanged(auth, user => {
 updateAuthButton(false);
 
 document.getElementById('downloadButton').addEventListener('click', async function() {
-  // Ensure the user is authenticated
   const user = auth.currentUser;
   if (!user) {
     console.error('User is not authenticated');
@@ -59,7 +58,7 @@ document.getElementById('downloadButton').addEventListener('click', async functi
     const teamLeaderText = teamDiv.querySelector('.result-tg-t-teamleader').textContent;
     const startIndex = teamLeaderText.indexOf(':');
     const teamLeader = teamLeaderText.substring(startIndex+2);
-        const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent);
+        const members = Array.from(teamDiv.querySelectorAll('ul li')).map(li => li.textContent);
     
     teams.push({
       teamName,
@@ -115,7 +114,7 @@ document.getElementById('saveButton').addEventListener('click', async function()
     const teamLeaderText = teamDiv.querySelector('.result-tg-t-teamleader').textContent;
     const startIndex = teamLeaderText.indexOf(':');
     const teamLeader = teamLeaderText.substring(startIndex + 1).trim();
-    const members = Array.from(teamDiv.querySelectorAll('ol li')).map(li => li.textContent);
+    const members = Array.from(teamDiv.querySelectorAll('ul li')).map(li => li.textContent);
 
     teams.push({
       teamName,
@@ -157,6 +156,7 @@ document.getElementById('saveButton').addEventListener('click', async function()
     userId: user.uid
   });
 
+  // Display success message
   Swal.fire({
     title: 'Saved to History',
     icon: 'success',
@@ -187,7 +187,7 @@ const feedbackArea = document.querySelector('.feedback-area');
 const dragAlert = document.querySelector('.drag-alert');
 
 function enableDragAndDrop() {
-  document.querySelectorAll('.result-tg-t ol li, .result-tg-t-teamleader p').forEach(item => {
+  document.querySelectorAll('.result-tg-t ul li, .result-tg-t-teamleader p').forEach(item => {
     item.setAttribute('draggable', true);
 
     item.addEventListener('dragstart', function(event) {
@@ -200,7 +200,8 @@ function enableDragAndDrop() {
     });
   });
 
-  document.querySelectorAll('.result-tg-t ol, .result-tg-t-teamleader').forEach(list => {
+  document.querySelectorAll('.result-tg-t ul, .result-tg-t-teamleader').forEach(list => {
+    
     list.addEventListener('dragover', function(event) {
       event.preventDefault();
       const draggingItem = document.querySelector('.dragging');
@@ -223,13 +224,13 @@ function enableDragAndDrop() {
 }
 
 function disableDragAndDrop() {
-  document.querySelectorAll('.result-tg-t ol li, .result-tg-t-teamleader p').forEach(item => {
+  document.querySelectorAll('.result-tg-t ul li, .result-tg-t-teamleader p').forEach(item => {
     item.removeAttribute('draggable');
     item.removeEventListener('dragstart', function() {});
     item.removeEventListener('dragend', function() {});
   });
 
-  document.querySelectorAll('.result-tg-t ol, .result-tg-t-teamleader').forEach(list => {
+  document.querySelectorAll('.result-tg-t ul, .result-tg-t-teamleader').forEach(list => {
     list.removeEventListener('dragover', function() {});
     list.removeEventListener('drop', function() {});
   });
@@ -256,13 +257,18 @@ if (editButton && feedbackArea) {
 
   editButton.addEventListener('click', (event) => {
     event.preventDefault();
+    
     const isVisible = feedbackArea.style.display === 'block';
     feedbackArea.style.display = isVisible ? 'none' : 'block';
     
     const editButtonText = document.getElementById('editButtonText');
     const editButtonIcon = editButton.querySelector('i');
 
+    const inputField = document.getElementById('team-name-input');
+    const icon = document.getElementById('icon');
+
     if (!isVisible) {
+
       disableDragAndDrop();
       dragAlert.textContent = '';
       editButtonText.textContent = 'Edit';
@@ -303,48 +309,99 @@ if (editButton && feedbackArea) {
       document.getElementById('downloadButton').style.display='none';
       document.getElementById('saveButton').style.display='none';
     }
+
+      inputField.readOnly = false;
+      inputField.focus();
+      icon.classList.add('show'); 
   });
 }
 
+
 function showAddRemoveButtons() {
-  document.querySelectorAll('.result-tg-t ol li').forEach(li => {
+  document.querySelectorAll('.result-tg-t ul li').forEach(li => {
     const deleteButton = document.createElement('button');
     const deleteIcon = document.createElement('i');
-      deleteIcon.classList.add('fas', 'fa-trash');
-      deleteButton.appendChild(deleteIcon);
+    deleteIcon.classList.add('fas', 'fa-trash');
+    deleteButton.appendChild(deleteIcon);
 
     deleteButton.classList.add('delete-member');
     deleteButton.addEventListener('click', function() {
-      li.remove();
+      Swal.fire({
+        title: 'Are you sure?',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          li.remove();
+          Swal.fire(
+            'Deleted!',
+            'The member has been deleted.',
+          );
+        }
+      });
     });
     li.appendChild(deleteButton);
   });
 
-  document.querySelectorAll('.result-tg-t ol').forEach(ol => {
+  document.querySelectorAll('.result-tg-t ul').forEach(ul => {
     const addButton = document.createElement('button');
     addButton.textContent = '+ Add member';
     addButton.classList.add('add-member');
     addButton.addEventListener('click', function() {
-      const newMember = prompt('Enter the name of the new member:');
-      if (newMember) {
-        const newLi = document.createElement('li');
-        newLi.textContent = newMember;
+      Swal.fire({
+        title: 'Enter the name of the new member',
+        input: 'text',
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Add',
+        showLoaderOnConfirm: true,
+        preConfirm: (newMember) => {
+          if (!newMember) {
+            Swal.showValidationMessage(`Please enter a name`);
+            return false;
+          }
+          return newMember;
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const newMember = result.value;
+          const newLi = document.createElement('li');
+          newLi.textContent = newMember;
 
-        const deleteButton = document.createElement('button');
-        deleteButton.classList.add('delete-member');
-        const deleteIcon = document.createElement('i');
-        deleteIcon.classList.add('fas', 'fa-trash');
-        deleteButton.appendChild(deleteIcon);
+          const deleteButton = document.createElement('button');
+          deleteButton.classList.add('delete-member');
+          const deleteIcon = document.createElement('i');
+          deleteIcon.classList.add('fas', 'fa-trash');
+          deleteButton.appendChild(deleteIcon);
 
-        deleteButton.addEventListener('click', function() {
-          newLi.remove();
-        });
-        newLi.appendChild(deleteButton);
-        ol.appendChild(newLi);
-        enableDragAndDrop();
-      }
+          deleteButton.addEventListener('click', function() {
+            Swal.fire({
+              title: 'Are you sure?',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                newLi.remove();
+                Swal.fire(
+                  'Deleted!',
+                  'The member has been deleted.',
+                );
+              }
+            });
+          });
+          newLi.appendChild(deleteButton);
+          ul.appendChild(newLi);
+          enableDragAndDrop();
+        }
+      });
     });
-    ol.appendChild(addButton);
+    ul.appendChild(addButton);
   });
 }
 

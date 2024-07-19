@@ -140,7 +140,6 @@
  }
 .result-tg-t{
     width: calc(50% - 20px);
-    background-color: var(--lavender);
     border-radius: 10px;
     overflow: hidden;
     transition: background-color 0.3s;
@@ -205,12 +204,12 @@
 .result-tg-t-teamleader p.dropped-transition{
     background-color: red;
 }
-.result-tg-t-members ol{
+.result-tg-t-members ul{
     padding-top: 10px;
     margin: 0;
     padding: 0;
 }
-.result-tg-t ol{
+.result-tg-t ul{
     justify-content: space-around;
     display: flex;
     gap: 50px;
@@ -219,6 +218,7 @@
     background-color: rgb(221, 221, 221);
     border-radius: 0px 0px 8px 8px;
     font-size: 1.1rem;
+    list-style-type: none;
 }
 .result-tg-t-members li.dragging {
     opacity: 0.5;
@@ -236,6 +236,7 @@
 .result-tg-t.editable .result-tg-t-teamleader p{
     border: 3px solid black;
     border-style: dashed;
+
 }
 
 .result-tg-t.editable .result-tg-t-members li {
@@ -265,7 +266,7 @@
     padding-top: 5rem;
     padding-bottom: 5rem;
 }
-.result-tg-t ol button{
+.result-tg-t ul button{
     border: 1px solid gray;
     border-radius: 5px;
     padding: 1px 10px;
@@ -657,3 +658,14 @@ footer .footer-content{
         margin-top: 30px;
     }
 }
+/*  */
+.team-name-input {
+    width: 100%;
+    padding: 5px;
+    font-size: 1.9rem;
+    text-align: center;
+    border: none;
+    outline: none;
+    background-color: #5A639C;
+  }
+  

@@ -12,6 +12,7 @@ const firebaseConfig = {
     measurementId: "G-Q9C3E9L2P6"
 };
  
+// Initialize Firebase
 let app;
 if (!getApps().length) {
     app = initializeApp(firebaseConfig);
@@ -21,13 +22,16 @@ if (!getApps().length) {
  
 const auth = getAuth(app);
 const firestore = getFirestore(app);
-  
+ 
+ 
+// Login function
 function login() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
  
     signInWithEmailAndPassword(auth, email, password)
         .then(userCredential => {
+            // Signed in
             const user = userCredential.user;
             retrieveUsername(user.uid);
         })
@@ -36,6 +40,7 @@ function login() {
         });
 }
  
+// Logout function
 function logout() {
     signOut(auth).then(() => {
         updateUserUI();
@@ -44,6 +49,7 @@ function logout() {
     });
 }
  
+// Retrieve username from Firestore
 async function retrieveUsername(uid) {
     try {
         const userDoc = await getDoc(doc(firestore, "users", uid));
@@ -60,7 +66,6 @@ async function retrieveUsername(uid) {
         updateUserUI("Guest");
     }
 }
- 
 function updateUserUI(username = "Guest") {
     onAuthStateChanged(auth, user => {
         const loginButton = document.getElementById('loginButton');
@@ -89,11 +94,13 @@ window.onload = () => {
         }
     });
 
+    // Add click event listener for the login button
     const loginButton = document.getElementById('loginButton');
     if (loginButton) {
         loginButton.addEventListener('click', login);
     }
 
+    // Add click event listener for the logout button
     const logoutButton = document.getElementById('logoutButton');
     if (logoutButton) {
         logoutButton.addEventListener('click', logout);

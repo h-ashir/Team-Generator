@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generated Team</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="css/generated-team.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -33,8 +32,7 @@
                             <a class="log-item" id="loginButton" href="login.html">Login</a>
                           </li>
                           <li class="nav-item dropdown" id="dropdownButton" style="display: none;">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="userButton">
-        
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="userButton">        
                             </a>
                             <ul class="dropdown-menu">
                               <li><a class="dropdown-item" id="historyButton" aria-current="page"  href="history.html">History</a></li>
@@ -49,16 +47,20 @@
           </header>
     </nav>
     <!-- Navbar End-->
-    <div class="generated-project-name">
-      <h1 id="project-name-heading"></h1>
-      <h2 style="font-weight: bold;" id="project-category-heading"></h2>
+    <div class="generated-project-category">
+      <h1 id="project-category-heading"></h1>
     </div>
+    
 
     <div id="drag-drop">
       <p class="drag-alert"></p>
     </div>
 
     <section>
+      <div class="projectnameandteam">
+      <div class="generated-project-name">
+        <h1 id="project-name-heading"></h1>
+      </div>
         <div class="teamname-area" id="teamsContainer">
             <!-- Teams will be dynamically generated here -->
         </div>
@@ -94,9 +96,9 @@
                   <input class="tg-feedback-btn" type="submit" id="submitFeedbackBtn" value="Submit">
               </div>
             </div>
-        </div>
-   <!-- </div>  -->
+        </div> 
   </section>
+   
     <!-- footer -->
     <footer>
         <div class="footer-content">
@@ -126,13 +128,11 @@
               </div>
             </div>
           </div>
-   
           <section class="sub-footer" style="text-align: center; color: #373270;">
             <span>&copy;Team Generator - All Rights Reserved</span>
           </section>
      </footer>
     <!-- footer end -->
-   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script> document.addEventListener('DOMContentLoaded', function() {
         const teams = JSON.parse(sessionStorage.getItem('generatedTeams'));
@@ -141,28 +141,35 @@
         if (teams && teams.length > 0) {
             teams.forEach((team, index) => {
                 const teamHtml = `
-                    <div class="result-tg-t">
-                        <div class="result-tg-t-title"><p>${team.name}</p></div>
+                   <div class="result-tg-t">
+                        <div class="result-tg-t-title">
+                         <p class="team-name-text">${team.name}</p>
+  <input type="text" class="team-name-input" style="display: none;">
+ 
+</div>
                         <div class="result-tg-t-members">
                           <div class="result-tg-t-teamleader">Team Leader:&nbsp;<p> ${team.leader}</p></div>
-                            
-                            <ol>
+                           
+                            <ul>
     ${team.members.map(member => {
         if (member.name !== team.leader) {
             return `<li style="list-style-type: none;">${member.name}</li>`;
         } else {
-            return ''; // Skip the leader from the list
+            return '';
         }
     }).join('')}
-</ol>
+</ul>
                         </div>
                     </div>
                 `;
+              
+                
                 teamsContainer.innerHTML += teamHtml;
             });
         }
     });
   </script>
+  <script type="module" src="js/feedback.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script type="module" src="js/generated-team.js"></script>

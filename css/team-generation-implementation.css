@@ -1,3 +1,4 @@
+/* header area */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 *{
     margin: 0;
@@ -60,10 +61,12 @@
     text-decoration: none;
     transition: .4s linear;
 }
+
 .header-leftarea img{
     height: 50px;
     width: 50px;
 }
+
 /* dropdown css */
 .dropdown-menu {
     width: auto;
@@ -108,6 +111,7 @@
 .upload-area input{
     background-color: #5A639C;
 }
+
 /* Input areas */
 .project-teams-area{
     display: flex;
@@ -115,11 +119,12 @@
     grid-row: auto;
     gap: 70px;
     align-items: center;
-    gap: 10px;
 }
+
 .project-teams-area div{
-    width: 30%;
+    width: 20%;
 }
+
 .parameter-area{
     display: flex;
     justify-content: space-around;
@@ -145,30 +150,37 @@
 .parameter-area div{
     width: 10%;
 }
+
 /* Pie chart CSS */
+
 .chart-area {
     gap: 5rem;
     text-align: center;
     padding: 20px;
 }
+
 #inputs {
     margin: 20px 0;
 }
+
 input[id="numParts"], .skill-input {
     margin: 10px; 
     width: 60px;
 }
+
 .pie-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 canvas {
     height: 50vh;
     width: 50vh;
     margin: auto;
     display: block;
 }
+
 .generate-area {
     display: flex;
     margin-top: 10px;
@@ -184,16 +196,19 @@ canvas {
     padding: 15px 15px;
     margin-top: 18px;
 }
+
 .generate-area button a {
     text-decoration: none;
     padding: 15px 15px;
     color: white;
     font-size: 20px;
 }
+
 .generate-area button:hover {
     background-color: #313c82;
     transition: .4s linear;
 }
+
 .warning-text {
     color: red;
     display: none;
@@ -201,14 +216,17 @@ canvas {
 .hidden {
     display: none;
 }
+
 .team-gen-weightage{
     display: flex;
     justify-content: center;
     padding: auto;
 }
+
 .team-gen-header{
 font-size: 1.5rem;
 }
+
 /* footer area */
 footer{
     width: 100%;
@@ -223,16 +241,19 @@ footer .footer-content{
     justify-content: space-around;
     align-items: center;
 }
+
 .footer-leftarea img{
     margin-top: 30px;
     height: 70px;
     width: 70px;
 }
+
 .social-icons-area{
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
+
 .social-media{
     display: flex;
     justify-content: space-evenly;
@@ -304,10 +325,10 @@ input[type=file]::file-selector-button {
 #weightageInput #increaseButton {
     height: auto;
     width:20px;
-    text-align: center;
-    background: linear-gradient(to right, #9B86BD, #F3F3F3); 
-    border-style: hidden;
-    border-radius: 2px;
+text-align: center;
+background: linear-gradient(to right, #9B86BD, #F3F3F3); 
+border-style: hidden;
+border-radius: 2px;
 }
 #weightageInput #decreaseButton {
     height: auto;
@@ -343,6 +364,7 @@ input[type=file]::file-selector-button {
 .guidelines-text:hover .hover-text {
     display: block;
 }
+
 .guidelines-card {
     display: none;
     background-color: #f8f9fa;
@@ -355,6 +377,30 @@ input[type=file]::file-selector-button {
     left: 50%;
     transform: translateX(-50%);
 }
+
 .guidelines-card.active {
     display: block;
+}
+#teamMembersInput {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    border: 2px solid #9B86BD;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px #9B86BD;
+    align-items: center;
+    display: flex;
+    
+}
+
+#teamMembersInput h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+.numberofmember-area{
+    display: flex;
+    justify-content: center;
+
 }
