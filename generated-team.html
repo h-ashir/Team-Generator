@@ -149,13 +149,14 @@
                 const teamHtml = `
                    <div class="result-tg-t">
                         <div class="result-tg-t-title">
-                          <div class="result-tg-t-title"><p>${team.name}</p></div>
+                         <p class="team-name-text">${team.name}</p>
+  <input type="text" class="team-name-input" style="display: none;">
  
 </div>
                         <div class="result-tg-t-members">
                           <div class="result-tg-t-teamleader">Team Leader:&nbsp;<p> ${team.leader}</p></div>
                            
-                            <ol>
+                            <ul>
     ${team.members.map(member => {
         if (member.name !== team.leader) {
             return `<li style="list-style-type: none;">${member.name}</li>`;
@@ -163,7 +164,7 @@
             return ''; // Skip the leader from the list
         }
     }).join('')}
-</ol>
+</ul>
                         </div>
                     </div>
                 `;

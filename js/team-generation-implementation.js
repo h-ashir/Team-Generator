@@ -208,9 +208,9 @@ document.getElementById('fileInput').addEventListener('change', function() {
         };
  
         // Destroy existing chart instance if it exists
-        if (pieChartInstance) {
-            pieChartInstance.destroy();
-        }
+        // if (pieChartInstance) {
+        //     pieChartInstance.destroy();
+        // }
  
         // Create the Chart.js pie chart
         const ctx = document.getElementById('pieChart').getContext('2d');
@@ -424,6 +424,9 @@ document.getElementById('fileInput').addEventListener('change', handleFileUpload
 // }
  
 function updatePieChart(parameters) {
+    // if (pieChartInstance) {
+    //     pieChartInstance.destroy();
+    // }
     const ctx = document.getElementById('pieChart').getContext('2d');
     pieChartInstance = new Chart(ctx, {
         type: 'pie',
@@ -557,10 +560,10 @@ function updateWeightageInput(value) {
                       return;
                   }
               } 
-            //   else {
-            //       alert(`Input field for Team ${i} not found`);
-            //       return;
-            //   }
+              else {
+                //   alert(`Input field for Team ${i} not found`);
+                  return;
+              }
           }
   
           // Proceed to generate teams with the extracted number of members

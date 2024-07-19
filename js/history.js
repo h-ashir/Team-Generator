@@ -67,6 +67,7 @@ async function fetchAndDisplayProjects(userId) {
     console.log("Projects found:", projectsSnapshot.size);
     projectsSnapshot.forEach((doc, index) => {
       const projectData = doc.data();
+      const projectCategory = projectData.projectCategory;
       const projectName = projectData.projectName;
       const creationDate = new Date(projectData.uploadDate).toLocaleDateString();
       const fileURL = projectData.fileURL;
@@ -76,6 +77,7 @@ async function fetchAndDisplayProjects(userId) {
 
       projectRow.innerHTML = `
         <div class="history-content-details">${projectName}</div>
+        <div class="history-content-details">${projectCategory}</div>
         <div class="history-content-details">${creationDate}</div>
         <div class="history-content-details">
           <a href="#" class="download-link" data-url="${fileURL}">Download</a>
