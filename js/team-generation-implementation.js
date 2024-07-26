@@ -39,7 +39,7 @@ onAuthStateChanged(auth, user => {
 updateAuthButton(false);
 document.getElementById('logoutButton').addEventListener('click', function() {
   localStorage.setItem('showSwal', 'true');
-  window.location.href = 'home.html';
+  window.location.href = 'index.html';
  
 });
 const projectCategoryInput = document.getElementById('exampleFormControlInput3');

@@ -413,7 +413,7 @@ function hideAddRemoveButtons() {
 
 document.getElementById('logoutButton').addEventListener('click', function() {
   localStorage.setItem('showSwal', 'true');
-  window.location.href = 'home.html';
+  window.location.href = 'index.html';
 });
 
 const projectNameHeading = document.getElementById('project-name-heading');

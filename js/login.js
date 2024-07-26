@@ -65,7 +65,7 @@ function setupAuthEventListeners() {
                 updateAuthButton(false);
                 console.log("Logged out");
                 localStorage.removeItem('loggedInUserId');
-                window.location.href = 'home.html';
+                window.location.href = 'index.html';
             }).catch((error) => {
                 console.error('Logout error:', error);
                 showMessage('Logout failed', 'logOutMessage');
